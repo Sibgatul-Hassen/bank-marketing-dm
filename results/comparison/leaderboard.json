@@ -1,0 +1,545 @@
+{
+ "primary_metric": "pr_auc",
+ "primary_metric_why": "With 11.27% positives, PR-AUC measures how well a model finds subscribers; accuracy mostly rewards predicting 'no'.",
+ "baseline": {
+  "model_id": "majority_class",
+  "display_name": "Majority class (always 'no')",
+  "kind": "baseline",
+  "runs": {
+   "without_duration": {
+    "accuracy": 0.887351,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "roc_auc": 0.5,
+    "pr_auc": 0.112649,
+    "mcc": 0.0,
+    "capture_at_20": 0.2
+   },
+   "with_duration": {
+    "accuracy": 0.887351,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "roc_auc": 0.5,
+    "pr_auc": 0.112649,
+    "mcc": 0.0,
+    "capture_at_20": 0.2
+   }
+  }
+ },
+ "models": [
+  {
+   "model_id": "decision_tree",
+   "display_name": "Decision Tree",
+   "family": "interpretable_baseline",
+   "task": "supervised_classification",
+   "kind": "project",
+   "interpretability": 5,
+   "interpretability_why": "Every prediction is a readable path of questions; we reproduce its arithmetic by hand.",
+   "runs": {
+    "without_duration": {
+     "accuracy": 0.872663,
+     "precision": 0.451012,
+     "recall": 0.600216,
+     "f1": 0.515025,
+     "roc_auc": 0.795369,
+     "pr_auc": 0.443121,
+     "mcc": 0.449432,
+     "brier": 0.159044,
+     "train_seconds": 0.313,
+     "predict_seconds": 0.03,
+     "threshold": 0.6688,
+     "capture_at_20": 0.6466,
+     "cv_roc_auc_mean": 0.782012
+    },
+    "with_duration": {
+     "accuracy": 0.909808,
+     "precision": 0.573941,
+     "recall": 0.773707,
+     "f1": 0.659018,
+     "roc_auc": 0.946402,
+     "pr_auc": 0.671969,
+     "mcc": 0.617374,
+     "brier": 0.10195,
+     "train_seconds": 0.322,
+     "predict_seconds": 0.023,
+     "threshold": 0.7782,
+     "capture_at_20": 0.8588,
+     "cv_roc_auc_mean": 0.939506
+    }
+   },
+   "leak_delta": {
+    "roc_auc": 0.151034,
+    "pr_auc": 0.228848,
+    "f1": 0.143992
+   }
+  },
+  {
+   "model_id": "catboost",
+   "display_name": "CatBoost",
+   "family": "gradient_boosting",
+   "task": "supervised_classification",
+   "kind": "project",
+   "interpretability": 2,
+   "interpretability_why": "Hundreds of trees; explained only through post-hoc SHAP.",
+   "runs": {
+    "without_duration": {
+     "accuracy": 0.884559,
+     "precision": 0.489302,
+     "recall": 0.56681,
+     "f1": 0.525212,
+     "roc_auc": 0.810894,
+     "pr_auc": 0.478608,
+     "mcc": 0.461517,
+     "brier": 0.154195,
+     "train_seconds": 19.546,
+     "predict_seconds": 0.061,
+     "threshold": 0.721,
+     "capture_at_20": 0.667,
+     "cv_roc_auc_mean": 0.796802
+    },
+    "with_duration": {
+     "accuracy": 0.910294,
+     "precision": 0.570787,
+     "recall": 0.821121,
+     "f1": 0.673442,
+     "roc_auc": 0.955848,
+     "pr_auc": 0.703273,
+     "mcc": 0.637246,
+     "brier": 0.092293,
+     "train_seconds": 28.28,
+     "predict_seconds": 0.169,
+     "threshold": 0.7479,
+     "capture_at_20": 0.8976,
+     "cv_roc_auc_mean": 0.947753
+    }
+   },
+   "leak_delta": {
+    "roc_auc": 0.144954,
+    "pr_auc": 0.224665,
+    "f1": 0.14823
+   }
+  },
+  {
+   "model_id": "tabnet",
+   "display_name": "TabNet",
+   "family": "tabular_deep_learning",
+   "task": "supervised_classification",
+   "kind": "project",
+   "interpretability": 3,
+   "interpretability_why": "Opaque network, but its attention masks are an intrinsic, readable attribution.",
+   "runs": {
+    "without_duration": {
+     "accuracy": 0.873513,
+     "precision": 0.45202,
+     "recall": 0.578664,
+     "f1": 0.507561,
+     "roc_auc": 0.801702,
+     "pr_auc": 0.445784,
+     "mcc": 0.440634,
+     "brier": 0.158288,
+     "train_seconds": 310.673,
+     "predict_seconds": 0.499,
+     "threshold": 0.696,
+     "capture_at_20": 0.6444,
+     "cv_roc_auc_mean": null
+    },
+    "with_duration": {
+     "accuracy": 0.907016,
+     "precision": 0.562404,
+     "recall": 0.786638,
+     "f1": 0.655885,
+     "roc_auc": 0.949484,
+     "pr_auc": 0.678458,
+     "mcc": 0.615209,
+     "brier": 0.097839,
+     "train_seconds": 250.567,
+     "predict_seconds": 0.522,
+     "threshold": 0.7401,
+     "capture_at_20": 0.8761,
+     "cv_roc_auc_mean": null
+    }
+   },
+   "leak_delta": {
+    "roc_auc": 0.147781,
+    "pr_auc": 0.232674,
+    "f1": 0.148324
+   }
+  },
+  {
+   "model_id": "tabpfn",
+   "display_name": "TabPFN",
+   "family": "foundation_model",
+   "task": "supervised_classification",
+   "kind": "project",
+   "interpretability": 1,
+   "interpretability_why": "A pre-trained transformer; no internal structure tied to this data. SHAP only, and approximate.",
+   "runs": {
+    "without_duration": {
+     "accuracy": 0.873392,
+     "precision": 0.452282,
+     "recall": 0.587284,
+     "f1": 0.511017,
+     "roc_auc": 0.806665,
+     "pr_auc": 0.461123,
+     "mcc": 0.444655,
+     "brier": 0.076941,
+     "train_seconds": 1.153,
+     "predict_seconds": 636.408,
+     "threshold": 0.1626,
+     "capture_at_20": 0.6444,
+     "cv_roc_auc_mean": null
+    },
+    "with_duration": {
+     "accuracy": 0.910658,
+     "precision": 0.579602,
+     "recall": 0.753233,
+     "f1": 0.655108,
+     "roc_auc": 0.94873,
+     "pr_auc": 0.681537,
+     "mcc": 0.611641,
+     "brier": 0.05514,
+     "train_seconds": 1.63,
+     "predict_seconds": 531.274,
+     "threshold": 0.2928,
+     "capture_at_20": 0.8685,
+     "cv_roc_auc_mean": null
+    }
+   },
+   "leak_delta": {
+    "roc_auc": 0.142065,
+    "pr_auc": 0.220414,
+    "f1": 0.14409
+   }
+  },
+  {
+   "model_id": "umap_hdbscan",
+   "display_name": "UMAP + HDBSCAN",
+   "family": "unsupervised",
+   "task": "unsupervised_clustering",
+   "kind": "project",
+   "interpretability": 3,
+   "interpretability_why": "Clusters can be profiled in words, but the embedding axes have no meaning.",
+   "secondary": {
+    "metric": "cluster-rate AUC (test)",
+    "roc_auc": 0.793032,
+    "note": "Not a classifier: scores each client by its cluster's subscription rate."
+   }
+  },
+  {
+   "model_id": "fp_growth",
+   "display_name": "FP-Growth",
+   "family": "pattern_mining",
+   "task": "association_rules",
+   "kind": "project",
+   "interpretability": 5,
+   "interpretability_why": "Output is a list of if-then rules with measured support, confidence and lift.",
+   "secondary": {
+    "metric": "rule-score AUC (test)",
+    "roc_auc": 0.759027,
+    "note": "Not a classifier: scores each client by the best matching rule's confidence."
+   }
+  }
+ ],
+ "reference": [
+  {
+   "model_id": "hist_gb",
+   "display_name": "HistGradientBoosting",
+   "kind": "reference",
+   "runs": {
+    "without_duration": {
+     "accuracy": 0.902768,
+     "precision": 0.6759,
+     "recall": 0.262931,
+     "f1": 0.378588,
+     "roc_auc": 0.810486,
+     "pr_auc": 0.491935,
+     "mcc": 0.381386,
+     "brier": 0.074564,
+     "train_seconds": 2.09125,
+     "predict_seconds": 0.094728,
+     "threshold": 0.5,
+     "capture_at_20": 0.6659
+    },
+    "with_duration": {
+     "accuracy": 0.921219,
+     "precision": 0.679537,
+     "recall": 0.568966,
+     "f1": 0.619355,
+     "roc_auc": 0.953892,
+     "pr_auc": 0.695679,
+     "mcc": 0.578627,
+     "brier": 0.052914,
+     "train_seconds": 0.919743,
+     "predict_seconds": 0.05338,
+     "threshold": 0.5,
+     "capture_at_20": 0.8901
+    }
+   },
+   "leak_delta": {
+    "roc_auc": 0.143406,
+    "pr_auc": 0.203744,
+    "f1": 0.240767
+   },
+   "plan_auc": {
+    "with_duration": 0.9546,
+    "without_duration": 0.8136
+   }
+  },
+  {
+   "model_id": "random_forest",
+   "display_name": "Random Forest",
+   "kind": "reference",
+   "runs": {
+    "without_duration": {
+     "accuracy": 0.895242,
+     "precision": 0.565923,
+     "recall": 0.300647,
+     "f1": 0.392681,
+     "roc_auc": 0.78004,
+     "pr_auc": 0.429091,
+     "mcc": 0.361712,
+     "brier": 0.081403,
+     "train_seconds": 2.577562,
+     "predict_seconds": 0.134007,
+     "threshold": 0.5,
+     "capture_at_20": 0.625
+    },
+    "with_duration": {
+     "accuracy": 0.915513,
+     "precision": 0.679567,
+     "recall": 0.47306,
+     "f1": 0.557814,
+     "roc_auc": 0.946157,
+     "pr_auc": 0.665337,
+     "mcc": 0.523055,
+     "brier": 0.055735,
+     "train_seconds": 2.037141,
+     "predict_seconds": 0.086192,
+     "threshold": 0.5,
+     "capture_at_20": 0.8847
+    }
+   },
+   "leak_delta": {
+    "roc_auc": 0.166117,
+    "pr_auc": 0.236246,
+    "f1": 0.165133
+   },
+   "plan_auc": {
+    "with_duration": 0.9494,
+    "without_duration": 0.7852
+   }
+  },
+  {
+   "model_id": "log_reg",
+   "display_name": "Logistic Regression",
+   "kind": "reference",
+   "runs": {
+    "without_duration": {
+     "accuracy": 0.900947,
+     "precision": 0.689189,
+     "recall": 0.219828,
+     "f1": 0.333333,
+     "roc_auc": 0.80087,
+     "pr_auc": 0.465485,
+     "mcc": 0.352046,
+     "brier": 0.076846,
+     "train_seconds": 0.766405,
+     "predict_seconds": 0.029538,
+     "threshold": 0.5,
+     "capture_at_20": 0.6487
+    },
+    "with_duration": {
+     "accuracy": 0.916606,
+     "precision": 0.711033,
+     "recall": 0.4375,
+     "f1": 0.541694,
+     "roc_auc": 0.942479,
+     "pr_auc": 0.636031,
+     "mcc": 0.516505,
+     "brier": 0.059854,
+     "train_seconds": 0.55137,
+     "predict_seconds": 0.037458,
+     "threshold": 0.5,
+     "capture_at_20": 0.8578
+    }
+   },
+   "leak_delta": {
+    "roc_auc": 0.141608,
+    "pr_auc": 0.170546,
+    "f1": 0.208361
+   },
+   "plan_auc": {
+    "with_duration": 0.9439,
+    "without_duration": 0.8009
+   }
+  },
+  {
+   "model_id": "decision_tree_d5",
+   "display_name": "Decision Tree (d=5)",
+   "kind": "reference",
+   "runs": {
+    "without_duration": {
+     "accuracy": 0.848871,
+     "precision": 0.393266,
+     "recall": 0.62931,
+     "f1": 0.484045,
+     "roc_auc": 0.790197,
+     "pr_auc": 0.437162,
+     "mcc": 0.416216,
+     "brier": 0.160923,
+     "train_seconds": 0.300003,
+     "predict_seconds": 0.022776,
+     "threshold": 0.5,
+     "capture_at_20": 0.6422
+    },
+    "with_duration": {
+     "accuracy": 0.844501,
+     "precision": 0.413692,
+     "recall": 0.911638,
+     "f1": 0.569122,
+     "roc_auc": 0.937953,
+     "pr_auc": 0.630988,
+     "mcc": 0.54716,
+     "brier": 0.107864,
+     "train_seconds": 0.263393,
+     "predict_seconds": 0.022174,
+     "threshold": 0.5,
+     "capture_at_20": 0.8491
+    }
+   },
+   "leak_delta": {
+    "roc_auc": 0.147756,
+    "pr_auc": 0.193826,
+    "f1": 0.085077
+   },
+   "plan_auc": {
+    "with_duration": 0.938,
+    "without_duration": 0.7902
+   }
+  },
+  {
+   "model_id": "knn_25",
+   "display_name": "kNN (k=25)",
+   "kind": "reference",
+   "runs": {
+    "without_duration": {
+     "accuracy": 0.902525,
+     "precision": 0.686567,
+     "recall": 0.247845,
+     "f1": 0.364212,
+     "roc_auc": 0.782204,
+     "pr_auc": 0.44687,
+     "mcc": 0.373737,
+     "brier": 0.077395,
+     "train_seconds": 0.133602,
+     "predict_seconds": 1.759718,
+     "threshold": 0.5,
+     "capture_at_20": 0.6412
+    },
+    "with_duration": {
+     "accuracy": 0.911508,
+     "precision": 0.692456,
+     "recall": 0.385776,
+     "f1": 0.495502,
+     "roc_auc": 0.928864,
+     "pr_auc": 0.611676,
+     "mcc": 0.47455,
+     "brier": 0.060049,
+     "train_seconds": 0.095456,
+     "predict_seconds": 1.326352,
+     "threshold": 0.5,
+     "capture_at_20": 0.8599
+    }
+   },
+   "leak_delta": {
+    "roc_auc": 0.14666,
+    "pr_auc": 0.164806,
+    "f1": 0.13129
+   },
+   "plan_auc": {
+    "with_duration": 0.8815,
+    "without_duration": 0.7727
+   }
+  },
+  {
+   "model_id": "gaussian_nb",
+   "display_name": "Gaussian NB",
+   "kind": "reference",
+   "runs": {
+    "without_duration": {
+     "accuracy": 0.86623,
+     "precision": 0.412826,
+     "recall": 0.443966,
+     "f1": 0.42783,
+     "roc_auc": 0.775199,
+     "pr_auc": 0.363915,
+     "mcc": 0.352503,
+     "brier": 0.127985,
+     "train_seconds": 0.138687,
+     "predict_seconds": 0.03255,
+     "threshold": 0.5,
+     "capture_at_20": 0.5905
+    },
+    "with_duration": {
+     "accuracy": 0.871328,
+     "precision": 0.435547,
+     "recall": 0.480603,
+     "f1": 0.456967,
+     "roc_auc": 0.843165,
+     "pr_auc": 0.404949,
+     "mcc": 0.384784,
+     "brier": 0.122119,
+     "train_seconds": 0.132521,
+     "predict_seconds": 0.031613,
+     "threshold": 0.5,
+     "capture_at_20": 0.6444
+    }
+   },
+   "leak_delta": {
+    "roc_auc": 0.067965,
+    "pr_auc": 0.041033,
+    "f1": 0.029138
+   },
+   "plan_auc": {
+    "with_duration": 0.8393,
+    "without_duration": 0.7755
+   }
+  }
+ ],
+ "ranks": {
+  "project": {
+   "without_duration": [
+    "catboost",
+    "tabpfn",
+    "tabnet",
+    "decision_tree"
+   ],
+   "with_duration": [
+    "catboost",
+    "tabpfn",
+    "tabnet",
+    "decision_tree"
+   ]
+  },
+  "reference": {
+   "without_duration": [
+    "hist_gb",
+    "log_reg",
+    "decision_tree_d5",
+    "knn_25",
+    "random_forest",
+    "gaussian_nb"
+   ],
+   "with_duration": [
+    "hist_gb",
+    "random_forest",
+    "log_reg",
+    "decision_tree_d5",
+    "knn_25",
+    "gaussian_nb"
+   ]
+  }
+ }
+}

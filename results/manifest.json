@@ -1,0 +1,63 @@
+{
+ "project": "A Leakage-Aware, Visually Explained Comparison of Modern Tabular Learning Methods",
+ "generated": "2026-10-06T08:58:33",
+ "dataset_sha256": "233e260d5d1d506a2c10381da5b8c2f75f2c08d1b373ca7b825e39ebe1bd30df",
+ "dataset_ok": true,
+ "models": [
+  {
+   "model_id": "decision_tree",
+   "status": "ok",
+   "display_name": "Decision Tree",
+   "family": "interpretable_baseline",
+   "task": "supervised_classification",
+   "one_liner": "Plays twenty questions: asks the most informative question first, then repeats on each group.",
+   "errors": []
+  },
+  {
+   "model_id": "catboost",
+   "status": "ok",
+   "display_name": "CatBoost",
+   "family": "gradient_boosting",
+   "task": "supervised_classification",
+   "one_liner": "Builds trees in sequence, each correcting the previous one's mistakes.",
+   "errors": []
+  },
+  {
+   "model_id": "tabnet",
+   "status": "ok",
+   "display_name": "TabNet",
+   "family": "tabular_deep_learning",
+   "task": "supervised_classification",
+   "one_liner": "A neural network that, at each step, chooses a handful of features to look at — and lets you read which ones.",
+   "errors": []
+  },
+  {
+   "model_id": "tabpfn",
+   "status": "ok",
+   "display_name": "TabPFN",
+   "family": "foundation_model",
+   "task": "supervised_classification",
+   "one_liner": "A transformer pre-trained on millions of synthetic tables; it predicts in one forward pass, with no training and no tuning.",
+   "errors": []
+  },
+  {
+   "model_id": "umap_hdbscan",
+   "status": "ok",
+   "display_name": "UMAP + HDBSCAN",
+   "family": "unsupervised",
+   "task": "unsupervised_clustering",
+   "one_liner": "Flattens 50 dimensions into 2–3 while keeping neighbours together, then finds dense groups without being told how many.",
+   "errors": []
+  },
+  {
+   "model_id": "fp_growth",
+   "status": "ok",
+   "display_name": "FP-Growth",
+   "family": "pattern_mining",
+   "task": "association_rules",
+   "one_liner": "Finds attribute combinations that occur often, then keeps the rules that beat chance — ranked by lift, not confidence.",
+   "errors": []
+  }
+ ],
+ "comparison_ok": true
+}

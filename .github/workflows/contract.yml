@@ -1,0 +1,19 @@
+name: artifact-contract
+on: [push, pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.13" }
+      - run: pip install numpy==2.3.5 pandas==3.0.6 scikit-learn==1.8.0 scipy==1.18.1
+      - name: Dataset hash
+        run: python -m src.data_loader
+      - name: Artifact contract (§6)
+        run: python -m src.contract validate all
+      - uses: actions/setup-node@v4
+        with: { node-version: "22" }
+      - name: KaTeX + frontend build
+        working-directory: frontend
+        run: npm ci && npm run check:katex && npm run build

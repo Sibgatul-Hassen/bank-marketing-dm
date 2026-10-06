@@ -1,0 +1,55 @@
+{
+ "estimator": "catboost.CatBoostClassifier",
+ "params": [
+  {
+   "name": "iterations",
+   "value": 1000,
+   "why": "Upper bound only; early stopping decides the real count."
+  },
+  {
+   "name": "learning_rate",
+   "value": 0.05,
+   "why": "Small steps (η in f4): more trees, smoother fit, less overfitting."
+  },
+  {
+   "name": "depth",
+   "value": 6,
+   "why": "CatBoost's default; oblivious trees of depth 6 capture up to 6-way interactions."
+  },
+  {
+   "name": "early_stopping_rounds",
+   "value": 50,
+   "why": "Stop when validation AUC has not improved for 50 rounds. Stopped at 252 trees."
+  },
+  {
+   "name": "eval_metric",
+   "value": "AUC",
+   "why": "We rank clients; AUC measures ranking quality directly."
+  },
+  {
+   "name": "auto_class_weights",
+   "value": "Balanced",
+   "why": "Only 11.27% subscribe; reweighting stops the loss being dominated by 'no'."
+  },
+  {
+   "name": "cat_features",
+   "value": [
+    "job",
+    "marital",
+    "education",
+    "housing",
+    "loan",
+    "contact",
+    "month",
+    "day_of_week",
+    "poutcome"
+   ],
+   "why": "Passed natively — no one-hot. CatBoost encodes them with ordered target statistics (f1)."
+  },
+  {
+   "name": "random_seed",
+   "value": 42,
+   "why": "Fixes the permutation used for ordered statistics, so results are reproducible."
+  }
+ ]
+}

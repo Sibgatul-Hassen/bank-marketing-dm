@@ -1,0 +1,79 @@
+{
+ "axes": [
+  "accuracy",
+  "f1",
+  "roc_auc",
+  "pr_auc",
+  "speed",
+  "interpretability"
+ ],
+ "raw": {
+  "decision_tree": {
+   "accuracy": 0.872663,
+   "f1": 0.515025,
+   "roc_auc": 0.795369,
+   "pr_auc": 0.443121,
+   "speed": 0.463442,
+   "interpretability": 5
+  },
+  "catboost": {
+   "accuracy": 0.884559,
+   "f1": 0.525212,
+   "roc_auc": 0.810894,
+   "pr_auc": 0.478608,
+   "speed": -1.292433,
+   "interpretability": 2
+  },
+  "tabnet": {
+   "accuracy": 0.873513,
+   "f1": 0.507561,
+   "roc_auc": 0.801702,
+   "pr_auc": 0.445784,
+   "speed": -2.493002,
+   "interpretability": 3
+  },
+  "tabpfn": {
+   "accuracy": 0.873392,
+   "f1": 0.511017,
+   "roc_auc": 0.806665,
+   "pr_auc": 0.461123,
+   "speed": -2.804522,
+   "interpretability": 1
+  }
+ },
+ "scaled": {
+  "decision_tree": {
+   "accuracy": 0.15,
+   "f1": 0.509436,
+   "roc_auc": 0.15,
+   "pr_auc": 0.15,
+   "speed": 1.0,
+   "interpretability": 1.0
+  },
+  "catboost": {
+   "accuracy": 1.0,
+   "f1": 1.0,
+   "roc_auc": 1.0,
+   "pr_auc": 1.0,
+   "speed": 0.543296,
+   "interpretability": 0.3625
+  },
+  "tabnet": {
+   "accuracy": 0.210735,
+   "f1": 0.15,
+   "roc_auc": 0.496734,
+   "pr_auc": 0.213785,
+   "speed": 0.231027,
+   "interpretability": 0.575
+  },
+  "tabpfn": {
+   "accuracy": 0.202089,
+   "f1": 0.316427,
+   "roc_auc": 0.768461,
+   "pr_auc": 0.581192,
+   "speed": 0.15,
+   "interpretability": 0.15
+  }
+ },
+ "note": "Each axis is min–max scaled across the four supervised models (0.15 = worst, 1 = best), so small differences look large. Speed = −log10(train + predict seconds). Interpretability is our judgement (1–5), not a measurement."
+}

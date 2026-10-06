@@ -1,0 +1,88 @@
+{
+ "figures": [
+  {
+   "file": "funnel.json",
+   "title": "Pipeline funnel",
+   "caption": "No row is ever dropped — every fix changes columns, not rows. The split happens last, after row-wise cleaning that learns nothing from the data.",
+   "page": "data"
+  },
+  {
+   "file": "unknown_heatmap.json",
+   "title": "'unknown' co-occurrence",
+   "caption": "Diagonal = 100%. housing and loan are unknown on exactly the same 990 rows — one missing source, not two. default=unknown (20.87%) is mostly independent of the rest.",
+   "page": "data"
+  },
+  {
+   "file": "unknown_bar.json",
+   "title": "'unknown' per column",
+   "caption": "The UCI metadata says there are no missing values. These six columns disagree.",
+   "page": "data"
+  },
+  {
+   "file": "class_balance.json",
+   "title": "Class balance",
+   "caption": "Only 11.27% subscribe. Predicting 'no' for everyone scores 88.73% accuracy — which is why accuracy is never the headline metric here.",
+   "page": "data"
+  },
+  {
+   "file": "duration_by_class.json",
+   "title": "duration — the leak",
+   "caption": "Mean 221s for 'no' vs 553s for 'yes'. No call under 37s ever ended in a subscription — and the length is only known after hanging up.",
+   "page": "data"
+  },
+  {
+   "file": "correlation.json",
+   "title": "Correlation heatmap",
+   "caption": "emp.var.rate, euribor3m and nr.employed correlate at 0.91–0.97: three columns carrying one signal, 'the state of the economy'. Note pdays is the raw column here (999 sentinel included).",
+   "page": "eda"
+  },
+  {
+   "file": "rate_poutcome.json",
+   "title": "poutcome",
+   "caption": "The strongest legitimate predictor: clients whose previous campaign succeeded subscribe at 65%.",
+   "page": "eda"
+  },
+  {
+   "file": "rate_contact.json",
+   "title": "contact",
+   "caption": "Cellular contacts convert nearly 3× better than landline — but channel may proxy for client type.",
+   "page": "eda"
+  },
+  {
+   "file": "rate_job.json",
+   "title": "job",
+   "caption": "Students and retirees respond most; blue-collar least. Note the sample sizes.",
+   "page": "eda"
+  },
+  {
+   "file": "rate_education.json",
+   "title": "education",
+   "caption": "education=illiterate shows 22.2% from only 18 rows — see the small-sample trap.",
+   "page": "eda"
+  },
+  {
+   "file": "rate_day_of_week.json",
+   "title": "day_of_week",
+   "caption": "Nearly flat. A feature that does nothing is itself a finding.",
+   "page": "eda"
+  },
+  {
+   "file": "month_dual.json",
+   "title": "The month volume–rate inversion",
+   "caption": "May has the most calls (13,769) and the worst rate (6.43%); March has 546 calls and 50.55%. This may reflect campaign strategy, not client behaviour — no causal claim.",
+   "page": "eda"
+  },
+  {
+   "file": "violins.json",
+   "title": "Numeric features by class",
+   "caption": "Subscribers cluster at low euribor3m / nr.employed — the crisis period. campaign is heavily skewed: median 2, max 56.",
+   "page": "eda"
+  },
+  {
+   "file": "split_balance.json",
+   "title": "Stratified split",
+   "caption": "Stratification keeps the 11.27% rate identical in train and test.",
+   "page": "data"
+  }
+ ]
+}

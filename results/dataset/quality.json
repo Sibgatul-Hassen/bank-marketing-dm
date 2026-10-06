@@ -1,0 +1,150 @@
+{
+ "problems": [
+  {
+   "id": "leak",
+   "title": "duration is a target leak",
+   "column": "duration",
+   "evidence": {
+    "corr_with_target": 0.405274,
+    "next_highest": {
+     "nr.employed": -0.354678
+    },
+    "mean_no": 220.844807,
+    "mean_yes": 553.191164,
+    "min_no": 0,
+    "min_yes": 37,
+    "zero_second_calls": 4,
+    "zero_second_calls_yes": 0
+   },
+   "action": "Excluded from every model. Reintroduced only for the with-duration comparison run.",
+   "before": 21,
+   "after": 20
+  },
+  {
+   "id": "sentinel",
+   "title": "pdays = 999 is a sentinel, not a number",
+   "column": "pdays",
+   "evidence": {
+    "rows_999": 39673,
+    "pct": 0.963217,
+    "real_range": [
+     0,
+     27
+    ]
+   },
+   "action": "Split into binary was_contacted plus numeric pdays (999 replaced by -1, a placeholder outside the real 0–27 range; the flag carries the meaning)."
+  },
+  {
+   "id": "unknown",
+   "title": "'unknown' is missing data disguised as a category",
+   "evidence": {
+    "columns": [
+     {
+      "column": "default",
+      "unknown": 8597,
+      "pct": 0.208726
+     },
+     {
+      "column": "education",
+      "unknown": 1731,
+      "pct": 0.042027
+     },
+     {
+      "column": "housing",
+      "unknown": 990,
+      "pct": 0.024036
+     },
+     {
+      "column": "loan",
+      "unknown": 990,
+      "pct": 0.024036
+     },
+     {
+      "column": "job",
+      "unknown": 330,
+      "pct": 0.008012
+     },
+     {
+      "column": "marital",
+      "unknown": 80,
+      "pct": 0.001942
+     }
+    ],
+    "uci_metadata_says": "Has Missing Values? No",
+    "housing_and_loan_unknown_together": 990,
+    "education_unknown_rate": 0.145003
+   },
+   "action": "Kept as its own level (one of three defensible choices: keep / impute / drop). education=unknown subscribes above several known levels, so it carries signal."
+  },
+  {
+   "id": "default",
+   "title": "default is effectively constant",
+   "column": "default",
+   "evidence": {
+    "counts": {
+     "no": 32588,
+     "unknown": 8597,
+     "yes": 3
+    }
+   },
+   "action": "Dropped the three-level column; kept a binary default_unknown flag."
+  }
+ ],
+ "metadata_discrepancy": "UCI lists 'Has Missing Values? No'. Six columns contain the string 'unknown' — 12,718 cells in total. Technically true, practically misleading.",
+ "unknown_total_cells": 12718,
+ "duplicates": {
+  "rows": 12,
+  "note": "Exact duplicate rows. Kept: 12 rows cannot move any metric measurably, and without client IDs we cannot tell a duplicate from two identical clients."
+ },
+ "pipeline": [
+  {
+   "step": "Raw CSV",
+   "rows": 41188,
+   "cols": 21
+  },
+  {
+   "step": "Verify SHA256",
+   "rows": 41188,
+   "cols": 21
+  },
+  {
+   "step": "Drop duration",
+   "rows": 41188,
+   "cols": 20
+  },
+  {
+   "step": "Split pdays sentinel",
+   "rows": 41188,
+   "cols": 21
+  },
+  {
+   "step": "Keep 'unknown' as level",
+   "rows": 41188,
+   "cols": 21
+  },
+  {
+   "step": "Collapse default",
+   "rows": 41188,
+   "cols": 21
+  },
+  {
+   "step": "Train split (80%)",
+   "rows": 32950,
+   "cols": 21
+  },
+  {
+   "step": "Test split (20%)",
+   "rows": 8238,
+   "cols": 21
+  }
+ ],
+ "encodings": {
+  "decision_tree": "one-hot (fitted on train), no scaling needed",
+  "catboost": "native categorical — ordered target statistics, no one-hot",
+  "tabnet": "integer codes → learned embeddings (cat_idxs / cat_dims); numerics standardised",
+  "tabpfn": "integer codes flagged as categorical; the model's own preprocessing",
+  "umap_hdbscan": "one-hot + standard scaling (distance-based)",
+  "fp_growth": "binned into items: age decades, campaign {1, 2–3, 4+}, macro terciles"
+ },
+ "split_protocol": "Stratified 80/20 holdout (random_state=42). Stratified 5-fold CV on the training part only. All scaling, encoding vocabularies and class weighting are fitted inside each fold — never before the split."
+}

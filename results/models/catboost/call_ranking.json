@@ -1,0 +1,51 @@
+{
+ "model_id": "catboost",
+ "score": "the probability from summing hundreds of small trees",
+ "how": "Every tree in the ensemble looks at the client and adds a small amount to their log-odds of subscribing; the total is turned into a probability with the sigmoid function. Because hundreds of trees each contribute, almost every client gets a different score, so the list is a fine-grained ranking of individual clients.",
+ "steps": [
+  "Start from the base-rate log-odds (−2.06)",
+  "Each tree adds or subtracts a little, scaled by the learning rate",
+  "Convert the sum to a probability with the sigmoid",
+  "Sort clients by probability; call down the list"
+ ],
+ "test_clients": 8238,
+ "subscribers": 928,
+ "base_rate": 0.112649,
+ "roc_auc": 0.810893,
+ "distinct_scores": 7308,
+ "top": [
+  {
+   "share": 0.05,
+   "calls": 412,
+   "hit_rate": 0.652913,
+   "lift": 5.796007,
+   "captured": 0.289871
+  },
+  {
+   "share": 0.1,
+   "calls": 824,
+   "hit_rate": 0.527913,
+   "lift": 4.686362,
+   "captured": 0.46875
+  },
+  {
+   "share": 0.2,
+   "calls": 1648,
+   "hit_rate": 0.375607,
+   "lift": 3.33432,
+   "captured": 0.667026
+  },
+  {
+   "share": 0.3,
+   "calls": 2471,
+   "hit_rate": 0.279644,
+   "lift": 2.482442,
+   "captured": 0.744612
+  }
+ ],
+ "within_month_auc": 0.748481,
+ "within_regime_auc": 0.606071,
+ "threshold_call_share": 0.130493,
+ "summary": "Calling the top 20% of clients by the probability from summing hundreds of small trees (1,648 calls) reaches 67% of all subscribers, with 38% of calls ending in a subscription — 3.3× calling at random.",
+ "caveat": "Much of this ranking is about when a client was called: among clients called under the same economic conditions its AUC falls from 0.811 to 0.606 (within the same month: 0.748). A bank choosing whom to call this week works within one period, so expect less separation than the table suggests. Offline estimate on a random split of 2008–2010 data, not a live campaign."
+}

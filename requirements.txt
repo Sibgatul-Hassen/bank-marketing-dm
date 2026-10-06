@@ -1,6 +1,20 @@
-pandas
-numpy
-scikit-learn
-matplotlib
-seaborn
-jupyter
+# Python 3.13 (tested). Pinned to the versions that produced results/.
+# numba 0.62 / scikit-learn 1.8: newer wheels were blocked by Windows Smart App Control on the
+# reference machine (unsigned DLLs); these versions load. torch is the CPU build:
+#   pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
+pandas==3.0.6
+numpy==2.3.5
+scipy==1.18.1
+scikit-learn==1.8.0
+catboost==1.2.10
+torch==2.14.1
+pytorch-tabnet==4.1.0
+tabpfn==9.1.0
+umap-learn==0.5.12
+numba==0.62.1
+llvmlite==0.45.1
+hdbscan==0.8.44
+mlxtend==0.25.0
+shap==0.52.0
+plotly==7.1.0
+matplotlib==3.11.2

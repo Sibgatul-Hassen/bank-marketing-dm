@@ -1,0 +1,3 @@
+# Keep the dataset byte-identical on every OS so the SHA256 check passes without normalisation.
+*.csv -text
+results/**/*.json text eol=lf

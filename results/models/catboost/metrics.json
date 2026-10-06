@@ -1,0 +1,80 @@
+{
+ "model_id": "catboost",
+ "protocol": {
+  "split": "stratified 80/20 holdout",
+  "cv": "stratified 5-fold on train",
+  "random_state": 42,
+  "threshold": "decision threshold chosen to maximise F1 on training-side predictions (out-of-fold or validation), never on the test set",
+  "note": "All scaling/encoding/resampling fitted inside the fold, never before the split.",
+  "resampling": "auto_class_weights='Balanced'",
+  "validation": "15% of train held out for early stopping and threshold"
+ },
+ "runs": {
+  "without_duration": {
+   "threshold": 0.721,
+   "accuracy": 0.884559,
+   "precision": 0.489302,
+   "recall": 0.56681,
+   "f1": 0.525212,
+   "roc_auc": 0.810894,
+   "pr_auc": 0.478608,
+   "mcc": 0.461517,
+   "brier": 0.154195,
+   "confusion_matrix": [
+    [
+     6761,
+     549
+    ],
+    [
+     402,
+     526
+    ]
+   ],
+   "train_seconds": 19.546,
+   "predict_seconds": 0.061,
+   "cv_roc_auc_mean": 0.796802,
+   "cv_roc_auc_std": 0.004839,
+   "primary": true
+  },
+  "with_duration": {
+   "threshold": 0.7479,
+   "accuracy": 0.910294,
+   "precision": 0.570787,
+   "recall": 0.821121,
+   "f1": 0.673442,
+   "roc_auc": 0.955848,
+   "pr_auc": 0.703273,
+   "mcc": 0.637246,
+   "brier": 0.092293,
+   "confusion_matrix": [
+    [
+     6737,
+     573
+    ],
+    [
+     166,
+     762
+    ]
+   ],
+   "train_seconds": 28.28,
+   "predict_seconds": 0.169,
+   "cv_roc_auc_mean": 0.947753,
+   "cv_roc_auc_std": 0.003567,
+   "primary": false
+  }
+ },
+ "baselines": {
+  "majority_class": {
+   "accuracy": 0.8874,
+   "roc_auc": 0.5,
+   "pr_auc": 0.1126,
+   "f1": 0.0,
+   "note": "Always predict 'no'. Every accuracy figure must be read against this row."
+  }
+ },
+ "leak_delta": {
+  "roc_auc": 0.144954,
+  "pr_auc": 0.224665,
+  "f1": 0.14823
+ }
+}

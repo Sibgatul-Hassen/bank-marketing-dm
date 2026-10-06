@@ -1,0 +1,499 @@
+{
+ "source": "UCI ML Repository, Dataset 222 — Bank Marketing (bank-additional-full.csv)",
+ "citation": "Moro, S., Cortez, P., & Rita, P. (2014). A data-driven approach to predict the success of bank telemarketing. Decision Support Systems, 62, 22–31.",
+ "sha256": "233e260d5d1d506a2c10381da5b8c2f75f2c08d1b373ca7b825e39ebe1bd30df",
+ "sha256_note": "Computed after normalising CRLF to LF; git on Windows rewrites line endings.",
+ "rows": 41188,
+ "columns": 21,
+ "separator": ";",
+ "period": "May 2008 – November 2010",
+ "target": {
+  "no": 36548,
+  "yes": 4640,
+  "yes_rate": 0.112654,
+  "majority_baseline_accuracy": 0.887346
+ },
+ "duplicate_rows": 12,
+ "columns_info": [
+  {
+   "name": "age",
+   "dtype": "numeric",
+   "unique": 78,
+   "min": 17.0,
+   "max": 98.0,
+   "mean": 40.02406,
+   "median": 38.0
+  },
+  {
+   "name": "job",
+   "dtype": "categorical",
+   "unique": 12
+  },
+  {
+   "name": "marital",
+   "dtype": "categorical",
+   "unique": 4
+  },
+  {
+   "name": "education",
+   "dtype": "categorical",
+   "unique": 8
+  },
+  {
+   "name": "default",
+   "dtype": "categorical",
+   "unique": 3
+  },
+  {
+   "name": "housing",
+   "dtype": "categorical",
+   "unique": 3
+  },
+  {
+   "name": "loan",
+   "dtype": "categorical",
+   "unique": 3
+  },
+  {
+   "name": "contact",
+   "dtype": "categorical",
+   "unique": 2
+  },
+  {
+   "name": "month",
+   "dtype": "categorical",
+   "unique": 10
+  },
+  {
+   "name": "day_of_week",
+   "dtype": "categorical",
+   "unique": 5
+  },
+  {
+   "name": "duration",
+   "dtype": "numeric",
+   "unique": 1544,
+   "min": 0.0,
+   "max": 4918.0,
+   "mean": 258.28501,
+   "median": 180.0
+  },
+  {
+   "name": "campaign",
+   "dtype": "numeric",
+   "unique": 42,
+   "min": 1.0,
+   "max": 56.0,
+   "mean": 2.567593,
+   "median": 2.0
+  },
+  {
+   "name": "pdays",
+   "dtype": "numeric",
+   "unique": 27,
+   "min": 0.0,
+   "max": 999.0,
+   "mean": 962.475454,
+   "median": 999.0
+  },
+  {
+   "name": "previous",
+   "dtype": "numeric",
+   "unique": 8,
+   "min": 0.0,
+   "max": 7.0,
+   "mean": 0.172963,
+   "median": 0.0
+  },
+  {
+   "name": "poutcome",
+   "dtype": "categorical",
+   "unique": 3
+  },
+  {
+   "name": "emp.var.rate",
+   "dtype": "numeric",
+   "unique": 10,
+   "min": -3.4,
+   "max": 1.4,
+   "mean": 0.081886,
+   "median": 1.1
+  },
+  {
+   "name": "cons.price.idx",
+   "dtype": "numeric",
+   "unique": 26,
+   "min": 92.201,
+   "max": 94.767,
+   "mean": 93.575664,
+   "median": 93.749
+  },
+  {
+   "name": "cons.conf.idx",
+   "dtype": "numeric",
+   "unique": 26,
+   "min": -50.8,
+   "max": -26.9,
+   "mean": -40.5026,
+   "median": -41.8
+  },
+  {
+   "name": "euribor3m",
+   "dtype": "numeric",
+   "unique": 316,
+   "min": 0.634,
+   "max": 5.045,
+   "mean": 3.621291,
+   "median": 4.857
+  },
+  {
+   "name": "nr.employed",
+   "dtype": "numeric",
+   "unique": 11,
+   "min": 4963.6,
+   "max": 5228.1,
+   "mean": 5167.035911,
+   "median": 5191.0
+  },
+  {
+   "name": "y",
+   "dtype": "categorical",
+   "unique": 2
+  }
+ ],
+ "correlation_with_target": {
+  "duration": 0.405274,
+  "nr.employed": -0.354678,
+  "pdays": -0.324914,
+  "euribor3m": -0.307771,
+  "emp.var.rate": -0.298334,
+  "previous": 0.230181,
+  "cons.price.idx": -0.136211,
+  "campaign": -0.066357,
+  "cons.conf.idx": 0.054878,
+  "age": 0.030399
+ },
+ "macro_correlation": {
+  "emp.var.rate ~ cons.price.idx": 0.775334,
+  "emp.var.rate ~ cons.conf.idx": 0.196041,
+  "emp.var.rate ~ euribor3m": 0.972245,
+  "emp.var.rate ~ nr.employed": 0.90697,
+  "cons.price.idx ~ cons.conf.idx": 0.058986,
+  "cons.price.idx ~ euribor3m": 0.68823,
+  "cons.price.idx ~ nr.employed": 0.522034,
+  "cons.conf.idx ~ euribor3m": 0.277686,
+  "cons.conf.idx ~ nr.employed": 0.100513,
+  "euribor3m ~ nr.employed": 0.945154
+ },
+ "rates": {
+  "job": [
+   {
+    "level": "student",
+    "rate": 0.314286,
+    "n": 875
+   },
+   {
+    "level": "retired",
+    "rate": 0.252326,
+    "n": 1720
+   },
+   {
+    "level": "unemployed",
+    "rate": 0.142012,
+    "n": 1014
+   },
+   {
+    "level": "admin.",
+    "rate": 0.129726,
+    "n": 10422
+   },
+   {
+    "level": "management",
+    "rate": 0.112175,
+    "n": 2924
+   },
+   {
+    "level": "unknown",
+    "rate": 0.112121,
+    "n": 330
+   },
+   {
+    "level": "technician",
+    "rate": 0.10826,
+    "n": 6743
+   },
+   {
+    "level": "self-employed",
+    "rate": 0.104856,
+    "n": 1421
+   },
+   {
+    "level": "housemaid",
+    "rate": 0.1,
+    "n": 1060
+   },
+   {
+    "level": "entrepreneur",
+    "rate": 0.085165,
+    "n": 1456
+   },
+   {
+    "level": "services",
+    "rate": 0.081381,
+    "n": 3969
+   },
+   {
+    "level": "blue-collar",
+    "rate": 0.068943,
+    "n": 9254
+   }
+  ],
+  "marital": [
+   {
+    "level": "unknown",
+    "rate": 0.15,
+    "n": 80
+   },
+   {
+    "level": "single",
+    "rate": 0.140041,
+    "n": 11568
+   },
+   {
+    "level": "divorced",
+    "rate": 0.103209,
+    "n": 4612
+   },
+   {
+    "level": "married",
+    "rate": 0.101573,
+    "n": 24928
+   }
+  ],
+  "education": [
+   {
+    "level": "illiterate",
+    "rate": 0.222222,
+    "n": 18
+   },
+   {
+    "level": "unknown",
+    "rate": 0.145003,
+    "n": 1731
+   },
+   {
+    "level": "university.degree",
+    "rate": 0.137245,
+    "n": 12168
+   },
+   {
+    "level": "professional.course",
+    "rate": 0.113485,
+    "n": 5243
+   },
+   {
+    "level": "high.school",
+    "rate": 0.108355,
+    "n": 9515
+   },
+   {
+    "level": "basic.4y",
+    "rate": 0.10249,
+    "n": 4176
+   },
+   {
+    "level": "basic.6y",
+    "rate": 0.082024,
+    "n": 2292
+   },
+   {
+    "level": "basic.9y",
+    "rate": 0.078246,
+    "n": 6045
+   }
+  ],
+  "housing": [
+   {
+    "level": "yes",
+    "rate": 0.116194,
+    "n": 21576
+   },
+   {
+    "level": "no",
+    "rate": 0.108796,
+    "n": 18622
+   },
+   {
+    "level": "unknown",
+    "rate": 0.108081,
+    "n": 990
+   }
+  ],
+  "loan": [
+   {
+    "level": "no",
+    "rate": 0.113402,
+    "n": 33950
+   },
+   {
+    "level": "yes",
+    "rate": 0.109315,
+    "n": 6248
+   },
+   {
+    "level": "unknown",
+    "rate": 0.108081,
+    "n": 990
+   }
+  ],
+  "contact": [
+   {
+    "level": "cellular",
+    "rate": 0.147376,
+    "n": 26144
+   },
+   {
+    "level": "telephone",
+    "rate": 0.052313,
+    "n": 15044
+   }
+  ],
+  "month": [
+   {
+    "level": "mar",
+    "rate": 0.505495,
+    "n": 546
+   },
+   {
+    "level": "dec",
+    "rate": 0.489011,
+    "n": 182
+   },
+   {
+    "level": "sep",
+    "rate": 0.449123,
+    "n": 570
+   },
+   {
+    "level": "oct",
+    "rate": 0.438719,
+    "n": 718
+   },
+   {
+    "level": "apr",
+    "rate": 0.204787,
+    "n": 2632
+   },
+   {
+    "level": "aug",
+    "rate": 0.106021,
+    "n": 6178
+   },
+   {
+    "level": "jun",
+    "rate": 0.105115,
+    "n": 5318
+   },
+   {
+    "level": "nov",
+    "rate": 0.101439,
+    "n": 4101
+   },
+   {
+    "level": "jul",
+    "rate": 0.090466,
+    "n": 7174
+   },
+   {
+    "level": "may",
+    "rate": 0.064347,
+    "n": 13769
+   }
+  ],
+  "day_of_week": [
+   {
+    "level": "thu",
+    "rate": 0.121188,
+    "n": 8623
+   },
+   {
+    "level": "tue",
+    "rate": 0.1178,
+    "n": 8090
+   },
+   {
+    "level": "wed",
+    "rate": 0.116671,
+    "n": 8134
+   },
+   {
+    "level": "fri",
+    "rate": 0.108087,
+    "n": 7827
+   },
+   {
+    "level": "mon",
+    "rate": 0.099483,
+    "n": 8514
+   }
+  ],
+  "poutcome": [
+   {
+    "level": "success",
+    "rate": 0.651129,
+    "n": 1373
+   },
+   {
+    "level": "failure",
+    "rate": 0.142286,
+    "n": 4252
+   },
+   {
+    "level": "nonexistent",
+    "rate": 0.088322,
+    "n": 35563
+   }
+  ],
+  "default": [
+   {
+    "level": "no",
+    "rate": 0.12879,
+    "n": 32588
+   },
+   {
+    "level": "unknown",
+    "rate": 0.05153,
+    "n": 8597
+   },
+   {
+    "level": "yes",
+    "rate": 0.0,
+    "n": 3
+   }
+  ]
+ },
+ "small_sample_trap": {
+  "level": "education=illiterate",
+  "n": 18,
+  "yes": 4,
+  "rate": 0.222222,
+  "rate_with_one_more_yes": 0.263158,
+  "one_row_moves_points": 5.555556,
+  "wilson_95": [
+   0.090008,
+   0.45215
+  ]
+ },
+ "campaign": {
+  "mean": 2.567593,
+  "median": 2.0,
+  "max": 56,
+  "p99": 14.0
+ },
+ "split": {
+  "train": 32950,
+  "test": 8238,
+  "stratified": true,
+  "random_state": 42
+ }
+}

@@ -1,0 +1,187 @@
+{
+ "model_id": "catboost",
+ "display_name": "CatBoost",
+ "family": "gradient_boosting",
+ "task": "supervised_classification",
+ "one_liner": "Builds trees in sequence, each correcting the previous one's mistakes.",
+ "plain_explanation": "Boosting builds many small trees in sequence. The first tree makes a rough guess. The second tree is trained not on the original answer but on the first tree's mistakes. The third corrects what remains, and so on. The final prediction is the sum of all of them, each scaled down by a small learning rate so no single tree dominates. CatBoost's distinctive part is how it handles categorical columns like job or month: instead of one-hot encoding, it replaces each category with a running average of the target — computed only from rows seen earlier, which is what stops it leaking the answer.",
+ "year": 2017,
+ "reference": "Prokhorenkova et al., CatBoost: unbiased boosting with categorical features, NeurIPS 2018",
+ "workflow": [
+  {
+   "id": "n1",
+   "label": "Encode categoricals",
+   "detail": "Ordered target statistics. Only earlier rows contribute, which prevents target leakage.",
+   "formula_ref": "f1"
+  },
+  {
+   "id": "n2",
+   "label": "Initialise",
+   "detail": "Start from the log-odds of the base rate — the best constant guess.",
+   "formula_ref": "f2"
+  },
+  {
+   "id": "n3",
+   "label": "Compute residuals",
+   "detail": "How wrong are we on each row right now?",
+   "formula_ref": "f3"
+  },
+  {
+   "id": "n4",
+   "label": "Fit a tree to the residuals",
+   "detail": "A shallow symmetric (oblivious) tree predicting the current errors: every node at the same depth asks the same question.",
+   "formula_ref": null
+  },
+  {
+   "id": "n5",
+   "label": "Update with shrinkage",
+   "detail": "Add the new tree, scaled by the learning rate.",
+   "formula_ref": "f4"
+  },
+  {
+   "id": "n6",
+   "label": "Repeat or early-stop",
+   "detail": "Loop to n3 until validation AUC stops improving for 50 rounds.",
+   "formula_ref": "f5"
+  }
+ ],
+ "edges": [
+  [
+   "n1",
+   "n2"
+  ],
+  [
+   "n2",
+   "n3"
+  ],
+  [
+   "n3",
+   "n4"
+  ],
+  [
+   "n4",
+   "n5"
+  ],
+  [
+   "n5",
+   "n3"
+  ],
+  [
+   "n5",
+   "n6"
+  ]
+ ],
+ "formulas": [
+  {
+   "id": "f1",
+   "name": "Ordered target statistic",
+   "latex": "\\hat{x}_k = \\frac{\\sum_{j=1}^{k-1}\\mathbb{1}[x_j = x_k]\\,y_j + a\\,p}{\\sum_{j=1}^{k-1}\\mathbb{1}[x_j = x_k] + a}",
+   "caption": "Replaces a category with the average target of earlier rows sharing that category. The prior p and weight a smooth rare categories. Using only j < k is what makes it leak-free — a naive target encoding using all rows would leak the answer.",
+   "glossary": [
+    {
+     "sym": "a",
+     "means": "smoothing weight"
+    },
+    {
+     "sym": "p",
+     "means": "global base rate (0.1127 here)"
+    },
+    {
+     "sym": "\\mathbb{1}[\\cdot]",
+     "means": "1 if true, else 0"
+    }
+   ]
+  },
+  {
+   "id": "f2",
+   "name": "Initial prediction",
+   "latex": "F_0(x) = \\log\\frac{p}{1-p}",
+   "caption": "The log-odds of the base rate. Here log(0.1127/0.8873) ≈ −2.06 — the best possible constant guess.",
+   "glossary": []
+  },
+  {
+   "id": "f3",
+   "name": "Residual (pseudo-gradient)",
+   "latex": "r_i = y_i - \\sigma\\big(F_{m-1}(x_i)\\big), \\qquad \\sigma(z) = \\frac{1}{1+e^{-z}}",
+   "caption": "How wrong the current ensemble is on row i. The next tree is trained to predict this, not y.",
+   "glossary": [
+    {
+     "sym": "\\sigma",
+     "means": "logistic sigmoid"
+    }
+   ]
+  },
+  {
+   "id": "f4",
+   "name": "Boosting update",
+   "latex": "F_m(x) = F_{m-1}(x) + \\eta\\, h_m(x)",
+   "caption": "Each tree is added scaled by the learning rate η. Small η means slow, stable learning and needs more trees.",
+   "glossary": [
+    {
+     "sym": "\\eta",
+     "means": "learning rate (0.05)"
+    },
+    {
+     "sym": "h_m",
+     "means": "the m-th tree"
+    }
+   ]
+  },
+  {
+   "id": "f5",
+   "name": "Loss (log loss)",
+   "latex": "\\mathcal{L} = -\\frac{1}{N}\\sum_{i=1}^{N}\\Big[y_i \\log \\sigma(F(x_i)) + (1-y_i)\\log\\big(1-\\sigma(F(x_i))\\big)\\Big]",
+   "caption": "What each tree reduces. The residual in f3 is exactly the negative gradient of this loss.",
+   "glossary": []
+  }
+ ],
+ "assumptions": [
+  {
+   "text": "Enough rows per categorical level",
+   "status": "warn",
+   "evidence": "job=unknown has 330 rows (0.80%), education=illiterate 18; the prior term a·p in f1 smooths them."
+  },
+  {
+   "text": "No scaling required",
+   "status": "ok",
+   "evidence": "Trees are scale-invariant."
+  },
+  {
+   "text": "Independent rows",
+   "status": "warn",
+   "evidence": "Data is time-ordered May 2008–Nov 2010; a random split ignores this."
+  }
+ ],
+ "figures": [
+  {
+   "file": "loss_curve.json",
+   "title": "Training and validation loss",
+   "type": "line",
+   "caption": "Validation AUC peaked at iteration 252 of 1,000; training stopped 50 rounds later. With duration it ran to 335."
+  },
+  {
+   "file": "feature_importance.json",
+   "title": "Feature importance",
+   "type": "bar",
+   "caption": "euribor3m leads with 14.1% of the total prediction change. day_of_week: 3.7%."
+  },
+  {
+   "file": "first_tree.json",
+   "title": "One tree from the ensemble",
+   "type": "bar",
+   "caption": "CatBoost grows oblivious trees: every node at a level asks the same question, so this tree is just 4 questions and 2^4 = 16 leaves (depth 6 is a maximum, not a requirement). Splits on categorical features use their ordered target statistic (shown as a ctr border)."
+  },
+  {
+   "file": "calibration.json",
+   "title": "Calibration curve",
+   "type": "line",
+   "caption": "Balanced class weights make the model over-confident: its mean prediction is 0.38 while the true rate is 0.11. Ranking (AUC) is unaffected; raw probabilities are not real chances."
+  },
+  {
+   "file": "ordered_ts.json",
+   "title": "Ordered target statistic",
+   "type": "line",
+   "caption": "Each student row is encoded using only the students before it. The first is pure prior (0.113); the estimate converges toward the true student rate. No row ever sees its own label."
+  }
+ ]
+}

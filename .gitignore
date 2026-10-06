@@ -216,3 +216,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+logs/
+catboost_info/
+data/processed/
+frontend/dist/

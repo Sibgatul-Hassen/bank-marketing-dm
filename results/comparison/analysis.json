@@ -1,0 +1,39 @@
+{
+ "paragraphs": [
+  {
+   "model_id": "catboost",
+   "title": "CatBoost — rank 1 of 4 (PR-AUC 0.4786)",
+   "text": "Boosting adds hundreds of shallow trees, each fitted to what the previous ones got wrong, so it can combine many weak signals (contact channel, month, the macro regime, poutcome) that a single tree must choose between. Ordered target statistics let one split separate high- from low-responding jobs or months without one-hot fragmentation. Its margin over the single tree is +0.0355 PR-AUC: real (see the McNemar test in the comparator) but small, because without duration the signal is concentrated in a handful of features that a depth-7 tree already reaches. Its leak inflation (+0.145 AUC) is typical of tree ensembles: duration is a single monotone feature that trees threshold precisely."
+  },
+  {
+   "model_id": "decision_tree",
+   "title": "Decision Tree — rank 4 of 4 (PR-AUC 0.4431)",
+   "text": "One tree of axis-parallel questions. It ranks below the ensemble because each client follows a single path, so evidence from features off that path is ignored, and because the three collinear macro features cannot be used jointly. It stays close because the strongest legitimate signals — the economic period (nr.employed / euribor3m), poutcome=success and the contact channel — are exactly the kind of sharp thresholds a tree finds first. It is the only model whose every prediction can be traced by hand, which we do on its page."
+  },
+  {
+   "model_id": "tabnet",
+   "title": "TabNet — rank 3 of 4 (PR-AUC 0.4458)",
+   "text": "A neural network with sequential attention. It lands below CatBoost, as the plan predicted. With ~28,000 training rows, 20 features and a weak signal, a network has more parameters to fit than the data can pin down, and its smooth decision surface has no advantage over trees when the useful structure is a few sharp thresholds. It took 15.9× CatBoost's training time on CPU. Its value here is the masks: an attribution produced by the architecture itself, which we compare with SHAP on its page."
+  },
+  {
+   "model_id": "tabpfn",
+   "title": "TabPFN — rank 2 of 4 (PR-AUC 0.4611)",
+   "text": "No training, no tuning, and only a 3,000-row context (one eleventh of the training data, a CPU limit) — yet ROC-AUC 0.8067, in the same band as models tuned on all 32,950 rows. A prior learned from millions of synthetic tables substitutes for data: on its context curve it beats CatBoost trained on the same rows at 6 of 6 sizes (e.g. 0.775 vs 0.764 at 250 rows). It is also the only well-calibrated model (Brier 0.0769), because it was not class-weighted. The cost is inference: every prediction re-reads the whole context, which is why the full-data run was not feasible without a GPU."
+  },
+  {
+   "model_id": "umap_hdbscan",
+   "title": "UMAP + HDBSCAN — not ranked (unsupervised)",
+   "text": "It never sees the label, so it cannot compete; scored by its clusters' subscription rates it reaches ROC-AUC 0.793. Its contribution is diagnostic: the clusters align with the month and economic regime of the call far more than with subscription — consistent with every supervised model leaning on the macro features: the dominant structure in this data is the calendar of the campaign."
+  },
+  {
+   "model_id": "fp_growth",
+   "title": "FP-Growth — not ranked (pattern mining)",
+   "text": "Rules describe groups, not individuals: a client matching no actionable rule gets the base-rate score, so as a ranker it reaches only ROC-AUC 0.759. But its top rules (poutcome=success, cellular contact in low-volume months, students and retirees) are readable policies with measured lift and coverage. They overlap with what SHAP ranks highly — the low-rate economic period, contact channel and month — though SHAP puts poutcome lower than the rules do, because few clients had a previous success."
+  },
+  {
+   "model_id": "reference",
+   "title": "The reference families — why the ranking reorders",
+   "text": "The six reference families explain the leakage finding. Random Forest gains the most from duration (+0.166 AUC) and falls from rank 2 to 5 without it: fully grown trees carve duration into fine thresholds that nearly determine the label, and without it the same unpruned trees memorise noise in a weak signal. Gaussian NB gains least (+0.068): it multiplies independent per-feature likelihoods, so duration is one vote among twenty, and its Gaussian model of a heavily skewed duration distribution captures little of it. kNN gains +0.147; the plan's §3.6 reported a smaller with-duration AUC (0.8815) than we reproduce (0.9289, scaled or unscaled) — an unresolved discrepancy we report rather than hide. The general lesson: a leaky feature rewards the models best able to exploit one sharp signal, so leaky benchmarks rank exploitation, not prediction."
+  }
+ ]
+}
