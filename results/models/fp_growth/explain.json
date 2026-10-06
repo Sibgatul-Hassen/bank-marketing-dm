@@ -1,0 +1,411 @@
+{
+ "kind": "rule_contribution",
+ "items": [
+  {
+   "item": "poutcome=success",
+   "rules": [
+    {
+     "rule": "poutcome=success → y=yes",
+     "lift": 5.759759,
+     "confidence": 0.648869,
+     "support": 0.02176,
+     "coverage": 0.033536
+    }
+   ],
+   "plain_text": "poutcome=success appears in 1 actionable rules; the strongest lifts subscription 5.8× over the base rate, covering 3.4% of clients."
+  },
+  {
+   "item": "contact=cellular",
+   "rules": [
+    {
+     "rule": "cons.conf.idx=mid + cons.price.idx=high + contact=cellular → y=yes",
+     "lift": 5.370616,
+     "confidence": 0.60503,
+     "support": 0.012413,
+     "coverage": 0.020516
+    },
+    {
+     "rule": "cons.price.idx=high + contact=cellular → y=yes",
+     "lift": 5.061229,
+     "confidence": 0.570175,
+     "support": 0.015781,
+     "coverage": 0.027678
+    },
+    {
+     "rule": "cons.conf.idx=mid + contact=cellular + nr.employed=low → y=yes",
+     "lift": 4.628093,
+     "confidence": 0.52138,
+     "support": 0.021093,
+     "coverage": 0.040455
+    },
+    {
+     "rule": "cons.conf.idx=mid + contact=cellular + euribor3m=low → y=yes",
+     "lift": 3.527389,
+     "confidence": 0.39738,
+     "support": 0.022094,
+     "coverage": 0.055599
+    },
+    {
+     "rule": "contact=cellular + education=university.degree + nr.employed=low → y=yes",
+     "lift": 2.731947,
+     "confidence": 0.307769,
+     "support": 0.028134,
+     "coverage": 0.091411
+    }
+   ],
+   "plain_text": "contact=cellular appears in 5 actionable rules; the strongest lifts subscription 5.4× over the base rate, covering 2.1% of clients."
+  },
+  {
+   "item": "cons.price.idx=high",
+   "rules": [
+    {
+     "rule": "cons.conf.idx=mid + cons.price.idx=high + contact=cellular → y=yes",
+     "lift": 5.370616,
+     "confidence": 0.60503,
+     "support": 0.012413,
+     "coverage": 0.020516
+    },
+    {
+     "rule": "cons.price.idx=high + contact=cellular → y=yes",
+     "lift": 5.061229,
+     "confidence": 0.570175,
+     "support": 0.015781,
+     "coverage": 0.027678
+    },
+    {
+     "rule": "cons.price.idx=high + euribor3m=low → y=yes",
+     "lift": 4.395744,
+     "confidence": 0.495205,
+     "support": 0.017238,
+     "coverage": 0.03481
+    },
+    {
+     "rule": "cons.price.idx=high + emp.var.rate=low → y=yes",
+     "lift": 4.395744,
+     "confidence": 0.495205,
+     "support": 0.017238,
+     "coverage": 0.03481
+    }
+   ],
+   "plain_text": "cons.price.idx=high appears in 4 actionable rules; the strongest lifts subscription 5.4× over the base rate, covering 2.1% of clients."
+  },
+  {
+   "item": "cons.conf.idx=mid",
+   "rules": [
+    {
+     "rule": "cons.conf.idx=mid + cons.price.idx=high + contact=cellular → y=yes",
+     "lift": 5.370616,
+     "confidence": 0.60503,
+     "support": 0.012413,
+     "coverage": 0.020516
+    },
+    {
+     "rule": "cons.conf.idx=mid + contact=cellular + nr.employed=low → y=yes",
+     "lift": 4.628093,
+     "confidence": 0.52138,
+     "support": 0.021093,
+     "coverage": 0.040455
+    },
+    {
+     "rule": "cons.conf.idx=mid + euribor3m=low + nr.employed=low → y=yes",
+     "lift": 4.155596,
+     "confidence": 0.468151,
+     "support": 0.022974,
+     "coverage": 0.049074
+    },
+    {
+     "rule": "cons.conf.idx=mid + emp.var.rate=low + nr.employed=low → y=yes",
+     "lift": 4.155596,
+     "confidence": 0.468151,
+     "support": 0.022974,
+     "coverage": 0.049074
+    },
+    {
+     "rule": "cons.conf.idx=mid + contact=cellular + euribor3m=low → y=yes",
+     "lift": 3.527389,
+     "confidence": 0.39738,
+     "support": 0.022094,
+     "coverage": 0.055599
+    }
+   ],
+   "plain_text": "cons.conf.idx=mid appears in 7 actionable rules; the strongest lifts subscription 5.4× over the base rate, covering 2.1% of clients."
+  },
+  {
+   "item": "emp.var.rate=low",
+   "rules": [
+    {
+     "rule": "cons.price.idx=mid + emp.var.rate=low → y=yes",
+     "lift": 5.059211,
+     "confidence": 0.569948,
+     "support": 0.010015,
+     "coverage": 0.017572
+    },
+    {
+     "rule": "cons.price.idx=high + emp.var.rate=low → y=yes",
+     "lift": 4.395744,
+     "confidence": 0.495205,
+     "support": 0.017238,
+     "coverage": 0.03481
+    },
+    {
+     "rule": "cons.conf.idx=mid + emp.var.rate=low + nr.employed=low → y=yes",
+     "lift": 4.155596,
+     "confidence": 0.468151,
+     "support": 0.022974,
+     "coverage": 0.049074
+    },
+    {
+     "rule": "cons.conf.idx=high + emp.var.rate=low → y=yes",
+     "lift": 3.733077,
+     "confidence": 0.420552,
+     "support": 0.026829,
+     "coverage": 0.063794
+    },
+    {
+     "rule": "age=20s + emp.var.rate=low + marital=single → y=yes",
+     "lift": 2.694029,
+     "confidence": 0.303497,
+     "support": 0.015539,
+     "coverage": 0.051199
+    }
+   ],
+   "plain_text": "emp.var.rate=low appears in 5 actionable rules; the strongest lifts subscription 5.1× over the base rate, covering 1.8% of clients."
+  },
+  {
+   "item": "cons.price.idx=mid",
+   "rules": [
+    {
+     "rule": "cons.price.idx=mid + emp.var.rate=low → y=yes",
+     "lift": 5.059211,
+     "confidence": 0.569948,
+     "support": 0.010015,
+     "coverage": 0.017572
+    }
+   ],
+   "plain_text": "cons.price.idx=mid appears in 1 actionable rules; the strongest lifts subscription 5.1× over the base rate, covering 1.8% of clients."
+  },
+  {
+   "item": "nr.employed=low",
+   "rules": [
+    {
+     "rule": "cons.conf.idx=mid + contact=cellular + nr.employed=low → y=yes",
+     "lift": 4.628093,
+     "confidence": 0.52138,
+     "support": 0.021093,
+     "coverage": 0.040455
+    },
+    {
+     "rule": "cons.conf.idx=mid + euribor3m=low + nr.employed=low → y=yes",
+     "lift": 4.155596,
+     "confidence": 0.468151,
+     "support": 0.022974,
+     "coverage": 0.049074
+    },
+    {
+     "rule": "cons.conf.idx=mid + emp.var.rate=low + nr.employed=low → y=yes",
+     "lift": 4.155596,
+     "confidence": 0.468151,
+     "support": 0.022974,
+     "coverage": 0.049074
+    },
+    {
+     "rule": "cons.conf.idx=high + nr.employed=low → y=yes",
+     "lift": 3.733077,
+     "confidence": 0.420552,
+     "support": 0.026829,
+     "coverage": 0.063794
+    },
+    {
+     "rule": "contact=cellular + education=university.degree + nr.employed=low → y=yes",
+     "lift": 2.731947,
+     "confidence": 0.307769,
+     "support": 0.028134,
+     "coverage": 0.091411
+    }
+   ],
+   "plain_text": "nr.employed=low appears in 5 actionable rules; the strongest lifts subscription 4.6× over the base rate, covering 4.0% of clients."
+  },
+  {
+   "item": "euribor3m=low",
+   "rules": [
+    {
+     "rule": "cons.price.idx=high + euribor3m=low → y=yes",
+     "lift": 4.395744,
+     "confidence": 0.495205,
+     "support": 0.017238,
+     "coverage": 0.03481
+    },
+    {
+     "rule": "cons.conf.idx=mid + euribor3m=low + nr.employed=low → y=yes",
+     "lift": 4.155596,
+     "confidence": 0.468151,
+     "support": 0.022974,
+     "coverage": 0.049074
+    },
+    {
+     "rule": "cons.conf.idx=high + euribor3m=low → y=yes",
+     "lift": 3.733077,
+     "confidence": 0.420552,
+     "support": 0.026829,
+     "coverage": 0.063794
+    },
+    {
+     "rule": "cons.conf.idx=mid + contact=cellular + euribor3m=low → y=yes",
+     "lift": 3.527389,
+     "confidence": 0.39738,
+     "support": 0.022094,
+     "coverage": 0.055599
+    },
+    {
+     "rule": "cons.conf.idx=mid + euribor3m=low + housing=no → y=yes",
+     "lift": 3.428943,
+     "confidence": 0.386289,
+     "support": 0.010774,
+     "coverage": 0.027891
+    }
+   ],
+   "plain_text": "euribor3m=low appears in 8 actionable rules; the strongest lifts subscription 4.4× over the base rate, covering 3.5% of clients."
+  },
+  {
+   "item": "cons.conf.idx=high",
+   "rules": [
+    {
+     "rule": "cons.conf.idx=high + emp.var.rate=low → y=yes",
+     "lift": 3.733077,
+     "confidence": 0.420552,
+     "support": 0.026829,
+     "coverage": 0.063794
+    },
+    {
+     "rule": "cons.conf.idx=high + nr.employed=low → y=yes",
+     "lift": 3.733077,
+     "confidence": 0.420552,
+     "support": 0.026829,
+     "coverage": 0.063794
+    },
+    {
+     "rule": "cons.conf.idx=high + euribor3m=low → y=yes",
+     "lift": 3.733077,
+     "confidence": 0.420552,
+     "support": 0.026829,
+     "coverage": 0.063794
+    },
+    {
+     "rule": "cons.conf.idx=high + cons.price.idx=low → y=yes",
+     "lift": 3.498997,
+     "confidence": 0.394181,
+     "support": 0.020971,
+     "coverage": 0.053202
+    }
+   ],
+   "plain_text": "cons.conf.idx=high appears in 4 actionable rules; the strongest lifts subscription 3.7× over the base rate, covering 6.4% of clients."
+  },
+  {
+   "item": "cons.price.idx=low",
+   "rules": [
+    {
+     "rule": "cons.conf.idx=high + cons.price.idx=low → y=yes",
+     "lift": 3.498997,
+     "confidence": 0.394181,
+     "support": 0.020971,
+     "coverage": 0.053202
+    }
+   ],
+   "plain_text": "cons.price.idx=low appears in 1 actionable rules; the strongest lifts subscription 3.5× over the base rate, covering 5.3% of clients."
+  },
+  {
+   "item": "housing=no",
+   "rules": [
+    {
+     "rule": "cons.conf.idx=mid + euribor3m=low + housing=no → y=yes",
+     "lift": 3.428943,
+     "confidence": 0.386289,
+     "support": 0.010774,
+     "coverage": 0.027891
+    }
+   ],
+   "plain_text": "housing=no appears in 1 actionable rules; the strongest lifts subscription 3.4× over the base rate, covering 2.8% of clients."
+  },
+  {
+   "item": "marital=single",
+   "rules": [
+    {
+     "rule": "age=20s + euribor3m=low + marital=single → y=yes",
+     "lift": 2.735869,
+     "confidence": 0.308211,
+     "support": 0.015266,
+     "coverage": 0.04953
+    },
+    {
+     "rule": "age=20s + emp.var.rate=low + marital=single → y=yes",
+     "lift": 2.694029,
+     "confidence": 0.303497,
+     "support": 0.015539,
+     "coverage": 0.051199
+    }
+   ],
+   "plain_text": "marital=single appears in 2 actionable rules; the strongest lifts subscription 2.7× over the base rate, covering 5.0% of clients."
+  },
+  {
+   "item": "age=20s",
+   "rules": [
+    {
+     "rule": "age=20s + euribor3m=low + marital=single → y=yes",
+     "lift": 2.735869,
+     "confidence": 0.308211,
+     "support": 0.015266,
+     "coverage": 0.04953
+    },
+    {
+     "rule": "age=20s + emp.var.rate=low + marital=single → y=yes",
+     "lift": 2.694029,
+     "confidence": 0.303497,
+     "support": 0.015539,
+     "coverage": 0.051199
+    }
+   ],
+   "plain_text": "age=20s appears in 2 actionable rules; the strongest lifts subscription 2.7× over the base rate, covering 5.0% of clients."
+  },
+  {
+   "item": "education=university.degree",
+   "rules": [
+    {
+     "rule": "contact=cellular + education=university.degree + nr.employed=low → y=yes",
+     "lift": 2.731947,
+     "confidence": 0.307769,
+     "support": 0.028134,
+     "coverage": 0.091411
+    },
+    {
+     "rule": "campaign=1 + education=university.degree + euribor3m=low → y=yes",
+     "lift": 2.685895,
+     "confidence": 0.302581,
+     "support": 0.016722,
+     "coverage": 0.055266
+    }
+   ],
+   "plain_text": "education=university.degree appears in 2 actionable rules; the strongest lifts subscription 2.7× over the base rate, covering 9.1% of clients."
+  },
+  {
+   "item": "campaign=1",
+   "rules": [
+    {
+     "rule": "campaign=1 + education=university.degree + euribor3m=low → y=yes",
+     "lift": 2.685895,
+     "confidence": 0.302581,
+     "support": 0.016722,
+     "coverage": 0.055266
+    }
+   ],
+   "plain_text": "campaign=1 appears in 1 actionable rules; the strongest lifts subscription 2.7× over the base rate, covering 5.5% of clients."
+  }
+ ],
+ "global": {
+  "plain_text": "20 rules predict subscription with lift ≥ 1.2. The strongest items are poutcome=success, contact=cellular, cons.price.idx=high, cons.conf.idx=mid."
+ },
+ "narrative": {
+  "headline": "The best rule lifts subscription 5.8×: poutcome=success → y=yes.",
+  "body": "poutcome=success alone lifts subscription 5.76× (the plan expected ≈ 5.8). Rules also find the low-interest-rate period and cellular contact. Used as a scorer, the rules rank held-out clients at AUC 0.759.",
+  "caveat": "SHAP does not apply to rule mining. A rule describes co-occurrence in this data, not a cause — and a high-confidence rule can be useless (see the confidence trap)."
+ }
+}

@@ -1,0 +1,194 @@
+{
+ "model_id": "fp_growth",
+ "display_name": "FP-Growth",
+ "family": "pattern_mining",
+ "task": "association_rules",
+ "one_liner": "Finds attribute combinations that occur often, then keeps the rules that beat chance — ranked by lift, not confidence.",
+ "plain_explanation": "Association rule mining looks for statements like 'clients who were contacted on a mobile AND whose previous campaign succeeded tend to subscribe.' It does this in two stages: first find the combinations of attributes that occur often enough to matter, then turn those into directional rules and keep the trustworthy ones. Apriori does this by generating candidate combinations level by level and scanning the data at each level. FP-Growth builds a compressed tree of the data in two passes and mines it recursively, generating no candidates at all — usually much faster for the same result.",
+ "year": 2000,
+ "reference": "Han, Pei & Yin, Mining frequent patterns without candidate generation, SIGMOD 2000; Agrawal & Srikant, Apriori, VLDB 1994",
+ "workflow": [
+  {
+   "id": "n1",
+   "label": "Bin continuous features",
+   "detail": "age into decades, campaign into {1, 2–3, 4+}, macro features into terciles.",
+   "formula_ref": null
+  },
+  {
+   "id": "n2",
+   "label": "Build transaction baskets",
+   "detail": "Each client becomes a set of items: job=student, month=mar, y=yes.",
+   "formula_ref": null
+  },
+  {
+   "id": "n3",
+   "label": "First scan — item counts",
+   "detail": "Count every single item, discard those below minimum support.",
+   "formula_ref": "f1"
+  },
+  {
+   "id": "n4",
+   "label": "Second scan — build FP-tree",
+   "detail": "Insert each transaction with items sorted by frequency; shared prefixes merge into one path.",
+   "formula_ref": "f6"
+  },
+  {
+   "id": "n5",
+   "label": "Mine conditional pattern bases",
+   "detail": "For each item, extract its conditional tree and recurse. No candidate generation.",
+   "formula_ref": null
+  },
+  {
+   "id": "n6",
+   "label": "Generate rules",
+   "detail": "For each frequent itemset, split into antecedent and consequent; keep those above minimum confidence.",
+   "formula_ref": "f2"
+  },
+  {
+   "id": "n7",
+   "label": "Rank by lift",
+   "detail": "Sort by lift, not confidence — and report coverage beside it.",
+   "formula_ref": "f3,f4,f5"
+  }
+ ],
+ "edges": [
+  [
+   "n1",
+   "n2"
+  ],
+  [
+   "n2",
+   "n3"
+  ],
+  [
+   "n3",
+   "n4"
+  ],
+  [
+   "n4",
+   "n5"
+  ],
+  [
+   "n5",
+   "n6"
+  ],
+  [
+   "n6",
+   "n7"
+  ]
+ ],
+ "formulas": [
+  {
+   "id": "f1",
+   "name": "Support",
+   "latex": "\\text{supp}(X) = \\frac{|\\{T \\in D : X \\subseteq T\\}|}{|D|}",
+   "caption": "The fraction of clients whose record contains all of X. Below minimum support (1% here), a pattern is too rare to act on.",
+   "glossary": [
+    {
+     "sym": "T",
+     "means": "one client's basket of items"
+    },
+    {
+     "sym": "D",
+     "means": "all baskets"
+    }
+   ]
+  },
+  {
+   "id": "f2",
+   "name": "Confidence",
+   "latex": "\\text{conf}(X \\Rightarrow Y) = \\frac{\\text{supp}(X \\cup Y)}{\\text{supp}(X)} = P(Y \\mid X)",
+   "caption": "How often the rule holds when X is present.",
+   "glossary": []
+  },
+  {
+   "id": "f3",
+   "name": "Lift",
+   "latex": "\\text{lift}(X \\Rightarrow Y) = \\frac{\\text{supp}(X \\cup Y)}{\\text{supp}(X)\\,\\text{supp}(Y)} = \\frac{\\text{conf}(X \\Rightarrow Y)}{\\text{supp}(Y)}",
+   "caption": "How much more likely Y is given X than by chance. Lift > 1: positive association · = 1: independent — the rule is worthless no matter how high its confidence · < 1: negative association.",
+   "glossary": []
+  },
+  {
+   "id": "f4",
+   "name": "Coverage",
+   "latex": "\\text{coverage}(X \\Rightarrow Y) = \\text{supp}(X)",
+   "caption": "What fraction of clients the rule even applies to. A rule with lift 4 that fires on 0.1% of clients is a curiosity, not a policy.",
+   "glossary": []
+  },
+  {
+   "id": "f5",
+   "name": "Leverage and conviction",
+   "latex": "\\text{leverage} = \\text{supp}(X \\cup Y) - \\text{supp}(X)\\,\\text{supp}(Y), \\qquad \\text{conviction} = \\frac{1 - \\text{supp}(Y)}{1 - \\text{conf}(X \\Rightarrow Y)}",
+   "caption": "Leverage: how many more co-occurrences than independence predicts (as a fraction of all clients). Conviction: how much more often the rule would be wrong if X and Y were independent.",
+   "glossary": []
+  },
+  {
+   "id": "f6",
+   "name": "Apriori property (downward closure)",
+   "latex": "X \\text{ infrequent} \\;\\Longrightarrow\\; \\forall\\, Y \\supseteq X,\\; Y \\text{ infrequent}",
+   "caption": "If an itemset is rare, every superset is at least as rare. This is what makes the search tractable — without it you would test 2^m − 1 itemsets.",
+   "glossary": []
+  }
+ ],
+ "assumptions": [
+  {
+   "text": "Items are discrete",
+   "status": "warn",
+   "evidence": "Continuous features were binned; bin edges (decades, terciles) are choices, and the macro terciles are uneven because those features take few distinct values."
+  },
+  {
+   "text": "Minimum support filters noise",
+   "status": "ok",
+   "evidence": "1% = 330 training clients; education=illiterate (18 rows) cannot appear in any rule."
+  },
+  {
+   "text": "Confidence is meaningful on its own",
+   "status": "fail",
+   "evidence": "88.73% of clients say no, so any rule → y=no has ~0.89 confidence by default. Rank by lift."
+  },
+  {
+   "text": "Rules generalise beyond the mining data",
+   "status": "unknown",
+   "evidence": "Checked: rules mined on the training split are re-measured on the held-out test split."
+  }
+ ],
+ "figures": [
+  {
+   "file": "rule_network.json",
+   "title": "Rule network",
+   "type": "network",
+   "caption": "Items on the outer ring, rules (amber) in the middle, the consequent y=yes at the centre. Thicker edge = higher lift. Hover a rule for its measures."
+  },
+  {
+   "file": "support_confidence.json",
+   "title": "Support vs confidence",
+   "type": "scatter",
+   "caption": "The top band (confidence ≈ 0.9) is almost entirely rules predicting y=no with lift ≈ 1 — they restate the base rate. The useful rules sit lower, in teal."
+  },
+  {
+   "file": "top_rules.json",
+   "title": "Top rules by lift (→ y=yes)",
+   "type": "table",
+   "caption": "All six measures, mined on the training split; the last two columns re-measure each rule on held-out test clients."
+  },
+  {
+   "file": "levels.json",
+   "title": "L1 → L4 itemset progression",
+   "type": "bar",
+   "caption": "L1: 77 candidates → 72 frequent · L2: 2,556 candidates → 1,639 frequent · L3: 26,206 candidates → 15,603 frequent · L4: 134,934 candidates → 72,869 frequent. Counts from our own Apriori, cross-checked against mlxtend."
+  },
+  {
+   "file": "runtime.json",
+   "title": "Apriori vs FP-Growth runtime",
+   "type": "bar",
+   "caption": "At min_support 1%: FP-Growth 15.8s vs Apriori 7.5s vs ours 1.4s for the same 90,183 itemsets (asserted identical). mlxtend's default Apriori ran out of memory at 1%; low_memory mode was used throughout."
+  }
+ ],
+ "extras": [
+  {
+   "kind": "confidence_trap",
+   "file": "confidence_trap.json",
+   "title": "The confidence trap"
+  }
+ ]
+}
