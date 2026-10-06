@@ -1,0 +1,40 @@
+{
+ "estimator": "mlxtend.frequent_patterns.fpgrowth + association_rules",
+ "params": [
+  {
+   "name": "min_support",
+   "value": 0.01,
+   "why": "1% of training clients = 330 people: the smallest group worth a targeted call list."
+  },
+  {
+   "name": "min_confidence",
+   "value": 0.3,
+   "why": "Rules must hold at least 30% of the time — ~2.7× the 11.27% base rate for y=yes."
+  },
+  {
+   "name": "min_lift",
+   "value": 1.2,
+   "why": "Reporting filter: a rule must lift the subscription rate by at least 20% over chance."
+  },
+  {
+   "name": "min_improvement",
+   "value": 0.02,
+   "why": "Redundancy filter (Bayardo, Agrawal & Gunopulos 1999): adding an item must raise confidence by ≥ 2 points over every simpler rule, otherwise the longer rule is just the shorter one restated."
+  },
+  {
+   "name": "max_len",
+   "value": 4,
+   "why": "Itemsets up to 4 items (the L1–L4 progression); longer rules have tiny coverage and are hard to act on."
+  },
+  {
+   "name": "binning",
+   "value": "age decades; campaign {1, 2–3, 4+}; macro terciles",
+   "why": "Rules need discrete items. Terciles keep each macro bin around a third of clients where ties allow."
+  },
+  {
+   "name": "mining data",
+   "value": "training split only",
+   "why": "So rules can be re-checked on held-out clients, like every other model."
+  }
+ ]
+}

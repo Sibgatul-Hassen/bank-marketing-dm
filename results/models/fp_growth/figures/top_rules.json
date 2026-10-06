@@ -1,0 +1,246 @@
+{
+ "type": "table",
+ "columns": [
+  "rule",
+  "support",
+  "coverage",
+  "confidence",
+  "lift",
+  "leverage",
+  "conviction",
+  "test_confidence",
+  "test_lift"
+ ],
+ "format": {
+  "support": "pct",
+  "coverage": "pct",
+  "confidence": "pct",
+  "lift": "num",
+  "leverage": "num",
+  "conviction": "num",
+  "test_confidence": "pct",
+  "test_lift": "num"
+ },
+ "rows": [
+  {
+   "rule": "poutcome=success → y=yes",
+   "support": 0.02176,
+   "coverage": 0.033536,
+   "confidence": 0.648869,
+   "lift": 5.759759,
+   "leverage": 0.017982,
+   "conviction": 2.527102,
+   "test_confidence": 0.660448,
+   "test_lift": 5.862897
+  },
+  {
+   "rule": "cons.conf.idx=mid + cons.price.idx=high + contact=cellular → y=yes",
+   "support": 0.012413,
+   "coverage": 0.020516,
+   "confidence": 0.60503,
+   "lift": 5.370616,
+   "leverage": 0.010102,
+   "conviction": 2.24661,
+   "test_confidence": 0.6,
+   "test_lift": 5.326293
+  },
+  {
+   "rule": "cons.price.idx=high + contact=cellular → y=yes",
+   "support": 0.015781,
+   "coverage": 0.027678,
+   "confidence": 0.570175,
+   "lift": 5.061229,
+   "leverage": 0.012663,
+   "conviction": 2.064434,
+   "test_confidence": 0.59434,
+   "test_lift": 5.276045
+  },
+  {
+   "rule": "cons.price.idx=mid + emp.var.rate=low → y=yes",
+   "support": 0.010015,
+   "coverage": 0.017572,
+   "confidence": 0.569948,
+   "lift": 5.059211,
+   "leverage": 0.008036,
+   "conviction": 2.063343,
+   "test_confidence": 0.586957,
+   "test_lift": 5.210504
+  },
+  {
+   "rule": "cons.conf.idx=mid + contact=cellular + nr.employed=low → y=yes",
+   "support": 0.021093,
+   "coverage": 0.040455,
+   "confidence": 0.52138,
+   "lift": 4.628093,
+   "leverage": 0.016535,
+   "conviction": 1.853966,
+   "test_confidence": 0.515244,
+   "test_lift": 4.5739
+  },
+  {
+   "rule": "cons.price.idx=high + euribor3m=low → y=yes",
+   "support": 0.017238,
+   "coverage": 0.03481,
+   "confidence": 0.495205,
+   "lift": 4.395744,
+   "leverage": 0.013317,
+   "conviction": 1.757831,
+   "test_confidence": 0.521073,
+   "test_lift": 4.625644
+  },
+  {
+   "rule": "cons.price.idx=high + emp.var.rate=low → y=yes",
+   "support": 0.017238,
+   "coverage": 0.03481,
+   "confidence": 0.495205,
+   "lift": 4.395744,
+   "leverage": 0.013317,
+   "conviction": 1.757831,
+   "test_confidence": 0.521073,
+   "test_lift": 4.625644
+  },
+  {
+   "rule": "cons.conf.idx=mid + euribor3m=low + nr.employed=low → y=yes",
+   "support": 0.022974,
+   "coverage": 0.049074,
+   "confidence": 0.468151,
+   "lift": 4.155596,
+   "leverage": 0.017446,
+   "conviction": 1.668414,
+   "test_confidence": 0.471503,
+   "test_lift": 4.185602
+  },
+  {
+   "rule": "cons.conf.idx=mid + emp.var.rate=low + nr.employed=low → y=yes",
+   "support": 0.022974,
+   "coverage": 0.049074,
+   "confidence": 0.468151,
+   "lift": 4.155596,
+   "leverage": 0.017446,
+   "conviction": 1.668414,
+   "test_confidence": 0.471503,
+   "test_lift": 4.185602
+  },
+  {
+   "rule": "cons.conf.idx=high + emp.var.rate=low → y=yes",
+   "support": 0.026829,
+   "coverage": 0.063794,
+   "confidence": 0.420552,
+   "lift": 3.733077,
+   "leverage": 0.019642,
+   "conviction": 1.531361,
+   "test_confidence": 0.44592,
+   "test_lift": 3.958504
+  },
+  {
+   "rule": "cons.conf.idx=high + nr.employed=low → y=yes",
+   "support": 0.026829,
+   "coverage": 0.063794,
+   "confidence": 0.420552,
+   "lift": 3.733077,
+   "leverage": 0.019642,
+   "conviction": 1.531361,
+   "test_confidence": 0.44592,
+   "test_lift": 3.958504
+  },
+  {
+   "rule": "cons.conf.idx=high + euribor3m=low → y=yes",
+   "support": 0.026829,
+   "coverage": 0.063794,
+   "confidence": 0.420552,
+   "lift": 3.733077,
+   "leverage": 0.019642,
+   "conviction": 1.531361,
+   "test_confidence": 0.44592,
+   "test_lift": 3.958504
+  },
+  {
+   "rule": "cons.conf.idx=mid + contact=cellular + euribor3m=low → y=yes",
+   "support": 0.022094,
+   "coverage": 0.055599,
+   "confidence": 0.39738,
+   "lift": 3.527389,
+   "leverage": 0.015831,
+   "conviction": 1.472477,
+   "test_confidence": 0.388262,
+   "test_lift": 3.446661
+  },
+  {
+   "rule": "cons.conf.idx=high + cons.price.idx=low → y=yes",
+   "support": 0.020971,
+   "coverage": 0.053202,
+   "confidence": 0.394181,
+   "lift": 3.498997,
+   "leverage": 0.014978,
+   "conviction": 1.464703,
+   "test_confidence": 0.413242,
+   "test_lift": 3.668413
+  },
+  {
+   "rule": "cons.conf.idx=mid + euribor3m=low + housing=no → y=yes",
+   "support": 0.010774,
+   "coverage": 0.027891,
+   "confidence": 0.386289,
+   "lift": 3.428943,
+   "leverage": 0.007632,
+   "conviction": 1.445868,
+   "test_confidence": 0.377451,
+   "test_lift": 3.350691
+  },
+  {
+   "rule": "cons.conf.idx=mid + euribor3m=low → y=yes",
+   "support": 0.024006,
+   "coverage": 0.065827,
+   "confidence": 0.364684,
+   "lift": 3.237162,
+   "leverage": 0.01659,
+   "conviction": 1.396698,
+   "test_confidence": 0.359922,
+   "test_lift": 3.195085
+  },
+  {
+   "rule": "age=20s + euribor3m=low + marital=single → y=yes",
+   "support": 0.015266,
+   "coverage": 0.04953,
+   "confidence": 0.308211,
+   "lift": 2.735869,
+   "leverage": 0.009686,
+   "conviction": 1.28268,
+   "test_confidence": 0.297587,
+   "test_lift": 2.641727
+  },
+  {
+   "rule": "contact=cellular + education=university.degree + nr.employed=low → y=yes",
+   "support": 0.028134,
+   "coverage": 0.091411,
+   "confidence": 0.307769,
+   "lift": 2.731947,
+   "leverage": 0.017836,
+   "conviction": 1.281862,
+   "test_confidence": 0.31405,
+   "test_lift": 2.787867
+  },
+  {
+   "rule": "age=20s + emp.var.rate=low + marital=single → y=yes",
+   "support": 0.015539,
+   "coverage": 0.051199,
+   "confidence": 0.303497,
+   "lift": 2.694029,
+   "leverage": 0.009771,
+   "conviction": 1.274,
+   "test_confidence": 0.291667,
+   "test_lift": 2.58917
+  },
+  {
+   "rule": "campaign=1 + education=university.degree + euribor3m=low → y=yes",
+   "support": 0.016722,
+   "coverage": 0.055266,
+   "confidence": 0.302581,
+   "lift": 2.685895,
+   "leverage": 0.010496,
+   "conviction": 1.272326,
+   "test_confidence": 0.328798,
+   "test_lift": 2.918793
+  }
+ ]
+}

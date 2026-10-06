@@ -1,0 +1,36 @@
+{
+ "type": "confidence_trap",
+ "base_rate_no": 0.887344,
+ "base_rate_yes": 0.112656,
+ "trap": {
+  "antecedent": [
+   "loan=no"
+  ],
+  "consequent": [
+   "y=no"
+  ],
+  "support": 0.730592,
+  "confidence": 0.887288,
+  "lift": 0.999936,
+  "coverage": 0.823399,
+  "leverage": -4.7e-05,
+  "conviction": 0.999496,
+  "count": 24073
+ },
+ "useful": {
+  "antecedent": [
+   "poutcome=success"
+  ],
+  "consequent": [
+   "y=yes"
+  ],
+  "support": 0.02176,
+  "confidence": 0.648869,
+  "lift": 5.759759,
+  "coverage": 0.033536,
+  "leverage": 0.017982,
+  "conviction": 2.527102,
+  "count": 717
+ },
+ "explanation": "The first rule is right 88.7% of the time — but 88.7% of all clients say no anyway, so its lift is 1.000: knowing the antecedent tells you nothing. The second rule is right only 64.9% of the time, yet that is 5.8× the 11.3% base rate. Confidence ignores how common the consequent already is; lift does not."
+}
