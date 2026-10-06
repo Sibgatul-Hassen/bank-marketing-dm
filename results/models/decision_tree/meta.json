@@ -1,0 +1,200 @@
+{
+ "model_id": "decision_tree",
+ "display_name": "Decision Tree",
+ "family": "interpretable_baseline",
+ "task": "supervised_classification",
+ "one_liner": "Plays twenty questions: asks the most informative question first, then repeats on each group.",
+ "plain_explanation": "A decision tree plays twenty questions. At each step it picks the question that most reduces uncertainty about the answer, splits the data on it, and repeats on each group until a group is pure enough or the tree hits a depth limit. To predict, you follow one path from root to leaf. The entire subject is one question: which question do you ask first? Every variant — ID3, C4.5, CART — is a different answer to that.",
+ "year": 1984,
+ "reference": "Breiman et al., Classification and Regression Trees (1984); Quinlan, ID3 (1986), C4.5 (1993)",
+ "workflow": [
+  {
+   "id": "n1",
+   "label": "Measure impurity at the node",
+   "detail": "How mixed are the classes here? Zero means pure.",
+   "formula_ref": "f1,f4"
+  },
+  {
+   "id": "n2",
+   "label": "Score every candidate split",
+   "detail": "For each feature and threshold, compute the weighted impurity after splitting.",
+   "formula_ref": "f2,f5"
+  },
+  {
+   "id": "n3",
+   "label": "Correct for cardinality",
+   "detail": "A feature with many values looks good for the wrong reason. Dividing by split information penalises fragmentation.",
+   "formula_ref": "f3"
+  },
+  {
+   "id": "n4",
+   "label": "Choose the best split",
+   "detail": "Take the feature with the largest reduction.",
+   "formula_ref": null
+  },
+  {
+   "id": "n5",
+   "label": "Partition and recurse",
+   "detail": "Send rows down each branch and repeat.",
+   "formula_ref": null
+  },
+  {
+   "id": "n6",
+   "label": "Stop",
+   "detail": "Pure node, no features left, depth limit, or minimum samples reached.",
+   "formula_ref": null
+  },
+  {
+   "id": "n7",
+   "label": "Prune",
+   "detail": "Remove branches that do not improve validation performance. Here: max_depth chosen by 5-fold CV and min_samples_leaf=50 act as pre-pruning.",
+   "formula_ref": null
+  }
+ ],
+ "edges": [
+  [
+   "n1",
+   "n2"
+  ],
+  [
+   "n2",
+   "n3"
+  ],
+  [
+   "n3",
+   "n4"
+  ],
+  [
+   "n4",
+   "n5"
+  ],
+  [
+   "n5",
+   "n1"
+  ],
+  [
+   "n5",
+   "n6"
+  ],
+  [
+   "n6",
+   "n7"
+  ]
+ ],
+ "formulas": [
+  {
+   "id": "f1",
+   "name": "Entropy",
+   "latex": "H(S) = -\\sum_{i=1}^{k} p_i \\log_2 p_i",
+   "caption": "The average number of yes/no questions needed to identify a class. Zero means you already know; 1 bit means a balanced coin flip. Convention: 0·log₂0 = 0, justified by lim p→0⁺ p log p = 0.",
+   "glossary": [
+    {
+     "sym": "p_i",
+     "means": "proportion of class i"
+    },
+    {
+     "sym": "k",
+     "means": "number of classes"
+    }
+   ]
+  },
+  {
+   "id": "f2",
+   "name": "Information gain (ID3)",
+   "latex": "IG(S, A) = H(S) - \\sum_{v \\in \\text{Values}(A)} \\frac{|S_v|}{|S|} H(S_v)",
+   "caption": "Uncertainty before the split minus the weighted average after. Weighted, because a branch holding one row should not count as much as one holding a thousand. IG ≥ 0 always — a negative value means an arithmetic error.",
+   "glossary": [
+    {
+     "sym": "S_v",
+     "means": "rows where feature A takes value v"
+    }
+   ]
+  },
+  {
+   "id": "f3",
+   "name": "Split information and gain ratio (C4.5)",
+   "latex": "\\text{SplitInfo}(A) = -\\sum_{k} \\frac{|S_k|}{|S|} \\log_2 \\frac{|S_k|}{|S|}, \\qquad \\text{GainRatio}(A) = \\frac{IG(A)}{\\text{SplitInfo}(A)}",
+   "caption": "Split information is the entropy of the branch-size distribution, ignoring class labels entirely — it measures fragmentation. An ID column would score maximum information gain and be useless; dividing by split information fixes that. Fails when a split is very unbalanced (SplitInfo → 0), so real C4.5 first discards features below the average information gain.",
+   "glossary": [
+    {
+     "sym": "S_k",
+     "means": "rows sent to branch k"
+    }
+   ]
+  },
+  {
+   "id": "f4",
+   "name": "Gini impurity (CART)",
+   "latex": "G(S) = 1 - \\sum_{i=1}^{k} p_i^2",
+   "caption": "The probability of misclassifying a random row if you guessed its class by drawing from the node's distribution. Range [0, 1−1/k]; for binary, [0, 0.5]. Never compare a Gini value to an entropy value — different scales.",
+   "glossary": [
+    {
+     "sym": "p_i",
+     "means": "proportion of class i"
+    }
+   ]
+  },
+  {
+   "id": "f5",
+   "name": "Gini gain",
+   "latex": "\\Delta G = G(S) - \\sum_{v} \\frac{|S_v|}{|S|} G(S_v)",
+   "caption": "The CART criterion actually used by this model (with class-balanced weights).",
+   "glossary": []
+  }
+ ],
+ "assumptions": [
+  {
+   "text": "No distributional assumption needed",
+   "status": "ok",
+   "evidence": "Trees only compare values against thresholds."
+  },
+  {
+   "text": "Features not required to be scaled",
+   "status": "ok",
+   "evidence": "Unlike kNN or neural nets; we pass raw values."
+  },
+  {
+   "text": "Low-cardinality features preferred for ID3",
+   "status": "warn",
+   "evidence": "job has 12 levels, education 8, month 10 — use gain ratio or Gini (see the hand-verification table)."
+  },
+  {
+   "text": "Axis-parallel boundaries only",
+   "status": "warn",
+   "evidence": "Cannot express diagonal boundaries without deep trees; the macro features move together, which a single split cannot exploit."
+  }
+ ],
+ "figures": [
+  {
+   "file": "tree.json",
+   "title": "The fitted tree (top 3 levels)",
+   "type": "tree",
+   "caption": "The real model has depth 7 and 70 leaves; only the first three levels are drawn. Each node shows actual training rows and their subscription rate."
+  },
+  {
+   "file": "depth_curve.json",
+   "title": "Depth vs AUC",
+   "type": "line",
+   "caption": "CV AUC peaks at depth 7 (0.7820). Depth 3 already reaches 0.7699; at depth 15 the train–CV gap is 0.067 — the overfitting point."
+  },
+  {
+   "file": "depth_accuracy.json",
+   "title": "Depth vs accuracy",
+   "type": "line",
+   "caption": "With balanced class weights every depth sits below the 'always no' baseline at threshold 0.5 — the tree is trading accuracy for recall on purpose. Accuracy is the wrong yardstick here."
+  },
+  {
+   "file": "feature_importance.json",
+   "title": "Feature importance",
+   "type": "bar",
+   "caption": "Top: nr.employed (0.67). Never used in any split: loan, was_contacted."
+  }
+ ],
+ "extras": [
+  {
+   "kind": "hand_verification",
+   "file": "hand_verification.json",
+   "title": "Hand verification: poutcome at the root"
+  }
+ ]
+}
