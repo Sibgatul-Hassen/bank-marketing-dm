@@ -1,0 +1,1228 @@
+{
+ "kind": "cluster_profile",
+ "clusters": [
+  {
+   "id": -1,
+   "name": "Noise (no cluster)",
+   "size": 137,
+   "subscribe_rate": 0.072993,
+   "profile": "Points HDBSCAN would not assign to any dense group. Subscription 7.3%.",
+   "deviations": [
+    {
+     "feature": "housing=unknown",
+     "kind": "categorical",
+     "deviation": 1.811103,
+     "text": "housing=unknown (63% vs 2% overall)"
+    },
+    {
+     "feature": "loan=unknown",
+     "kind": "categorical",
+     "deviation": 1.811103,
+     "text": "loan=unknown (63% vs 2% overall)"
+    },
+    {
+     "feature": "contact=telephone",
+     "kind": "categorical",
+     "deviation": 1.531981,
+     "text": "contact=telephone (88% vs 37% overall)"
+    },
+    {
+     "feature": "default_unknown",
+     "kind": "numeric",
+     "deviation": 1.336356,
+     "text": "default_unknown high (mean 0.7518 vs 0.2087)"
+    },
+    {
+     "feature": "month=may",
+     "kind": "categorical",
+     "deviation": 1.230687,
+     "text": "month=may (74% vs 33% overall)"
+    },
+    {
+     "feature": "campaign",
+     "kind": "numeric",
+     "deviation": 0.627786,
+     "text": "campaign high (mean 4.307 vs 2.568)"
+    }
+   ]
+  },
+  {
+   "id": 0,
+   "name": "Cluster 0",
+   "size": 5078,
+   "subscribe_rate": 0.062229,
+   "profile": "month=jul (98% vs 17% overall); nr.employed high (mean 5228 vs 5167); emp.var.rate high (mean 1.399 vs 0.08189). Subscription 6.2% — low response.",
+   "deviations": [
+    {
+     "feature": "month=jul",
+     "kind": "categorical",
+     "deviation": 2.404212,
+     "text": "month=jul (98% vs 17% overall)"
+    },
+    {
+     "feature": "nr.employed",
+     "kind": "numeric",
+     "deviation": 0.84334,
+     "text": "nr.employed high (mean 5228 vs 5167)"
+    },
+    {
+     "feature": "emp.var.rate",
+     "kind": "numeric",
+     "deviation": 0.838374,
+     "text": "emp.var.rate high (mean 1.399 vs 0.08189)"
+    },
+    {
+     "feature": "euribor3m",
+     "kind": "numeric",
+     "deviation": 0.772527,
+     "text": "euribor3m high (mean 4.961 vs 3.621)"
+    },
+    {
+     "feature": "contact=cellular",
+     "kind": "categorical",
+     "deviation": 0.635535,
+     "text": "contact=cellular (85% vs 63% overall)"
+    },
+    {
+     "feature": "cons.price.idx",
+     "kind": "numeric",
+     "deviation": 0.58243,
+     "text": "cons.price.idx high (mean 93.91 vs 93.58)"
+    }
+   ]
+  },
+  {
+   "id": 1,
+   "name": "Cluster 1",
+   "size": 5360,
+   "subscribe_rate": 0.03806,
+   "profile": "month=may (99% vs 33% overall); contact=telephone (100% vs 37% overall); cons.conf.idx high (mean -36.45 vs -40.5). Subscription 3.8% — low response.",
+   "deviations": [
+    {
+     "feature": "month=may",
+     "kind": "categorical",
+     "deviation": 1.960171,
+     "text": "month=may (99% vs 33% overall)"
+    },
+    {
+     "feature": "contact=telephone",
+     "kind": "categorical",
+     "deviation": 1.904244,
+     "text": "contact=telephone (100% vs 37% overall)"
+    },
+    {
+     "feature": "cons.conf.idx",
+     "kind": "numeric",
+     "deviation": 0.87614,
+     "text": "cons.conf.idx high (mean -36.45 vs -40.5)"
+    },
+    {
+     "feature": "cons.price.idx",
+     "kind": "numeric",
+     "deviation": 0.718316,
+     "text": "cons.price.idx high (mean 93.99 vs 93.58)"
+    },
+    {
+     "feature": "euribor3m",
+     "kind": "numeric",
+     "deviation": 0.713318,
+     "text": "euribor3m high (mean 4.859 vs 3.621)"
+    },
+    {
+     "feature": "emp.var.rate",
+     "kind": "numeric",
+     "deviation": 0.639035,
+     "text": "emp.var.rate high (mean 1.086 vs 0.08189)"
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "name": "Cluster 2",
+   "size": 2575,
+   "subscribe_rate": 0.057087,
+   "profile": "month=nov (99% vs 10% overall); contact=cellular (88% vs 63% overall); cons.price.idx low (mean 93.2 vs 93.58). Subscription 5.7% — low response.",
+   "deviations": [
+    {
+     "feature": "month=nov",
+     "kind": "categorical",
+     "deviation": 2.6745,
+     "text": "month=nov (99% vs 10% overall)"
+    },
+    {
+     "feature": "contact=cellular",
+     "kind": "categorical",
+     "deviation": 0.746241,
+     "text": "contact=cellular (88% vs 63% overall)"
+    },
+    {
+     "feature": "cons.price.idx",
+     "kind": "numeric",
+     "deviation": -0.649147,
+     "text": "cons.price.idx low (mean 93.2 vs 93.58)"
+    },
+    {
+     "feature": "default_unknown",
+     "kind": "numeric",
+     "deviation": -0.513593,
+     "text": "default_unknown low (mean 0 vs 0.2087)"
+    },
+    {
+     "feature": "poutcome=nonexistent",
+     "kind": "categorical",
+     "deviation": 0.409707,
+     "text": "poutcome=nonexistent (100% vs 86% overall)"
+    },
+    {
+     "feature": "nr.employed",
+     "kind": "numeric",
+     "deviation": 0.399424,
+     "text": "nr.employed high (mean 5196 vs 5167)"
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "name": "Cluster 3",
+   "size": 913,
+   "subscribe_rate": 0.064622,
+   "profile": "default_unknown high (mean 0.9682 vs 0.2087); euribor3m low (mean 1.435 vs 3.621); cons.conf.idx low (mean -46.21 vs -40.5). Subscription 6.5% — low response.",
+   "deviations": [
+    {
+     "feature": "default_unknown",
+     "kind": "numeric",
+     "deviation": 1.868861,
+     "text": "default_unknown high (mean 0.9682 vs 0.2087)"
+    },
+    {
+     "feature": "euribor3m",
+     "kind": "numeric",
+     "deviation": -1.260436,
+     "text": "euribor3m low (mean 1.435 vs 3.621)"
+    },
+    {
+     "feature": "cons.conf.idx",
+     "kind": "numeric",
+     "deviation": -1.232865,
+     "text": "cons.conf.idx low (mean -46.21 vs -40.5)"
+    },
+    {
+     "feature": "emp.var.rate",
+     "kind": "numeric",
+     "deviation": -1.164873,
+     "text": "emp.var.rate low (mean -1.748 vs 0.08189)"
+    },
+    {
+     "feature": "month=may",
+     "kind": "categorical",
+     "deviation": 1.083639,
+     "text": "month=may (70% vs 33% overall)"
+    },
+    {
+     "feature": "cons.price.idx",
+     "kind": "numeric",
+     "deviation": -1.077576,
+     "text": "cons.price.idx low (mean 92.95 vs 93.58)"
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "name": "Cluster 4",
+   "size": 412,
+   "subscribe_rate": 0.640777,
+   "profile": "was_contacted high (mean 1 vs 0.03678); previous high (mean 1.468 vs 0.173); poutcome=success (90% vs 3% overall). Subscription 64.1% — high response.",
+   "deviations": [
+    {
+     "feature": "was_contacted",
+     "kind": "numeric",
+     "deviation": 5.117242,
+     "text": "was_contacted high (mean 1 vs 0.03678)"
+    },
+    {
+     "feature": "previous",
+     "kind": "numeric",
+     "deviation": 2.617662,
+     "text": "previous high (mean 1.468 vs 0.173)"
+    },
+    {
+     "feature": "poutcome=success",
+     "kind": "categorical",
+     "deviation": 2.608733,
+     "text": "poutcome=success (90% vs 3% overall)"
+    },
+    {
+     "feature": "cons.conf.idx",
+     "kind": "numeric",
+     "deviation": 2.220858,
+     "text": "cons.conf.idx high (mean -30.22 vs -40.5)"
+    },
+    {
+     "feature": "emp.var.rate",
+     "kind": "numeric",
+     "deviation": -2.088014,
+     "text": "emp.var.rate low (mean -3.198 vs 0.08189)"
+    },
+    {
+     "feature": "cons.price.idx",
+     "kind": "numeric",
+     "deviation": -1.958116,
+     "text": "cons.price.idx low (mean 92.44 vs 93.58)"
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "name": "Cluster 5",
+   "size": 333,
+   "subscribe_rate": 0.054054,
+   "profile": "month=nov (100% vs 10% overall); default_unknown high (mean 1 vs 0.2087); contact=cellular (92% vs 63% overall). Subscription 5.4% — low response.",
+   "deviations": [
+    {
+     "feature": "month=nov",
+     "kind": "categorical",
+     "deviation": 2.701296,
+     "text": "month=nov (100% vs 10% overall)"
+    },
+    {
+     "feature": "default_unknown",
+     "kind": "numeric",
+     "deviation": 1.947019,
+     "text": "default_unknown high (mean 1 vs 0.2087)"
+    },
+    {
+     "feature": "contact=cellular",
+     "kind": "categorical",
+     "deviation": 0.852513,
+     "text": "contact=cellular (92% vs 63% overall)"
+    },
+    {
+     "feature": "cons.price.idx",
+     "kind": "numeric",
+     "deviation": -0.648995,
+     "text": "cons.price.idx low (mean 93.2 vs 93.58)"
+    },
+    {
+     "feature": "poutcome=nonexistent",
+     "kind": "categorical",
+     "deviation": 0.409707,
+     "text": "poutcome=nonexistent (100% vs 86% overall)"
+    },
+    {
+     "feature": "nr.employed",
+     "kind": "numeric",
+     "deviation": 0.39811,
+     "text": "nr.employed high (mean 5196 vs 5167)"
+    }
+   ]
+  },
+  {
+   "id": 6,
+   "name": "Cluster 6",
+   "size": 699,
+   "subscribe_rate": 0.034335,
+   "profile": "poutcome=failure (100% vs 10% overall); month=nov (100% vs 10% overall); previous high (mean 1 vs 0.173). Subscription 3.4% — low response.",
+   "deviations": [
+    {
+     "feature": "poutcome=failure",
+     "kind": "categorical",
+     "deviation": 2.690298,
+     "text": "poutcome=failure (100% vs 10% overall)"
+    },
+    {
+     "feature": "month=nov",
+     "kind": "categorical",
+     "deviation": 2.688421,
+     "text": "month=nov (100% vs 10% overall)"
+    },
+    {
+     "feature": "previous",
+     "kind": "numeric",
+     "deviation": 1.671116,
+     "text": "previous high (mean 1 vs 0.173)"
+    },
+    {
+     "feature": "contact=cellular",
+     "kind": "categorical",
+     "deviation": 0.894039,
+     "text": "contact=cellular (93% vs 63% overall)"
+    },
+    {
+     "feature": "cons.price.idx",
+     "kind": "numeric",
+     "deviation": -0.647137,
+     "text": "cons.price.idx low (mean 93.2 vs 93.58)"
+    },
+    {
+     "feature": "nr.employed",
+     "kind": "numeric",
+     "deviation": 0.397724,
+     "text": "nr.employed high (mean 5196 vs 5167)"
+    }
+   ]
+  },
+  {
+   "id": 7,
+   "name": "Cluster 7",
+   "size": 765,
+   "subscribe_rate": 0.741176,
+   "profile": "was_contacted high (mean 1 vs 0.03678); previous high (mean 2 vs 0.173); poutcome=success (89% vs 3% overall). Subscription 74.1% — high response.",
+   "deviations": [
+    {
+     "feature": "was_contacted",
+     "kind": "numeric",
+     "deviation": 5.117242,
+     "text": "was_contacted high (mean 1 vs 0.03678)"
+    },
+    {
+     "feature": "previous",
+     "kind": "numeric",
+     "deviation": 3.691722,
+     "text": "previous high (mean 2 vs 0.173)"
+    },
+    {
+     "feature": "poutcome=success",
+     "kind": "categorical",
+     "deviation": 2.558819,
+     "text": "poutcome=success (89% vs 3% overall)"
+    },
+    {
+     "feature": "nr.employed",
+     "kind": "numeric",
+     "deviation": -2.423282,
+     "text": "nr.employed low (mean 4992 vs 5167)"
+    },
+    {
+     "feature": "euribor3m",
+     "kind": "numeric",
+     "deviation": -1.61212,
+     "text": "euribor3m low (mean 0.8252 vs 3.621)"
+    },
+    {
+     "feature": "emp.var.rate",
+     "kind": "numeric",
+     "deviation": -1.078349,
+     "text": "emp.var.rate low (mean -1.612 vs 0.08189)"
+    }
+   ]
+  },
+  {
+   "id": 8,
+   "name": "Cluster 8",
+   "size": 303,
+   "subscribe_rate": 0.438944,
+   "profile": "was_contacted high (mean 1 vs 0.03678); poutcome=success (95% vs 3% overall); previous high (mean 1.135 vs 0.173). Subscription 43.9% — high response.",
+   "deviations": [
+    {
+     "feature": "was_contacted",
+     "kind": "numeric",
+     "deviation": 5.117242,
+     "text": "was_contacted high (mean 1 vs 0.03678)"
+    },
+    {
+     "feature": "poutcome=success",
+     "kind": "categorical",
+     "deviation": 2.75148,
+     "text": "poutcome=success (95% vs 3% overall)"
+    },
+    {
+     "feature": "previous",
+     "kind": "numeric",
+     "deviation": 1.944531,
+     "text": "previous high (mean 1.135 vs 0.173)"
+    },
+    {
+     "feature": "emp.var.rate",
+     "kind": "numeric",
+     "deviation": -1.357374,
+     "text": "emp.var.rate low (mean -2.05 vs 0.08189)"
+    },
+    {
+     "feature": "euribor3m",
+     "kind": "numeric",
+     "deviation": -1.330364,
+     "text": "euribor3m low (mean 1.314 vs 3.621)"
+    },
+    {
+     "feature": "cons.price.idx",
+     "kind": "numeric",
+     "deviation": -1.083442,
+     "text": "cons.price.idx low (mean 92.95 vs 93.58)"
+    }
+   ]
+  },
+  {
+   "id": 9,
+   "name": "Cluster 9",
+   "size": 3870,
+   "subscribe_rate": 0.053488,
+   "profile": "month=aug (100% vs 15% overall); contact=cellular (97% vs 63% overall); cons.conf.idx high (mean -36.1 vs -40.5). Subscription 5.3% — low response.",
+   "deviations": [
+    {
+     "feature": "month=aug",
+     "kind": "categorical",
+     "deviation": 2.550015,
+     "text": "month=aug (100% vs 15% overall)"
+    },
+    {
+     "feature": "contact=cellular",
+     "kind": "categorical",
+     "deviation": 1.010485,
+     "text": "contact=cellular (97% vs 63% overall)"
+    },
+    {
+     "feature": "cons.conf.idx",
+     "kind": "numeric",
+     "deviation": 0.951256,
+     "text": "cons.conf.idx high (mean -36.1 vs -40.5)"
+    },
+    {
+     "feature": "nr.employed",
+     "kind": "numeric",
+     "deviation": 0.84516,
+     "text": "nr.employed high (mean 5228 vs 5167)"
+    },
+    {
+     "feature": "emp.var.rate",
+     "kind": "numeric",
+     "deviation": 0.83905,
+     "text": "emp.var.rate high (mean 1.4 vs 0.08189)"
+    },
+    {
+     "feature": "euribor3m",
+     "kind": "numeric",
+     "deviation": 0.774583,
+     "text": "euribor3m high (mean 4.965 vs 3.621)"
+    }
+   ]
+  },
+  {
+   "id": 10,
+   "name": "Cluster 10",
+   "size": 1204,
+   "subscribe_rate": 0.049834,
+   "profile": "month=aug (100% vs 15% overall); default_unknown high (mean 1 vs 0.2087); contact=cellular (98% vs 63% overall). Subscription 5.0% — low response.",
+   "deviations": [
+    {
+     "feature": "month=aug",
+     "kind": "categorical",
+     "deviation": 2.550015,
+     "text": "month=aug (100% vs 15% overall)"
+    },
+    {
+     "feature": "default_unknown",
+     "kind": "numeric",
+     "deviation": 1.947019,
+     "text": "default_unknown high (mean 1 vs 0.2087)"
+    },
+    {
+     "feature": "contact=cellular",
+     "kind": "categorical",
+     "deviation": 1.021005,
+     "text": "contact=cellular (98% vs 63% overall)"
+    },
+    {
+     "feature": "cons.conf.idx",
+     "kind": "numeric",
+     "deviation": 0.951256,
+     "text": "cons.conf.idx high (mean -36.1 vs -40.5)"
+    },
+    {
+     "feature": "nr.employed",
+     "kind": "numeric",
+     "deviation": 0.84516,
+     "text": "nr.employed high (mean 5228 vs 5167)"
+    },
+    {
+     "feature": "emp.var.rate",
+     "kind": "numeric",
+     "deviation": 0.83905,
+     "text": "emp.var.rate high (mean 1.4 vs 0.08189)"
+    }
+   ]
+  },
+  {
+   "id": 11,
+   "name": "Cluster 11",
+   "size": 2032,
+   "subscribe_rate": 0.090551,
+   "profile": "poutcome=failure (100% vs 10% overall); previous high (mean 1.058 vs 0.173); euribor3m low (mean 1.324 vs 3.621). Subscription 9.1% — average response.",
+   "deviations": [
+    {
+     "feature": "poutcome=failure",
+     "kind": "categorical",
+     "deviation": 2.690298,
+     "text": "poutcome=failure (100% vs 10% overall)"
+    },
+    {
+     "feature": "previous",
+     "kind": "numeric",
+     "deviation": 1.78746,
+     "text": "previous high (mean 1.058 vs 0.173)"
+    },
+    {
+     "feature": "euribor3m",
+     "kind": "numeric",
+     "deviation": -1.32452,
+     "text": "euribor3m low (mean 1.324 vs 3.621)"
+    },
+    {
+     "feature": "emp.var.rate",
+     "kind": "numeric",
+     "deviation": -1.237204,
+     "text": "emp.var.rate low (mean -1.862 vs 0.08189)"
+    },
+    {
+     "feature": "cons.conf.idx",
+     "kind": "numeric",
+     "deviation": -1.218918,
+     "text": "cons.conf.idx low (mean -46.14 vs -40.5)"
+    },
+    {
+     "feature": "cons.price.idx",
+     "kind": "numeric",
+     "deviation": -1.097442,
+     "text": "cons.price.idx low (mean 92.94 vs 93.58)"
+    }
+   ]
+  },
+  {
+   "id": 12,
+   "name": "Cluster 12",
+   "size": 512,
+   "subscribe_rate": 0.357422,
+   "profile": "month=jun (100% vs 13% overall); emp.var.rate low (mean -2.9 vs 0.08189); euribor3m low (mean 1.258 vs 3.621). Subscription 35.7% — high response.",
+   "deviations": [
+    {
+     "feature": "month=jun",
+     "kind": "categorical",
+     "deviation": 2.612654,
+     "text": "month=jun (100% vs 13% overall)"
+    },
+    {
+     "feature": "emp.var.rate",
+     "kind": "numeric",
+     "deviation": -1.89813,
+     "text": "emp.var.rate low (mean -2.9 vs 0.08189)"
+    },
+    {
+     "feature": "euribor3m",
+     "kind": "numeric",
+     "deviation": -1.362829,
+     "text": "euribor3m low (mean 1.258 vs 3.621)"
+    },
+    {
+     "feature": "nr.employed",
+     "kind": "numeric",
+     "deviation": -1.257218,
+     "text": "nr.employed low (mean 5076 vs 5167)"
+    },
+    {
+     "feature": "cons.price.idx",
+     "kind": "numeric",
+     "deviation": -1.058435,
+     "text": "cons.price.idx low (mean 92.96 vs 93.58)"
+    },
+    {
+     "feature": "contact=cellular",
+     "kind": "categorical",
+     "deviation": 0.785209,
+     "text": "contact=cellular (90% vs 63% overall)"
+    }
+   ]
+  },
+  {
+   "id": 13,
+   "name": "Cluster 13",
+   "size": 1748,
+   "subscribe_rate": 0.054348,
+   "profile": "month=jul (99% vs 17% overall); default_unknown high (mean 1 vs 0.2087); nr.employed high (mean 5228 vs 5167). Subscription 5.4% — low response.",
+   "deviations": [
+    {
+     "feature": "month=jul",
+     "kind": "categorical",
+     "deviation": 2.443144,
+     "text": "month=jul (99% vs 17% overall)"
+    },
+    {
+     "feature": "default_unknown",
+     "kind": "numeric",
+     "deviation": 1.947019,
+     "text": "default_unknown high (mean 1 vs 0.2087)"
+    },
+    {
+     "feature": "nr.employed",
+     "kind": "numeric",
+     "deviation": 0.843691,
+     "text": "nr.employed high (mean 5228 vs 5167)"
+    },
+    {
+     "feature": "emp.var.rate",
+     "kind": "numeric",
+     "deviation": 0.838504,
+     "text": "emp.var.rate high (mean 1.399 vs 0.08189)"
+    },
+    {
+     "feature": "euribor3m",
+     "kind": "numeric",
+     "deviation": 0.772472,
+     "text": "euribor3m high (mean 4.961 vs 3.621)"
+    },
+    {
+     "feature": "contact=cellular",
+     "kind": "categorical",
+     "deviation": 0.632369,
+     "text": "contact=cellular (85% vs 63% overall)"
+    }
+   ]
+  },
+  {
+   "id": 14,
+   "name": "Cluster 14",
+   "size": 1353,
+   "subscribe_rate": 0.04139,
+   "profile": "month=jun (100% vs 13% overall); default_unknown high (mean 1 vs 0.2087); contact=telephone (100% vs 37% overall). Subscription 4.1% — low response.",
+   "deviations": [
+    {
+     "feature": "month=jun",
+     "kind": "categorical",
+     "deviation": 2.612654,
+     "text": "month=jun (100% vs 13% overall)"
+    },
+    {
+     "feature": "default_unknown",
+     "kind": "numeric",
+     "deviation": 1.947019,
+     "text": "default_unknown high (mean 1 vs 0.2087)"
+    },
+    {
+     "feature": "contact=telephone",
+     "kind": "categorical",
+     "deviation": 1.904244,
+     "text": "contact=telephone (100% vs 37% overall)"
+    },
+    {
+     "feature": "cons.price.idx",
+     "kind": "numeric",
+     "deviation": 1.53641,
+     "text": "cons.price.idx high (mean 94.47 vs 93.58)"
+    },
+    {
+     "feature": "nr.employed",
+     "kind": "numeric",
+     "deviation": 0.84516,
+     "text": "nr.employed high (mean 5228 vs 5167)"
+    },
+    {
+     "feature": "emp.var.rate",
+     "kind": "numeric",
+     "deviation": 0.83905,
+     "text": "emp.var.rate high (mean 1.4 vs 0.08189)"
+    }
+   ]
+  },
+  {
+   "id": 15,
+   "name": "Cluster 15",
+   "size": 413,
+   "subscribe_rate": 0.050847,
+   "profile": "poutcome=failure (100% vs 10% overall); default_unknown high (mean 1 vs 0.2087); previous high (mean 1.065 vs 0.173). Subscription 5.1% — low response.",
+   "deviations": [
+    {
+     "feature": "poutcome=failure",
+     "kind": "categorical",
+     "deviation": 2.690298,
+     "text": "poutcome=failure (100% vs 10% overall)"
+    },
+    {
+     "feature": "default_unknown",
+     "kind": "numeric",
+     "deviation": 1.947019,
+     "text": "default_unknown high (mean 1 vs 0.2087)"
+    },
+    {
+     "feature": "previous",
+     "kind": "numeric",
+     "deviation": 1.803213,
+     "text": "previous high (mean 1.065 vs 0.173)"
+    },
+    {
+     "feature": "euribor3m",
+     "kind": "numeric",
+     "deviation": -1.320512,
+     "text": "euribor3m low (mean 1.331 vs 3.621)"
+    },
+    {
+     "feature": "cons.conf.idx",
+     "kind": "numeric",
+     "deviation": -1.272192,
+     "text": "cons.conf.idx low (mean -46.39 vs -40.5)"
+    },
+    {
+     "feature": "emp.var.rate",
+     "kind": "numeric",
+     "deviation": -1.206398,
+     "text": "emp.var.rate low (mean -1.813 vs 0.08189)"
+    }
+   ]
+  },
+  {
+   "id": 16,
+   "name": "Cluster 16",
+   "size": 1191,
+   "subscribe_rate": 0.040302,
+   "profile": "month=jun (100% vs 13% overall); contact=telephone (100% vs 37% overall); cons.price.idx high (mean 94.47 vs 93.58). Subscription 4.0% — low response.",
+   "deviations": [
+    {
+     "feature": "month=jun",
+     "kind": "categorical",
+     "deviation": 2.612654,
+     "text": "month=jun (100% vs 13% overall)"
+    },
+    {
+     "feature": "contact=telephone",
+     "kind": "categorical",
+     "deviation": 1.904244,
+     "text": "contact=telephone (100% vs 37% overall)"
+    },
+    {
+     "feature": "cons.price.idx",
+     "kind": "numeric",
+     "deviation": 1.53641,
+     "text": "cons.price.idx high (mean 94.47 vs 93.58)"
+    },
+    {
+     "feature": "housing=yes",
+     "kind": "categorical",
+     "deviation": 1.425955,
+     "text": "housing=yes (100% vs 52% overall)"
+    },
+    {
+     "feature": "nr.employed",
+     "kind": "numeric",
+     "deviation": 0.84516,
+     "text": "nr.employed high (mean 5228 vs 5167)"
+    },
+    {
+     "feature": "emp.var.rate",
+     "kind": "numeric",
+     "deviation": 0.83905,
+     "text": "emp.var.rate high (mean 1.4 vs 0.08189)"
+    }
+   ]
+  },
+  {
+   "id": 17,
+   "name": "Cluster 17",
+   "size": 1785,
+   "subscribe_rate": 0.047059,
+   "profile": "month=jun (100% vs 13% overall); contact=telephone (100% vs 37% overall); cons.price.idx high (mean 94.46 vs 93.58). Subscription 4.7% — low response.",
+   "deviations": [
+    {
+     "feature": "month=jun",
+     "kind": "categorical",
+     "deviation": 2.607612,
+     "text": "month=jun (100% vs 13% overall)"
+    },
+    {
+     "feature": "contact=telephone",
+     "kind": "categorical",
+     "deviation": 1.904244,
+     "text": "contact=telephone (100% vs 37% overall)"
+    },
+    {
+     "feature": "cons.price.idx",
+     "kind": "numeric",
+     "deviation": 1.534822,
+     "text": "cons.price.idx high (mean 94.46 vs 93.58)"
+    },
+    {
+     "feature": "housing=no",
+     "kind": "categorical",
+     "deviation": 1.374727,
+     "text": "housing=no (91% vs 45% overall)"
+    },
+    {
+     "feature": "nr.employed",
+     "kind": "numeric",
+     "deviation": 0.84516,
+     "text": "nr.employed high (mean 5228 vs 5167)"
+    },
+    {
+     "feature": "emp.var.rate",
+     "kind": "numeric",
+     "deviation": 0.83905,
+     "text": "emp.var.rate high (mean 1.4 vs 0.08189)"
+    }
+   ]
+  },
+  {
+   "id": 18,
+   "name": "Cluster 18",
+   "size": 1393,
+   "subscribe_rate": 0.350323,
+   "profile": "emp.var.rate low (mean -2.957 vs 0.08189); cons.conf.idx high (mean -32.18 vs -40.5); nr.employed low (mean 5038 vs 5167). Subscription 35.0% — high response.",
+   "deviations": [
+    {
+     "feature": "emp.var.rate",
+     "kind": "numeric",
+     "deviation": -1.934276,
+     "text": "emp.var.rate low (mean -2.957 vs 0.08189)"
+    },
+    {
+     "feature": "cons.conf.idx",
+     "kind": "numeric",
+     "deviation": 1.797422,
+     "text": "cons.conf.idx high (mean -32.18 vs -40.5)"
+    },
+    {
+     "feature": "nr.employed",
+     "kind": "numeric",
+     "deviation": -1.791223,
+     "text": "nr.employed low (mean 5038 vs 5167)"
+    },
+    {
+     "feature": "cons.price.idx",
+     "kind": "numeric",
+     "deviation": -1.6849,
+     "text": "cons.price.idx low (mean 92.6 vs 93.58)"
+    },
+    {
+     "feature": "euribor3m",
+     "kind": "numeric",
+     "deviation": -1.607921,
+     "text": "euribor3m low (mean 0.8324 vs 3.621)"
+    },
+    {
+     "feature": "month=oct",
+     "kind": "categorical",
+     "deviation": 0.699318,
+     "text": "month=oct (25% vs 2% overall)"
+    }
+   ]
+  },
+  {
+   "id": 19,
+   "name": "Cluster 19",
+   "size": 476,
+   "subscribe_rate": 0.315126,
+   "profile": "poutcome=failure (100% vs 10% overall); cons.conf.idx high (mean -30.32 vs -40.5); previous high (mean 1.212 vs 0.173). Subscription 31.5% — high response.",
+   "deviations": [
+    {
+     "feature": "poutcome=failure",
+     "kind": "categorical",
+     "deviation": 2.690298,
+     "text": "poutcome=failure (100% vs 10% overall)"
+    },
+    {
+     "feature": "cons.conf.idx",
+     "kind": "numeric",
+     "deviation": 2.199042,
+     "text": "cons.conf.idx high (mean -30.32 vs -40.5)"
+    },
+    {
+     "feature": "previous",
+     "kind": "numeric",
+     "deviation": 2.099858,
+     "text": "previous high (mean 1.212 vs 0.173)"
+    },
+    {
+     "feature": "emp.var.rate",
+     "kind": "numeric",
+     "deviation": -2.06021,
+     "text": "emp.var.rate low (mean -3.155 vs 0.08189)"
+    },
+    {
+     "feature": "cons.price.idx",
+     "kind": "numeric",
+     "deviation": -2.02429,
+     "text": "cons.price.idx low (mean 92.4 vs 93.58)"
+    },
+    {
+     "feature": "nr.employed",
+     "kind": "numeric",
+     "deviation": -1.715014,
+     "text": "nr.employed low (mean 5043 vs 5167)"
+    }
+   ]
+  },
+  {
+   "id": 20,
+   "name": "Cluster 20",
+   "size": 490,
+   "subscribe_rate": 0.312245,
+   "profile": "previous high (mean 1.516 vs 0.173); poutcome=failure (100% vs 10% overall); nr.employed low (mean 4989 vs 5167). Subscription 31.2% — high response.",
+   "deviations": [
+    {
+     "feature": "previous",
+     "kind": "numeric",
+     "deviation": 2.714408,
+     "text": "previous high (mean 1.516 vs 0.173)"
+    },
+    {
+     "feature": "poutcome=failure",
+     "kind": "categorical",
+     "deviation": 2.690298,
+     "text": "poutcome=failure (100% vs 10% overall)"
+    },
+    {
+     "feature": "nr.employed",
+     "kind": "numeric",
+     "deviation": -2.46768,
+     "text": "nr.employed low (mean 4989 vs 5167)"
+    },
+    {
+     "feature": "euribor3m",
+     "kind": "numeric",
+     "deviation": -1.620952,
+     "text": "euribor3m low (mean 0.8098 vs 3.621)"
+    },
+    {
+     "feature": "emp.var.rate",
+     "kind": "numeric",
+     "deviation": -1.037483,
+     "text": "emp.var.rate low (mean -1.548 vs 0.08189)"
+    },
+    {
+     "feature": "cons.price.idx",
+     "kind": "numeric",
+     "deviation": 0.826912,
+     "text": "cons.price.idx high (mean 94.05 vs 93.58)"
+    }
+   ]
+  },
+  {
+   "id": 21,
+   "name": "Cluster 21",
+   "size": 716,
+   "subscribe_rate": 0.453911,
+   "profile": "nr.employed low (mean 4993 vs 5167); euribor3m low (mean 0.774 vs 3.621); emp.var.rate low (mean -1.631 vs 0.08189). Subscription 45.4% — high response.",
+   "deviations": [
+    {
+     "feature": "nr.employed",
+     "kind": "numeric",
+     "deviation": -2.40906,
+     "text": "nr.employed low (mean 4993 vs 5167)"
+    },
+    {
+     "feature": "euribor3m",
+     "kind": "numeric",
+     "deviation": -1.64163,
+     "text": "euribor3m low (mean 0.774 vs 3.621)"
+    },
+    {
+     "feature": "emp.var.rate",
+     "kind": "numeric",
+     "deviation": -1.090525,
+     "text": "emp.var.rate low (mean -1.631 vs 0.08189)"
+    },
+    {
+     "feature": "cons.price.idx",
+     "kind": "numeric",
+     "deviation": 0.643604,
+     "text": "cons.price.idx high (mean 93.95 vs 93.58)"
+    },
+    {
+     "feature": "cons.conf.idx",
+     "kind": "numeric",
+     "deviation": 0.54945,
+     "text": "cons.conf.idx high (mean -37.96 vs -40.5)"
+    },
+    {
+     "feature": "month=sep",
+     "kind": "categorical",
+     "deviation": 0.486416,
+     "text": "month=sep (18% vs 1% overall)"
+    }
+   ]
+  },
+  {
+   "id": 22,
+   "name": "Cluster 22",
+   "size": 1585,
+   "subscribe_rate": 0.225237,
+   "profile": "month=apr (97% vs 6% overall); cons.conf.idx low (mean -47.16 vs -40.5); euribor3m low (mean 1.415 vs 3.621). Subscription 22.5% — high response.",
+   "deviations": [
+    {
+     "feature": "month=apr",
+     "kind": "categorical",
+     "deviation": 2.730691,
+     "text": "month=apr (97% vs 6% overall)"
+    },
+    {
+     "feature": "cons.conf.idx",
+     "kind": "numeric",
+     "deviation": -1.438062,
+     "text": "cons.conf.idx low (mean -47.16 vs -40.5)"
+    },
+    {
+     "feature": "euribor3m",
+     "kind": "numeric",
+     "deviation": -1.271953,
+     "text": "euribor3m low (mean 1.415 vs 3.621)"
+    },
+    {
+     "feature": "emp.var.rate",
+     "kind": "numeric",
+     "deviation": -1.197921,
+     "text": "emp.var.rate low (mean -1.8 vs 0.08189)"
+    },
+    {
+     "feature": "nr.employed",
+     "kind": "numeric",
+     "deviation": -0.94027,
+     "text": "nr.employed low (mean 5099 vs 5167)"
+    },
+    {
+     "feature": "contact=cellular",
+     "kind": "categorical",
+     "deviation": 0.87809,
+     "text": "contact=cellular (93% vs 63% overall)"
+    }
+   ]
+  },
+  {
+   "id": 23,
+   "name": "Cluster 23",
+   "size": 3500,
+   "subscribe_rate": 0.118,
+   "profile": "month=may (94% vs 33% overall); euribor3m low (mean 1.314 vs 3.621); cons.conf.idx low (mean -46.43 vs -40.5). Subscription 11.8% — average response.",
+   "deviations": [
+    {
+     "feature": "month=may",
+     "kind": "categorical",
+     "deviation": 1.808539,
+     "text": "month=may (94% vs 33% overall)"
+    },
+    {
+     "feature": "euribor3m",
+     "kind": "numeric",
+     "deviation": -1.3305,
+     "text": "euribor3m low (mean 1.314 vs 3.621)"
+    },
+    {
+     "feature": "cons.conf.idx",
+     "kind": "numeric",
+     "deviation": -1.279912,
+     "text": "cons.conf.idx low (mean -46.43 vs -40.5)"
+    },
+    {
+     "feature": "emp.var.rate",
+     "kind": "numeric",
+     "deviation": -1.198121,
+     "text": "emp.var.rate low (mean -1.8 vs 0.08189)"
+    },
+    {
+     "feature": "cons.price.idx",
+     "kind": "numeric",
+     "deviation": -1.183362,
+     "text": "cons.price.idx low (mean 92.89 vs 93.58)"
+    },
+    {
+     "feature": "nr.employed",
+     "kind": "numeric",
+     "deviation": -0.94036,
+     "text": "nr.employed low (mean 5099 vs 5167)"
+    }
+   ]
+  },
+  {
+   "id": 24,
+   "name": "Cluster 24",
+   "size": 1128,
+   "subscribe_rate": 0.033688,
+   "profile": "month=may (100% vs 33% overall); default_unknown high (mean 1 vs 0.2087); contact=telephone (100% vs 37% overall). Subscription 3.4% — low response.",
+   "deviations": [
+    {
+     "feature": "month=may",
+     "kind": "categorical",
+     "deviation": 1.994451,
+     "text": "month=may (100% vs 33% overall)"
+    },
+    {
+     "feature": "default_unknown",
+     "kind": "numeric",
+     "deviation": 1.947019,
+     "text": "default_unknown high (mean 1 vs 0.2087)"
+    },
+    {
+     "feature": "contact=telephone",
+     "kind": "categorical",
+     "deviation": 1.904244,
+     "text": "contact=telephone (100% vs 37% overall)"
+    },
+    {
+     "feature": "housing=yes",
+     "kind": "categorical",
+     "deviation": 1.420496,
+     "text": "housing=yes (100% vs 52% overall)"
+    },
+    {
+     "feature": "cons.conf.idx",
+     "kind": "numeric",
+     "deviation": 0.886493,
+     "text": "cons.conf.idx high (mean -36.4 vs -40.5)"
+    },
+    {
+     "feature": "cons.price.idx",
+     "kind": "numeric",
+     "deviation": 0.721871,
+     "text": "cons.price.idx high (mean 93.99 vs 93.58)"
+    }
+   ]
+  },
+  {
+   "id": 25,
+   "name": "Cluster 25",
+   "size": 1217,
+   "subscribe_rate": 0.029581,
+   "profile": "month=may (100% vs 33% overall); default_unknown high (mean 1 vs 0.2087); contact=telephone (100% vs 37% overall). Subscription 3.0% — low response.",
+   "deviations": [
+    {
+     "feature": "month=may",
+     "kind": "categorical",
+     "deviation": 1.997111,
+     "text": "month=may (100% vs 33% overall)"
+    },
+    {
+     "feature": "default_unknown",
+     "kind": "numeric",
+     "deviation": 1.947019,
+     "text": "default_unknown high (mean 1 vs 0.2087)"
+    },
+    {
+     "feature": "contact=telephone",
+     "kind": "categorical",
+     "deviation": 1.904244,
+     "text": "contact=telephone (100% vs 37% overall)"
+    },
+    {
+     "feature": "housing=no",
+     "kind": "categorical",
+     "deviation": 1.614053,
+     "text": "housing=no (99% vs 45% overall)"
+    },
+    {
+     "feature": "cons.conf.idx",
+     "kind": "numeric",
+     "deviation": 0.886436,
+     "text": "cons.conf.idx high (mean -36.4 vs -40.5)"
+    },
+    {
+     "feature": "cons.price.idx",
+     "kind": "numeric",
+     "deviation": 0.722714,
+     "text": "cons.price.idx high (mean 93.99 vs 93.58)"
+    }
+   ]
+  }
+ ],
+ "global": {
+  "plain_text": "The structure UMAP finds is mostly about month: clients called under the same economic conditions sit together, whatever their job or age."
+ },
+ "narrative": {
+  "headline": "Clients group by when they were called, not by whether they subscribed.",
+  "body": "HDBSCAN finds 26 dense groups. Their subscription rates range from 3.0% to 74.1%, so the groups do carry some signal (cluster-rate AUC 0.793 on held-out clients), but the partition matches month (AMI 0.63) far better than subscription (AMI 0.042). The largest group (5,360 clients) — month=may (99% vs 33% overall); contact=telephone (100% vs 37% overall); cons.conf.idx high (mean -36.45 vs -40.5). Subscription 3.8% — low response.",
+  "caveat": "SHAP does not apply to clustering. These are per-cluster deviations from the population average: they describe a group, not a cause."
+ }
+}

@@ -1,0 +1,26 @@
+{
+ "model_id": "umap_hdbscan",
+ "task": "unsupervised",
+ "n_clusters": 26,
+ "noise_fraction": 0.003326,
+ "ami": {
+  "y (subscription)": 0.042154,
+  "month": 0.631472,
+  "macro regime (5 macro features)": 0.550541,
+  "contact": 0.24335,
+  "poutcome": 0.268187,
+  "job": 0.037625
+ },
+ "cluster_rate_auc_test": 0.793032,
+ "cluster_rate_auc_note": "Score each test client by the subscription rate of its cluster (rates from training rows only).",
+ "subscribe_rate_range": [
+  0.029581,
+  0.741176
+ ],
+ "timing_seconds": {
+  "umap_2d": 54.185243,
+  "umap_3d": 32.961903,
+  "hdbscan": 14.426058
+ },
+ "selected_clusters_in_tree": 26
+}

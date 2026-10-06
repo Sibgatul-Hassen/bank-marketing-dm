@@ -1,0 +1,205 @@
+{
+ "type": "table",
+ "columns": [
+  "cluster",
+  "size",
+  "subscribe_rate",
+  "response",
+  "profile"
+ ],
+ "format": {
+  "subscribe_rate": "pct",
+  "size": "int"
+ },
+ "rows": [
+  {
+   "cluster": "Cluster 7",
+   "size": 765,
+   "subscribe_rate": 0.7412,
+   "response": "high",
+   "profile": "was_contacted high (mean 1 vs 0.03678); previous high (mean 2 vs 0.173); poutcome=success (89% vs 3% overall). Subscription 74.1% — high response."
+  },
+  {
+   "cluster": "Cluster 4",
+   "size": 412,
+   "subscribe_rate": 0.6408,
+   "response": "high",
+   "profile": "was_contacted high (mean 1 vs 0.03678); previous high (mean 1.468 vs 0.173); poutcome=success (90% vs 3% overall). Subscription 64.1% — high response."
+  },
+  {
+   "cluster": "Cluster 21",
+   "size": 716,
+   "subscribe_rate": 0.4539,
+   "response": "high",
+   "profile": "nr.employed low (mean 4993 vs 5167); euribor3m low (mean 0.774 vs 3.621); emp.var.rate low (mean -1.631 vs 0.08189). Subscription 45.4% — high response."
+  },
+  {
+   "cluster": "Cluster 8",
+   "size": 303,
+   "subscribe_rate": 0.4389,
+   "response": "high",
+   "profile": "was_contacted high (mean 1 vs 0.03678); poutcome=success (95% vs 3% overall); previous high (mean 1.135 vs 0.173). Subscription 43.9% — high response."
+  },
+  {
+   "cluster": "Cluster 12",
+   "size": 512,
+   "subscribe_rate": 0.3574,
+   "response": "high",
+   "profile": "month=jun (100% vs 13% overall); emp.var.rate low (mean -2.9 vs 0.08189); euribor3m low (mean 1.258 vs 3.621). Subscription 35.7% — high response."
+  },
+  {
+   "cluster": "Cluster 18",
+   "size": 1393,
+   "subscribe_rate": 0.3503,
+   "response": "high",
+   "profile": "emp.var.rate low (mean -2.957 vs 0.08189); cons.conf.idx high (mean -32.18 vs -40.5); nr.employed low (mean 5038 vs 5167). Subscription 35.0% — high response."
+  },
+  {
+   "cluster": "Cluster 19",
+   "size": 476,
+   "subscribe_rate": 0.3151,
+   "response": "high",
+   "profile": "poutcome=failure (100% vs 10% overall); cons.conf.idx high (mean -30.32 vs -40.5); previous high (mean 1.212 vs 0.173). Subscription 31.5% — high response."
+  },
+  {
+   "cluster": "Cluster 20",
+   "size": 490,
+   "subscribe_rate": 0.3122,
+   "response": "high",
+   "profile": "previous high (mean 1.516 vs 0.173); poutcome=failure (100% vs 10% overall); nr.employed low (mean 4989 vs 5167). Subscription 31.2% — high response."
+  },
+  {
+   "cluster": "Cluster 22",
+   "size": 1585,
+   "subscribe_rate": 0.2252,
+   "response": "high",
+   "profile": "month=apr (97% vs 6% overall); cons.conf.idx low (mean -47.16 vs -40.5); euribor3m low (mean 1.415 vs 3.621). Subscription 22.5% — high response."
+  },
+  {
+   "cluster": "Cluster 23",
+   "size": 3500,
+   "subscribe_rate": 0.118,
+   "response": "average",
+   "profile": "month=may (94% vs 33% overall); euribor3m low (mean 1.314 vs 3.621); cons.conf.idx low (mean -46.43 vs -40.5). Subscription 11.8% — average response."
+  },
+  {
+   "cluster": "Cluster 11",
+   "size": 2032,
+   "subscribe_rate": 0.0906,
+   "response": "average",
+   "profile": "poutcome=failure (100% vs 10% overall); previous high (mean 1.058 vs 0.173); euribor3m low (mean 1.324 vs 3.621). Subscription 9.1% — average response."
+  },
+  {
+   "cluster": "Noise (no cluster)",
+   "size": 137,
+   "subscribe_rate": 0.073,
+   "response": "low",
+   "profile": "Points HDBSCAN would not assign to any dense group. Subscription 7.3%."
+  },
+  {
+   "cluster": "Cluster 3",
+   "size": 913,
+   "subscribe_rate": 0.0646,
+   "response": "low",
+   "profile": "default_unknown high (mean 0.9682 vs 0.2087); euribor3m low (mean 1.435 vs 3.621); cons.conf.idx low (mean -46.21 vs -40.5). Subscription 6.5% — low response."
+  },
+  {
+   "cluster": "Cluster 0",
+   "size": 5078,
+   "subscribe_rate": 0.0622,
+   "response": "low",
+   "profile": "month=jul (98% vs 17% overall); nr.employed high (mean 5228 vs 5167); emp.var.rate high (mean 1.399 vs 0.08189). Subscription 6.2% — low response."
+  },
+  {
+   "cluster": "Cluster 2",
+   "size": 2575,
+   "subscribe_rate": 0.0571,
+   "response": "low",
+   "profile": "month=nov (99% vs 10% overall); contact=cellular (88% vs 63% overall); cons.price.idx low (mean 93.2 vs 93.58). Subscription 5.7% — low response."
+  },
+  {
+   "cluster": "Cluster 13",
+   "size": 1748,
+   "subscribe_rate": 0.0543,
+   "response": "low",
+   "profile": "month=jul (99% vs 17% overall); default_unknown high (mean 1 vs 0.2087); nr.employed high (mean 5228 vs 5167). Subscription 5.4% — low response."
+  },
+  {
+   "cluster": "Cluster 5",
+   "size": 333,
+   "subscribe_rate": 0.0541,
+   "response": "low",
+   "profile": "month=nov (100% vs 10% overall); default_unknown high (mean 1 vs 0.2087); contact=cellular (92% vs 63% overall). Subscription 5.4% — low response."
+  },
+  {
+   "cluster": "Cluster 9",
+   "size": 3870,
+   "subscribe_rate": 0.0535,
+   "response": "low",
+   "profile": "month=aug (100% vs 15% overall); contact=cellular (97% vs 63% overall); cons.conf.idx high (mean -36.1 vs -40.5). Subscription 5.3% — low response."
+  },
+  {
+   "cluster": "Cluster 15",
+   "size": 413,
+   "subscribe_rate": 0.0508,
+   "response": "low",
+   "profile": "poutcome=failure (100% vs 10% overall); default_unknown high (mean 1 vs 0.2087); previous high (mean 1.065 vs 0.173). Subscription 5.1% — low response."
+  },
+  {
+   "cluster": "Cluster 10",
+   "size": 1204,
+   "subscribe_rate": 0.0498,
+   "response": "low",
+   "profile": "month=aug (100% vs 15% overall); default_unknown high (mean 1 vs 0.2087); contact=cellular (98% vs 63% overall). Subscription 5.0% — low response."
+  },
+  {
+   "cluster": "Cluster 17",
+   "size": 1785,
+   "subscribe_rate": 0.0471,
+   "response": "low",
+   "profile": "month=jun (100% vs 13% overall); contact=telephone (100% vs 37% overall); cons.price.idx high (mean 94.46 vs 93.58). Subscription 4.7% — low response."
+  },
+  {
+   "cluster": "Cluster 14",
+   "size": 1353,
+   "subscribe_rate": 0.0414,
+   "response": "low",
+   "profile": "month=jun (100% vs 13% overall); default_unknown high (mean 1 vs 0.2087); contact=telephone (100% vs 37% overall). Subscription 4.1% — low response."
+  },
+  {
+   "cluster": "Cluster 16",
+   "size": 1191,
+   "subscribe_rate": 0.0403,
+   "response": "low",
+   "profile": "month=jun (100% vs 13% overall); contact=telephone (100% vs 37% overall); cons.price.idx high (mean 94.47 vs 93.58). Subscription 4.0% — low response."
+  },
+  {
+   "cluster": "Cluster 1",
+   "size": 5360,
+   "subscribe_rate": 0.0381,
+   "response": "low",
+   "profile": "month=may (99% vs 33% overall); contact=telephone (100% vs 37% overall); cons.conf.idx high (mean -36.45 vs -40.5). Subscription 3.8% — low response."
+  },
+  {
+   "cluster": "Cluster 6",
+   "size": 699,
+   "subscribe_rate": 0.0343,
+   "response": "low",
+   "profile": "poutcome=failure (100% vs 10% overall); month=nov (100% vs 10% overall); previous high (mean 1 vs 0.173). Subscription 3.4% — low response."
+  },
+  {
+   "cluster": "Cluster 24",
+   "size": 1128,
+   "subscribe_rate": 0.0337,
+   "response": "low",
+   "profile": "month=may (100% vs 33% overall); default_unknown high (mean 1 vs 0.2087); contact=telephone (100% vs 37% overall). Subscription 3.4% — low response."
+  },
+  {
+   "cluster": "Cluster 25",
+   "size": 1217,
+   "subscribe_rate": 0.0296,
+   "response": "low",
+   "profile": "month=may (100% vs 33% overall); default_unknown high (mean 1 vs 0.2087); contact=telephone (100% vs 37% overall). Subscription 3.0% — low response."
+  }
+ ]
+}
