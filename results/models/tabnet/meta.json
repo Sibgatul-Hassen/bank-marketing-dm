@@ -1,0 +1,203 @@
+{
+ "model_id": "tabnet",
+ "display_name": "TabNet",
+ "family": "tabular_deep_learning",
+ "task": "supervised_classification",
+ "one_liner": "A neural network that, at each step, chooses a handful of features to look at — and lets you read which ones.",
+ "plain_explanation": "Most neural networks look at every feature at once. TabNet instead works in steps, and at each step it decides which small handful of features to look at — like a person reading a form and covering everything except the two fields that matter right now, then moving on to a different pair. That choosing is done by a learned mask. Because the mask is explicit, you can read it afterwards and see exactly which features the network used at each step — unusual for a neural network, and an interpretability story that does not depend on SHAP.",
+ "year": 2021,
+ "reference": "Arık & Pfister, TabNet: Attentive Interpretable Tabular Learning, AAAI 2021",
+ "workflow": [
+  {
+   "id": "n1",
+   "label": "Normalise input features",
+   "detail": "Categoricals → learned embeddings; batch normalisation on the feature vector (numerics also standardised beforehand).",
+   "formula_ref": null
+  },
+  {
+   "id": "n2",
+   "label": "Attentive transformer → mask",
+   "detail": "Learn which features to attend to at this step. Sparsemax forces most weights to exactly zero.",
+   "formula_ref": "f1"
+  },
+  {
+   "id": "n3",
+   "label": "Apply prior scale",
+   "detail": "Features already used heavily are down-weighted, encouraging different steps to look at different things.",
+   "formula_ref": "f2"
+  },
+  {
+   "id": "n4",
+   "label": "Mask the features",
+   "detail": "Element-wise multiply: everything not selected becomes zero.",
+   "formula_ref": "f3"
+  },
+  {
+   "id": "n5",
+   "label": "Feature transformer → split",
+   "detail": "Produce a decision contribution and information for the next step's mask.",
+   "formula_ref": "f4"
+  },
+  {
+   "id": "n6",
+   "label": "Repeat for N steps",
+   "detail": "Loop to n2. Here N = 4 steps.",
+   "formula_ref": "f6"
+  },
+  {
+   "id": "n7",
+   "label": "Aggregate and predict",
+   "detail": "Sum decision contributions, apply the final linear layer.",
+   "formula_ref": "f5"
+  }
+ ],
+ "edges": [
+  [
+   "n1",
+   "n2"
+  ],
+  [
+   "n2",
+   "n3"
+  ],
+  [
+   "n3",
+   "n4"
+  ],
+  [
+   "n4",
+   "n5"
+  ],
+  [
+   "n5",
+   "n2"
+  ],
+  [
+   "n5",
+   "n6"
+  ],
+  [
+   "n6",
+   "n7"
+  ]
+ ],
+ "formulas": [
+  {
+   "id": "f1",
+   "name": "Attentive transformer mask",
+   "latex": "\\mathbf{M}[i] = \\text{sparsemax}\\big(\\mathbf{P}[i-1] \\cdot h_i(\\mathbf{a}[i-1])\\big)",
+   "caption": "Sparsemax, unlike softmax, drives most entries to exactly zero — so the mask genuinely selects a subset rather than weighting everything slightly.",
+   "glossary": [
+    {
+     "sym": "h_i",
+     "means": "FC + batch-norm layer of step i"
+    },
+    {
+     "sym": "\\mathbf{a}[i-1]",
+     "means": "information passed from the previous step"
+    }
+   ]
+  },
+  {
+   "id": "f2",
+   "name": "Prior scale",
+   "latex": "\\mathbf{P}[i] = \\prod_{j=1}^{i}\\big(\\gamma - \\mathbf{M}[j]\\big)",
+   "caption": "Tracks how much each feature has been used. With γ = 1, a feature used fully at one step is excluded afterwards. Larger γ (1.3 here) allows reuse.",
+   "glossary": [
+    {
+     "sym": "\\gamma",
+     "means": "relaxation parameter (1.3)"
+    }
+   ]
+  },
+  {
+   "id": "f3",
+   "name": "Masked features",
+   "latex": "\\mathbf{f}_{\\text{masked}}[i] = \\mathbf{M}[i] \\odot \\mathbf{f}",
+   "caption": "⊙ is element-wise multiplication: unselected features become zero for this step.",
+   "glossary": []
+  },
+  {
+   "id": "f4",
+   "name": "Feature transformer split",
+   "latex": "[\\mathbf{d}[i], \\mathbf{a}[i]] = f_i\\big(\\mathbf{M}[i] \\odot \\mathbf{f}\\big)",
+   "caption": "Output splits in two: d[i] contributes to the prediction, a[i] informs the next mask.",
+   "glossary": [
+    {
+     "sym": "\\mathbf{d}[i]",
+     "means": "decision output (n_d = 16 wide)"
+    },
+    {
+     "sym": "\\mathbf{a}[i]",
+     "means": "attention output (n_a = 16 wide)"
+    }
+   ]
+  },
+  {
+   "id": "f5",
+   "name": "Aggregate output",
+   "latex": "\\mathbf{d}_{\\text{out}} = \\sum_{i=1}^{N_{\\text{steps}}} \\text{ReLU}\\big(\\mathbf{d}[i]\\big), \\qquad \\hat{y} = \\mathbf{W}_{\\text{final}}\\,\\mathbf{d}_{\\text{out}}",
+   "caption": "Each step adds its (non-negative) decision vector; a final linear layer turns the sum into class scores.",
+   "glossary": []
+  },
+  {
+   "id": "f6",
+   "name": "Sparsity regularisation",
+   "latex": "\\mathcal{L}_{\\text{sparse}} = \\sum_{i=1}^{N_{\\text{steps}}}\\sum_{b}\\sum_{j} \\frac{-\\mathbf{M}[i]_{b,j}\\log\\big(\\mathbf{M}[i]_{b,j}+\\epsilon\\big)}{N_{\\text{steps}}\\cdot B}",
+   "caption": "The entropy of the masks, added to the loss with weight λ_sparse = 0.001. Pushes masks toward selecting fewer features. (Checked against pytorch-tabnet's source: it computes mean over batch of Σ −M·log(M+ε), divided by n_steps.)",
+   "glossary": [
+    {
+     "sym": "B",
+     "means": "batch size"
+    },
+    {
+     "sym": "\\epsilon",
+     "means": "small constant for log(0)"
+    }
+   ]
+  }
+ ],
+ "assumptions": [
+  {
+   "text": "Features should be scaled",
+   "status": "required",
+   "evidence": "Numerics standardised (fitted on train). Unscaled inputs give badly conditioned gradients."
+  },
+  {
+   "text": "Enough data for a neural network",
+   "status": "warn",
+   "evidence": "~28k training rows is small for deep learning; trees usually win here."
+  },
+  {
+   "text": "Categoricals need embedding",
+   "status": "ok",
+   "evidence": "cat_idxs / cat_dims passed; each level gets a learned 2-d embedding instead of one-hot."
+  }
+ ],
+ "figures": [
+  {
+   "file": "mask_heatmap.json",
+   "title": "Feature mask heatmap",
+   "type": "heatmap",
+   "caption": "Which features the network attended to at each of its 4 steps. Top feature per step: step 1: nr.employed, step 2: month, step 3: euribor3m, step 4: nr.employed."
+  },
+  {
+   "file": "training_curve.json",
+   "title": "Training curve",
+   "type": "line",
+   "caption": "Validation AUC peaked at epoch 50 (0.7968); training stopped 20 epochs later and restored the best weights."
+  },
+  {
+   "file": "masks3d.json",
+   "title": "Mask evolution in 3D",
+   "type": "mask3d",
+   "caption": "The same masks as bars: decision steps along depth, features across, mask weight as height."
+  },
+  {
+   "file": "mask_vs_shap.json",
+   "title": "Masks vs SHAP",
+   "type": "bar",
+   "caption": "Masks are produced by the architecture; SHAP is computed afterwards from predictions only. Rank agreement ρ = 0.38; shared top-5: euribor3m, month, nr.employed."
+  }
+ ]
+}

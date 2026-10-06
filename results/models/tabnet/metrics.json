@@ -1,0 +1,80 @@
+{
+ "model_id": "tabnet",
+ "protocol": {
+  "split": "stratified 80/20 holdout",
+  "cv": "not run — each fit takes minutes on CPU; single holdout with early stopping",
+  "random_state": 42,
+  "threshold": "decision threshold chosen to maximise F1 on training-side predictions (out-of-fold or validation), never on the test set",
+  "note": "All scaling/encoding/resampling fitted inside the fold, never before the split.",
+  "resampling": "weights=1: training batches sampled with inverse class frequency (inside the training split only)",
+  "validation": "15% of train held out for early stopping and threshold"
+ },
+ "runs": {
+  "without_duration": {
+   "threshold": 0.696,
+   "accuracy": 0.873513,
+   "precision": 0.45202,
+   "recall": 0.578664,
+   "f1": 0.507561,
+   "roc_auc": 0.801702,
+   "pr_auc": 0.445784,
+   "mcc": 0.440634,
+   "brier": 0.158288,
+   "confusion_matrix": [
+    [
+     6659,
+     651
+    ],
+    [
+     391,
+     537
+    ]
+   ],
+   "train_seconds": 310.673,
+   "predict_seconds": 0.499,
+   "cv_roc_auc_mean": null,
+   "cv_roc_auc_std": null,
+   "primary": true
+  },
+  "with_duration": {
+   "threshold": 0.7401,
+   "accuracy": 0.907016,
+   "precision": 0.562404,
+   "recall": 0.786638,
+   "f1": 0.655885,
+   "roc_auc": 0.949484,
+   "pr_auc": 0.678458,
+   "mcc": 0.615209,
+   "brier": 0.097839,
+   "confusion_matrix": [
+    [
+     6742,
+     568
+    ],
+    [
+     198,
+     730
+    ]
+   ],
+   "train_seconds": 250.567,
+   "predict_seconds": 0.522,
+   "cv_roc_auc_mean": null,
+   "cv_roc_auc_std": null,
+   "primary": false
+  }
+ },
+ "baselines": {
+  "majority_class": {
+   "accuracy": 0.8874,
+   "roc_auc": 0.5,
+   "pr_auc": 0.1126,
+   "f1": 0.0,
+   "note": "Always predict 'no'. Every accuracy figure must be read against this row."
+  }
+ },
+ "leak_delta": {
+  "roc_auc": 0.147781,
+  "pr_auc": 0.232674,
+  "f1": 0.148324
+ }
+}

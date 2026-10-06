@@ -1,0 +1,35 @@
+{
+ "headline": "TabNet reaches AUC 0.802 — a neural network that shows its own feature choices, at more cost and no gain over trees.",
+ "findings": [
+  {
+   "type": "result",
+   "text": "Without duration: ROC-AUC 0.8017, PR-AUC 0.4458, F1 0.5076; trained in 311s on CPU."
+  },
+  {
+   "type": "result",
+   "text": "Leak inflation: +0.1478 AUC, +0.2327 PR-AUC."
+  },
+  {
+   "type": "result",
+   "text": "Masks vs SHAP: Spearman ρ = 0.38; shared top-5 features: euribor3m, month, nr.employed. The two methods disagree substantially — a genuine result: masks show what the network looks at, SHAP what changes its output."
+  },
+  {
+   "type": "failure",
+   "text": "TabNet loses to CatBoost: PR-AUC 0.4458 vs 0.4786, ROC-AUC 0.8017 vs 0.8109, at 3.7× the training time. We did not tune TabNet further to change this."
+  },
+  {
+   "type": "limitation",
+   "text": "No cross-validation (CPU cost); the single-holdout AUC has no error bar, and neural nets vary more across seeds than trees."
+  },
+  {
+   "type": "limitation",
+   "text": "SHAP for TabNet uses Kernel SHAP (batched; same estimator as shap.KernelExplainer) on 500 clients with 200 coalition samples (1.7 min) — approximate, unlike exact TreeSHAP."
+  },
+  {
+   "type": "limitation",
+   "text": "Masks show where the network looks, not how a feature moves the prediction; a heavily attended feature can still have a small effect."
+  }
+ ],
+ "comparison_note": "The only model with an attribution produced by the architecture itself, which lets us cross-check SHAP rather than trust it.",
+ "viva_answer": "Q: Why would anyone use a neural network on tabular data when boosting usually wins? — Usually they would not, and our results reflect that. We included TabNet for a specific reason: its attention masks give a feature-importance signal produced by the architecture itself rather than computed afterwards. That lets us check SHAP against an independent method. The honest finding is that it costs more compute and gives less accuracy here."
+}

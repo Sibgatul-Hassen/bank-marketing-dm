@@ -1,0 +1,51 @@
+{
+ "model_id": "tabnet",
+ "score": "the probability from the network after four attention steps",
+ "how": "The client's features pass through four decision steps; at each one the network attends to a few features (its mask) and adds to its decision. The final layer turns that into a probability of subscribing, and clients are sorted by it.",
+ "steps": [
+  "Embed categorical features, normalise numeric ones",
+  "Four steps each pick a few features and add to the decision",
+  "Final layer → probability of subscribing",
+  "Sort clients by probability; call down the list"
+ ],
+ "test_clients": 8238,
+ "subscribers": 928,
+ "base_rate": 0.112649,
+ "roc_auc": 0.801704,
+ "distinct_scores": 6864,
+ "top": [
+  {
+   "share": 0.05,
+   "calls": 412,
+   "hit_rate": 0.56068,
+   "lift": 4.97724,
+   "captured": 0.248922
+  },
+  {
+   "share": 0.1,
+   "calls": 824,
+   "hit_rate": 0.489078,
+   "lift": 4.341618,
+   "captured": 0.434267
+  },
+  {
+   "share": 0.2,
+   "calls": 1648,
+   "hit_rate": 0.362864,
+   "lift": 3.221201,
+   "captured": 0.644397
+  },
+  {
+   "share": 0.3,
+   "calls": 2471,
+   "hit_rate": 0.273169,
+   "lift": 2.424961,
+   "captured": 0.727371
+  }
+ ],
+ "within_month_auc": 0.726559,
+ "within_regime_auc": 0.5918,
+ "threshold_call_share": 0.14421,
+ "summary": "Calling the top 20% of clients by the probability from the network after four attention steps (1,648 calls) reaches 64% of all subscribers, with 36% of calls ending in a subscription — 3.2× calling at random.",
+ "caveat": "Much of this ranking is about when a client was called: among clients called under the same economic conditions its AUC falls from 0.802 to 0.592 (within the same month: 0.727). A bank choosing whom to call this week works within one period, so expect less separation than the table suggests. Offline estimate on a random split of 2008–2010 data, not a live campaign."
+}
