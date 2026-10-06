@@ -1,0 +1,207 @@
+{
+ "model_id": "umap_hdbscan",
+ "display_name": "UMAP + HDBSCAN",
+ "family": "unsupervised",
+ "task": "unsupervised_clustering",
+ "one_liner": "Flattens 50 dimensions into 2–3 while keeping neighbours together, then finds dense groups without being told how many.",
+ "plain_explanation": "UMAP takes data with fifty columns and squeezes it down to two or three, trying to keep neighbours as neighbours. Think of flattening a crumpled sheet of paper without tearing it — points that were close stay close, and the overall shape survives. HDBSCAN then finds clusters in that flattened space by looking for dense regions. Unlike k-means, you do not tell it how many clusters to find, and it is allowed to say 'this point belongs to no cluster'. Together they answer: do our clients fall into natural groups, and do subscribers sit anywhere in particular?",
+ "year": 2018,
+ "reference": "McInnes, Healy & Melville, UMAP (2018); Campello, Moulavi & Sander, HDBSCAN (2013); McInnes & Healy, hdbscan (2017)",
+ "workflow": [
+  {
+   "id": "n1",
+   "label": "Build the k-NN graph",
+   "detail": "For each client, find its 15 nearest neighbours in the full (one-hot, scaled) feature space.",
+   "formula_ref": "f1"
+  },
+  {
+   "id": "n2",
+   "label": "Convert to fuzzy memberships",
+   "detail": "Turn distances into probabilities. Each point's local scale is set so it has a consistent neighbourhood size.",
+   "formula_ref": "f1"
+  },
+  {
+   "id": "n3",
+   "label": "Symmetrise",
+   "detail": "Reconcile 'A says B is a neighbour' with 'B says A is not'.",
+   "formula_ref": "f2"
+  },
+  {
+   "id": "n4",
+   "label": "Optimise the low-dim layout",
+   "detail": "Place points in 2D/3D so the low-dim graph matches the high-dim one.",
+   "formula_ref": "f3,f4"
+  },
+  {
+   "id": "n5",
+   "label": "Mutual reachability distance",
+   "detail": "Inflate distances in sparse regions so noise cannot bridge clusters.",
+   "formula_ref": "f5"
+  },
+  {
+   "id": "n6",
+   "label": "Build the hierarchy",
+   "detail": "Minimum spanning tree → condensed cluster tree.",
+   "formula_ref": null
+  },
+  {
+   "id": "n7",
+   "label": "Extract stable clusters",
+   "detail": "Keep clusters that persist across density thresholds.",
+   "formula_ref": "f6"
+  }
+ ],
+ "edges": [
+  [
+   "n1",
+   "n2"
+  ],
+  [
+   "n2",
+   "n3"
+  ],
+  [
+   "n3",
+   "n4"
+  ],
+  [
+   "n4",
+   "n5"
+  ],
+  [
+   "n5",
+   "n6"
+  ],
+  [
+   "n6",
+   "n7"
+  ]
+ ],
+ "formulas": [
+  {
+   "id": "f1",
+   "name": "Local fuzzy membership (UMAP)",
+   "latex": "p_{j|i} = \\exp\\!\\left(-\\frac{d(x_i,x_j) - \\rho_i}{\\sigma_i}\\right)",
+   "caption": "ρᵢ is the distance to the nearest neighbour, so every point is certainly connected to at least one other. σᵢ is solved per point so that Σⱼ p_{j|i} = log₂ k — this is what makes UMAP adapt to varying local density.",
+   "glossary": [
+    {
+     "sym": "\\rho_i",
+     "means": "distance to nearest neighbour"
+    },
+    {
+     "sym": "\\sigma_i",
+     "means": "per-point bandwidth"
+    },
+    {
+     "sym": "k",
+     "means": "n_neighbors (15)"
+    }
+   ]
+  },
+  {
+   "id": "f2",
+   "name": "Symmetrisation",
+   "latex": "p_{ij} = p_{j|i} + p_{i|j} - p_{j|i}\\,p_{i|j}",
+   "caption": "Probabilistic OR: an edge exists if either endpoint claims it.",
+   "glossary": []
+  },
+  {
+   "id": "f3",
+   "name": "Low-dimensional similarity",
+   "latex": "q_{ij} = \\big(1 + a\\,\\lVert y_i - y_j \\rVert_2^{2b}\\big)^{-1}",
+   "caption": "a and b are fitted from min_dist. Heavy tails let distant points stay distant without dominating the loss.",
+   "glossary": [
+    {
+     "sym": "y_i",
+     "means": "low-dimensional position of point i"
+    }
+   ]
+  },
+  {
+   "id": "f4",
+   "name": "Cross-entropy objective",
+   "latex": "\\mathcal{L} = \\sum_{i \\ne j} \\left[ p_{ij}\\log\\frac{p_{ij}}{q_{ij}} + (1-p_{ij})\\log\\frac{1-p_{ij}}{1-q_{ij}} \\right]",
+   "caption": "The first term pulls neighbours together; the second pushes non-neighbours apart. Keeping both is why UMAP preserves global structure better than t-SNE.",
+   "glossary": []
+  },
+  {
+   "id": "f5",
+   "name": "Mutual reachability distance (HDBSCAN)",
+   "latex": "d_{\\text{mreach-}k}(a,b) = \\max\\big\\{\\text{core}_k(a),\\; \\text{core}_k(b),\\; d(a,b)\\big\\}",
+   "caption": "core_k(x) is the distance from x to its k-th nearest neighbour. Points in sparse regions get pushed apart, so noise cannot act as a bridge between two real clusters.",
+   "glossary": [
+    {
+     "sym": "\\text{core}_k(x)",
+     "means": "distance to x's k-th nearest neighbour (k = min_samples = 10)"
+    }
+   ]
+  },
+  {
+   "id": "f6",
+   "name": "Cluster stability",
+   "latex": "S(C) = \\sum_{p \\in C}\\big(\\lambda_p - \\lambda_{\\text{birth}}(C)\\big), \\qquad \\lambda = \\frac{1}{\\text{distance}}",
+   "caption": "How long a cluster survives as the density threshold tightens. HDBSCAN keeps the set of clusters maximising total stability — this is what replaces choosing k.",
+   "glossary": []
+  }
+ ],
+ "assumptions": [
+  {
+   "text": "Features must be scaled",
+   "status": "required",
+   "evidence": "Distance-based: one-hot + StandardScaler applied."
+  },
+  {
+   "text": "Meaningful distance in the feature space",
+   "status": "warn",
+   "evidence": "One-hot encoding makes Euclidean distance crude for categoricals (every level mismatch costs the same); Gower distance would be an alternative."
+  },
+  {
+   "text": "Clusters have varying density",
+   "status": "ok",
+   "evidence": "Exactly what HDBSCAN handles and DBSCAN does not."
+  },
+  {
+   "text": "Local structure is meaningful",
+   "status": "unknown",
+   "evidence": "The page's open question — answered by the mutual-information table in the findings."
+  }
+ ],
+ "figures": [
+  {
+   "file": "points3d.json",
+   "title": "3D point cloud",
+   "type": "points3d",
+   "caption": "8,000 clients in 3D UMAP space. Drag to orbit; hover a point for the client card."
+  },
+  {
+   "file": "map_by_class.json",
+   "title": "2D map by subscription",
+   "type": "scatter",
+   "caption": "Subscribers do not form their own region. They are concentrated in some islands more than others, but AMI between clusters and subscription is only 0.042."
+  },
+  {
+   "file": "map_by_cluster.json",
+   "title": "2D map by cluster",
+   "type": "scatter",
+   "caption": "26 clusters, 0.3% of clients labelled noise. min_cluster_size=250, min_samples=10 — set before looking."
+  },
+  {
+   "file": "condensed_tree.json",
+   "title": "Condensed tree (HDBSCAN hierarchy)",
+   "type": "custom",
+   "caption": "Each bar is a candidate cluster, from the density at which it splits off (top) to where it dissolves (bottom). HDBSCAN keeps the teal ones: the set with the greatest total stability (f6)."
+  },
+  {
+   "file": "cluster_table.json",
+   "title": "Cluster profiles in plain language",
+   "type": "table",
+   "caption": "Each profile lists the three features that deviate most from the overall population. Generated from the data, not written by hand."
+  },
+  {
+   "file": "ami.json",
+   "title": "Clusters vs known variables",
+   "type": "bar",
+   "caption": "The clusters align most with month (AMI 0.63) and barely with subscription (0.042)."
+  }
+ ]
+}
