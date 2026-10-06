@@ -29,7 +29,14 @@ ACCENT, MUTED, AMBER = "#4FB3A0", "#6B7E8F", "#D4A373"
 
 
 def prepare(ds):
-    """Standardise numerics (fitted on train); categoricals stay integer codes for the embeddings."""
+    """Standardise numerics (fitted on train); categoricals stay integer codes for the embeddings.
+
+    Fit numerical scaling on the outer training set and apply the
+    same transformation to training and test data. Keep categorical
+    codes unchanged for TabNet's learned embeddings.
+
+    Return float32 arrays. The internal validation split happens
+    after this preprocessing."""
     sc = StandardScaler().fit(ds.X_train[ds.numeric])
     Xtr, Xte = ds.X_train.copy(), ds.X_test.copy()
     Xtr[ds.numeric] = sc.transform(ds.X_train[ds.numeric])
