@@ -281,7 +281,7 @@ npm run build
 
 ## Copyright
 
-Copyright © 2025 Sibgatul Hassen. All rights reserved.
+Copyright © 2026 Sibgatul Hassen. All rights reserved.
 
 ## License and attribution
 
