@@ -279,6 +279,10 @@ npm run build
 - SHAP shows model attribution, not causality.
 - The reported artifacts are generated offline and committed so the frontend can be deployed without a Python backend.
 
+## Copyright
+
+Copyright © 2025 Sibgatul Hassen. All rights reserved.
+
 ## License and attribution
 
 Dataset: UCI Bank Marketing, Moro, Cortez & Rita (2014).
