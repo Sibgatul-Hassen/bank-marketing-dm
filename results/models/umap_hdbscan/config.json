@@ -1,0 +1,50 @@
+{
+ "estimator": "umap.UMAP + hdbscan.HDBSCAN",
+ "params": [
+  {
+   "name": "n_components",
+   "value": "2 and 3",
+   "why": "2D for analysis and clustering, 3D for the hero visual."
+  },
+  {
+   "name": "n_neighbors",
+   "value": 15,
+   "why": "UMAP's default: balances local detail against global structure. Not tuned."
+  },
+  {
+   "name": "min_dist",
+   "value": 0.1,
+   "why": "How tightly points may pack in the embedding; default, not tuned."
+  },
+  {
+   "name": "metric",
+   "value": "euclidean",
+   "why": "On one-hot + standardised features. A known weakness for categoricals (see assumptions)."
+  },
+  {
+   "name": "min_cluster_size",
+   "value": 250,
+   "why": "A segment smaller than ~0.6% of clients is not actionable for a campaign."
+  },
+  {
+   "name": "min_samples",
+   "value": 10,
+   "why": "k for the core distance in f5; larger = more conservative, more noise."
+  },
+  {
+   "name": "clustered_space",
+   "value": "2D UMAP embedding",
+   "why": "So the colours on the 2D map are exactly the clusters found."
+  },
+  {
+   "name": "input",
+   "value": "all 41,188 clients, duration excluded",
+   "why": "Unsupervised: the target is used only for colouring and evaluation, never for fitting."
+  },
+  {
+   "name": "random_state",
+   "value": 42,
+   "why": "UMAP is stochastic; a fixed seed makes the picture reproducible (and single-threaded)."
+  }
+ ]
+}

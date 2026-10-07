@@ -1,0 +1,39 @@
+{
+ "headline": "A depth-7 tree reaches AUC 0.795 without the leaky call length — and 0.946 with it.",
+ "findings": [
+  {
+   "type": "result",
+   "text": "Without duration: ROC-AUC 0.7954, PR-AUC 0.4431, F1 0.5150 (threshold 0.669 chosen on out-of-fold predictions). The plan's d=5 smoke test measured 0.7902."
+  },
+  {
+   "type": "result",
+   "text": "Leak inflation: +0.1510 AUC and +0.2288 PR-AUC when duration is allowed. The CV-best depth is 7 in both runs: the leak changes which splits are made, not how deep the tree should be."
+  },
+  {
+   "type": "result",
+   "text": "Hand-computed entropy, information gain, split information and Gini for poutcome match scipy and sklearn to 1e-9. Information gain picks poutcome; C4.5's gain ratio (after the average-gain filter) picks poutcome."
+  },
+  {
+   "type": "result",
+   "text": "The depth curve is flat: depth 3 CV AUC 0.7699 vs best 0.7820 at depth 7. The plan's prediction (shallow ≈ deep) holds — the signal without duration is weak and diffuse."
+  },
+  {
+   "type": "result",
+   "text": "day_of_week ranks 7 of 20 in SHAP attribution — the plan predicted near-zero importance; not confirmed for this model: a tree uses it for a few late splits even though its overall rates are nearly flat."
+  },
+  {
+   "type": "limitation",
+   "text": "Axis-parallel splits cannot use the three collinear macro features jointly; the tree picks one (usually nr.employed or euribor3m) and the others become nearly redundant."
+  },
+  {
+   "type": "limitation",
+   "text": "Balanced class weights push accuracy at threshold 0.5 below the 0.8873 majority baseline; at the F1-optimal threshold accuracy is 0.8727. Probabilities are not calibrated (Brier 0.1590)."
+  },
+  {
+   "type": "limitation",
+   "text": "A random 80/20 split ignores that the data is time-ordered (May 2008 – Nov 2010); a temporal split would likely score lower."
+  }
+ ],
+ "comparison_note": "The reference point for every other model. It is the only model whose prediction a human can trace step by step, and the only one whose arithmetic we reproduce by hand.",
+ "viva_answer": "Q: Why did you use Gini rather than information gain? — They rarely disagree in practice: we computed both for the root and report them side by side. Gini is cheaper (no logarithms) and tends to isolate the most frequent class; entropy tends to produce more balanced trees. We also show gain ratio, because information gain alone is biased toward high-cardinality features like job, which has 12 levels."
+}

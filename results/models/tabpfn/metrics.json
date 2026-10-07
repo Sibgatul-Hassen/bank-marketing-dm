@@ -1,0 +1,80 @@
+{
+ "model_id": "tabpfn",
+ "protocol": {
+  "split": "stratified 80/20 holdout",
+  "cv": "not run — no training step to cross-validate, and CPU inference is too slow for 5 refits",
+  "random_state": 42,
+  "threshold": "chosen on 1,000 training rows outside the context",
+  "note": "All scaling/encoding/resampling fitted inside the fold, never before the split.",
+  "resampling": "none — TabPFN outputs calibrated probabilities",
+  "context": "stratified 3,000-row subsample of the training split (CPU limit)"
+ },
+ "runs": {
+  "without_duration": {
+   "threshold": 0.1626,
+   "accuracy": 0.873392,
+   "precision": 0.452282,
+   "recall": 0.587284,
+   "f1": 0.511017,
+   "roc_auc": 0.806665,
+   "pr_auc": 0.461123,
+   "mcc": 0.444655,
+   "brier": 0.076941,
+   "confusion_matrix": [
+    [
+     6650,
+     660
+    ],
+    [
+     383,
+     545
+    ]
+   ],
+   "train_seconds": 1.153,
+   "predict_seconds": 636.408,
+   "cv_roc_auc_mean": null,
+   "cv_roc_auc_std": null,
+   "primary": true
+  },
+  "with_duration": {
+   "threshold": 0.2928,
+   "accuracy": 0.910658,
+   "precision": 0.579602,
+   "recall": 0.753233,
+   "f1": 0.655108,
+   "roc_auc": 0.94873,
+   "pr_auc": 0.681537,
+   "mcc": 0.611641,
+   "brier": 0.05514,
+   "confusion_matrix": [
+    [
+     6803,
+     507
+    ],
+    [
+     229,
+     699
+    ]
+   ],
+   "train_seconds": 1.63,
+   "predict_seconds": 531.274,
+   "cv_roc_auc_mean": null,
+   "cv_roc_auc_std": null,
+   "primary": false
+  }
+ },
+ "baselines": {
+  "majority_class": {
+   "accuracy": 0.8874,
+   "roc_auc": 0.5,
+   "pr_auc": 0.1126,
+   "f1": 0.0,
+   "note": "Always predict 'no'. Every accuracy figure must be read against this row."
+  }
+ },
+ "leak_delta": {
+  "roc_auc": 0.142065,
+  "pr_auc": 0.220414,
+  "f1": 0.14409
+ }
+}

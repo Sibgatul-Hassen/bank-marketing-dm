@@ -1,0 +1,55 @@
+{
+ "estimator": "pytorch_tabnet.TabNetClassifier",
+ "params": [
+  {
+   "name": "n_d / n_a",
+   "value": "16 / 16",
+   "why": "Width of the decision and attention outputs (f4). Small: 28k rows cannot support a wide network."
+  },
+  {
+   "name": "n_steps",
+   "value": 4,
+   "why": "Number of decision steps (N_steps). 3–8 is typical; 4 keeps the mask heatmap readable."
+  },
+  {
+   "name": "gamma",
+   "value": 1.3,
+   "why": "Prior-scale relaxation (f2): >1 lets a feature be reused in later steps."
+  },
+  {
+   "name": "lambda_sparse",
+   "value": 0.001,
+   "why": "Weight of the sparsity loss (f6)."
+  },
+  {
+   "name": "cat_emb_dim",
+   "value": 2,
+   "why": "Each categorical level becomes a learned 2-d vector instead of a one-hot column."
+  },
+  {
+   "name": "optimizer",
+   "value": "Adam(lr=2e-2) + StepLR(10, 0.9)",
+   "why": "The paper's recommended setup for small tabular data."
+  },
+  {
+   "name": "max_epochs / patience",
+   "value": "100 / 20",
+   "why": "Early stopping on validation AUC; stopped after 70 epochs."
+  },
+  {
+   "name": "batch_size / virtual_batch_size",
+   "value": "1024 / 128",
+   "why": "Ghost batch normalisation: statistics over 128-row virtual batches."
+  },
+  {
+   "name": "weights",
+   "value": 1,
+   "why": "Balanced sampling of training batches: the 11.27% minority is drawn as often as the majority."
+  },
+  {
+   "name": "seed",
+   "value": 42,
+   "why": "Fixes weight initialisation and batch order."
+  }
+ ]
+}

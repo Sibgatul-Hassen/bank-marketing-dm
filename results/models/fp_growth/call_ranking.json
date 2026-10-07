@@ -1,0 +1,50 @@
+{
+ "model_id": "fp_growth",
+ "score": "the confidence of the best rule the client matches",
+ "how": "Each actionable rule (→ y=yes, lift ≥ 1.2) is a condition like 'poutcome=success'. A client's score is the confidence of the strongest rule whose conditions they all meet; clients matching no rule get the base rate (11.3%). Most clients match no rule, so the list has a short, strong head and a long flat tail.",
+ "steps": [
+  "Check which actionable rules the client satisfies",
+  "Score = highest confidence among those rules",
+  "No rule matched → base rate 11.3%",
+  "Sort by score; call rule-matched clients first"
+ ],
+ "test_clients": 8238,
+ "subscribers": 928,
+ "base_rate": 0.112649,
+ "roc_auc": 0.759027,
+ "distinct_scores": 28,
+ "top": [
+  {
+   "share": 0.05,
+   "calls": 412,
+   "hit_rate": 0.597087,
+   "lift": 5.300437,
+   "captured": 0.265086
+  },
+  {
+   "share": 0.1,
+   "calls": 824,
+   "hit_rate": 0.480583,
+   "lift": 4.266206,
+   "captured": 0.426724
+  },
+  {
+   "share": 0.2,
+   "calls": 1648,
+   "hit_rate": 0.345874,
+   "lift": 3.070375,
+   "captured": 0.614224
+  },
+  {
+   "share": 0.3,
+   "calls": 2471,
+   "hit_rate": 0.254553,
+   "lift": 2.259705,
+   "captured": 0.677802
+  }
+ ],
+ "within_month_auc": 0.703509,
+ "within_regime_auc": 0.550821,
+ "summary": "Calling the top 20% of clients by the confidence of the best rule the client matches (1,648 calls) reaches 61% of all subscribers, with 35% of calls ending in a subscription — 3.1× calling at random.",
+ "caveat": "Much of this ranking is about when a client was called: among clients called under the same economic conditions its AUC falls from 0.759 to 0.551 (within the same month: 0.704). A bank choosing whom to call this week works within one period, so expect less separation than the table suggests. Offline estimate on a random split of 2008–2010 data, not a live campaign."
+}

@@ -1,0 +1,35 @@
+{
+ "estimator": "sklearn.tree.DecisionTreeClassifier",
+ "params": [
+  {
+   "name": "criterion",
+   "value": "gini",
+   "why": "CART's criterion; cheaper than entropy (no logarithms) and rarely disagrees — both are shown in the hand-verification panel."
+  },
+  {
+   "name": "max_depth",
+   "value": 7,
+   "why": "Chosen from 1–15 by stratified 5-fold CV AUC on the training split (best CV AUC 0.7820). With duration the best depth was 7."
+  },
+  {
+   "name": "min_samples_leaf",
+   "value": 50,
+   "why": "Pre-pruning: no leaf may describe fewer than 50 clients, so leaf rates are not small-sample noise (cf. education=illiterate, 18 rows)."
+  },
+  {
+   "name": "class_weight",
+   "value": "balanced",
+   "why": "Only 11.27% subscribe; without reweighting the impurity criterion is dominated by the 'no' class."
+  },
+  {
+   "name": "encoding",
+   "value": "one-hot, fitted on train",
+   "why": "sklearn trees need numeric input; one-hot keeps each level as a separate yes/no question."
+  },
+  {
+   "name": "random_state",
+   "value": 42,
+   "why": "Ties between equally good splits are broken randomly; fixing the seed makes the tree reproducible."
+  }
+ ]
+}

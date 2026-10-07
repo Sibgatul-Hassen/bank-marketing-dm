@@ -1,0 +1,145 @@
+{
+ "model_id": "tabpfn",
+ "display_name": "TabPFN",
+ "family": "foundation_model",
+ "task": "supervised_classification",
+ "one_liner": "A transformer pre-trained on millions of synthetic tables; it predicts in one forward pass, with no training and no tuning.",
+ "plain_explanation": "Every other model here learns from your data by adjusting its internal numbers until it fits. TabPFN does not. It was trained once, in advance, on millions of synthetic datasets generated from a prior — so it has already learned what tabular problems generally look like and how to reason about them. To use it, you hand it your training rows as context, like a prompt, and ask about a new row. It answers immediately. There is no training step and no hyperparameters to tune — so the comparison is unfair in an interesting direction: tuned models against one that was never tuned at all.",
+ "year": 2025,
+ "reference": "Hollmann et al., Accurate predictions on small data with a tabular foundation model, Nature 637 (2025); TabPFN-2.5 (Prior Labs, 2025)",
+ "workflow": [
+  {
+   "id": "n1",
+   "label": "(Done in advance) Pre-train on synthetic data",
+   "detail": "Millions of datasets drawn from a structural-causal-model prior. Done by the authors, not by us.",
+   "formula_ref": "f3"
+  },
+  {
+   "id": "n2",
+   "label": "Supply training set as context",
+   "detail": "The training rows become the model's prompt. No gradient updates. Here: a stratified 3,000-row subsample (CPU limit).",
+   "formula_ref": null
+  },
+  {
+   "id": "n3",
+   "label": "Append query rows",
+   "detail": "Test rows are appended to the context.",
+   "formula_ref": null
+  },
+  {
+   "id": "n4",
+   "label": "Attend across rows and columns",
+   "detail": "Alternating row-wise and column-wise attention lets each cell see the whole table.",
+   "formula_ref": null
+  },
+  {
+   "id": "n5",
+   "label": "Output posterior predictive",
+   "detail": "Approximates the Bayesian posterior predictive distribution over the prior.",
+   "formula_ref": "f1,f2"
+  }
+ ],
+ "edges": [
+  [
+   "n1",
+   "n2"
+  ],
+  [
+   "n2",
+   "n3"
+  ],
+  [
+   "n3",
+   "n4"
+  ],
+  [
+   "n4",
+   "n5"
+  ]
+ ],
+ "formulas": [
+  {
+   "id": "f1",
+   "name": "Posterior predictive distribution",
+   "latex": "p(y \\mid x, D_{\\text{train}}) = \\int p(y \\mid x, \\phi)\\; p(\\phi \\mid D_{\\text{train}})\\, d\\phi",
+   "caption": "The quantity a Bayesian would want: average the prediction over all hypotheses φ, weighted by how well each explains the training data. Normally intractable.",
+   "glossary": [
+    {
+     "sym": "\\phi",
+     "means": "a hypothesis (data-generating mechanism)"
+    },
+    {
+     "sym": "D_{\\text{train}}",
+     "means": "the context rows"
+    }
+   ]
+  },
+  {
+   "id": "f2",
+   "name": "The approximation",
+   "latex": "q_\\theta(y \\mid x, D_{\\text{train}}) \\approx p(y \\mid x, D_{\\text{train}})",
+   "caption": "A single forward pass of the network q_θ approximates the integral. This is the central claim of prior-data fitted networks.",
+   "glossary": [
+    {
+     "sym": "\\theta",
+     "means": "the network's pre-trained weights"
+    }
+   ]
+  },
+  {
+   "id": "f3",
+   "name": "Pre-training objective",
+   "latex": "\\theta^* = \\arg\\min_\\theta \\; \\mathbb{E}_{D \\sim p(D)}\\Big[-\\log q_\\theta\\big(y \\mid x, D_{\\text{train}}\\big)\\Big]",
+   "caption": "Minimise negative log-likelihood over datasets drawn from the prior p(D) — learning to learn, rather than learning one task.",
+   "glossary": []
+  }
+ ],
+ "assumptions": [
+  {
+   "text": "≤ 50,000 rows (v2: ≤ 10,000 recommended)",
+   "status": "warn",
+   "evidence": "We have 32,950 training rows; on CPU we can only afford a 3,000-row context."
+  },
+  {
+   "text": "≤ 2,000 features",
+   "status": "ok",
+   "evidence": "20 features (categoricals passed as integer codes, flagged as categorical)."
+  },
+  {
+   "text": "Data resembles the synthetic prior",
+   "status": "unknown",
+   "evidence": "The prior is synthetic; real financial data with 3 near-duplicate macro features may differ."
+  },
+  {
+   "text": "GPU available",
+   "status": "fail",
+   "evidence": "None on this machine. Measured 308 s to fit + predict 1,000 clients at a 5,000-row context on 4 idle CPU cores (cost figure)."
+  }
+ ],
+ "figures": [
+  {
+   "file": "context_curve.json",
+   "title": "Accuracy vs context size",
+   "type": "line",
+   "caption": "With only 250 rows TabPFN scores 0.775 vs CatBoost 0.764 on the same rows. At 5,000 rows: TabPFN 0.808, CatBoost 0.798. Contexts above 5,000 rows were not run: CPU cost grows with context × queries."
+  },
+  {
+   "file": "context_cost.json",
+   "title": "Cost vs context size",
+   "type": "bar",
+   "caption": "There is no training step, but every prediction re-reads the whole context. On CPU that cost is what limits the context, not accuracy."
+  },
+  {
+   "file": "shap_importance.json",
+   "title": "What TabPFN relies on",
+   "type": "bar",
+   "caption": "TabPFN has no built-in importance; this comes from Kernel SHAP on a 1,000-row-context copy. Approximate: 100 clients explained."
+  },
+  {
+   "file": "confusion.json",
+   "title": "Confusion matrix",
+   "type": "heatmap",
+   "caption": "Recall 0.59, precision 0.45 at the F1-optimal threshold chosen on held-out training rows."
+  }
+ ]
+}

@@ -1,0 +1,51 @@
+{
+ "model_id": "tabpfn",
+ "score": "the posterior probability given 3,000 example clients",
+ "how": "The client is placed next to 3,000 training clients whose outcomes are known, and the pre-trained transformer reads the whole table at once to estimate how likely this client is to subscribe. No training happens; the score is a single forward pass. Its probabilities are well calibrated, so a score of 0.30 really means roughly a 30% chance.",
+ "steps": [
+  "Give the model 3,000 known clients as context",
+  "Append the client to score",
+  "One forward pass → probability of subscribing",
+  "Sort clients by probability; call down the list"
+ ],
+ "test_clients": 8238,
+ "subscribers": 928,
+ "base_rate": 0.112649,
+ "roc_auc": 0.806669,
+ "distinct_scores": 4281,
+ "top": [
+  {
+   "share": 0.05,
+   "calls": 412,
+   "hit_rate": 0.645631,
+   "lift": 5.731367,
+   "captured": 0.286638
+  },
+  {
+   "share": 0.1,
+   "calls": 824,
+   "hit_rate": 0.523058,
+   "lift": 4.643269,
+   "captured": 0.46444
+  },
+  {
+   "share": 0.2,
+   "calls": 1648,
+   "hit_rate": 0.362864,
+   "lift": 3.221201,
+   "captured": 0.644397
+  },
+  {
+   "share": 0.3,
+   "calls": 2471,
+   "hit_rate": 0.275192,
+   "lift": 2.442924,
+   "captured": 0.732759
+  }
+ ],
+ "within_month_auc": 0.745968,
+ "within_regime_auc": 0.615572,
+ "threshold_call_share": 0.146273,
+ "summary": "Calling the top 20% of clients by the posterior probability given 3,000 example clients (1,648 calls) reaches 64% of all subscribers, with 36% of calls ending in a subscription — 3.2× calling at random.",
+ "caveat": "Much of this ranking is about when a client was called: among clients called under the same economic conditions its AUC falls from 0.807 to 0.616 (within the same month: 0.746). A bank choosing whom to call this week works within one period, so expect less separation than the table suggests. Offline estimate on a random split of 2008–2010 data, not a live campaign."
+}

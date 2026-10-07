@@ -1,0 +1,35 @@
+{
+ "headline": "With no tuning and only 3,000 rows, TabPFN scores AUC 0.807 — in the same band as the tuned models trained on all 32,950.",
+ "findings": [
+  {
+   "type": "result",
+   "text": "Without duration: ROC-AUC 0.8067, PR-AUC 0.4611, F1 0.5110, Brier 0.0769 (well calibrated — no class weighting)."
+  },
+  {
+   "type": "result",
+   "text": "Leak inflation: +0.1421 AUC, +0.2204 PR-AUC."
+  },
+  {
+   "type": "result",
+   "text": "Data efficiency: at 250 rows TabPFN 0.775 vs CatBoost 0.764 vs tree 0.625. Best TabPFN point on the curve: 0.811 at 3,000 rows."
+  },
+  {
+   "type": "failure",
+   "text": "The plan's model, TabPFN-2.5, could not be run: its weights are licence-gated. We used TabPFN v2 instead and say so on every page."
+  },
+  {
+   "type": "failure",
+   "text": "The full-context run (41k rows) and the 10k/20k/41k points of the context curve were not feasible without a GPU; the curve stops at 5,000."
+  },
+  {
+   "type": "limitation",
+   "text": "Prediction is slow: 636 s for 8,238 clients on CPU, versus well under a second for the tree. SHAP needed 46 minutes for 100 clients, even batched; the library's per-client KernelExplainer ran for over three hours without finishing and was abandoned."
+  },
+  {
+   "type": "limitation",
+   "text": "No cross-validation: CV would mean 5 more full inference passes. The single holdout AUC has no error bar here."
+  }
+ ],
+ "comparison_note": "The only model that never sees a gradient update on this data. Its competitors were tuned and trained on 11× more rows.",
+ "viva_answer": "Q: If it was trained on synthetic data, why does it work on real data? — Because it was not trained to solve one task: it was trained on millions of synthetic tasks to learn a general strategy for reasoning about tables. The synthetic datasets come from structural causal models, which produce the kinds of feature interactions real tabular data has. That is an empirical claim: it works well on benchmarks, and our job was to check whether it works here — which our context curve does directly."
+}

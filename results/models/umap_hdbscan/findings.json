@@ -1,0 +1,35 @@
+{
+ "headline": "The two classes do not separate. Clients cluster by the economic period of the call — the finding the plan predicted.",
+ "findings": [
+  {
+   "type": "result",
+   "text": "26 clusters, 0.3% noise. Adjusted mutual information with the clusters: month 0.631, macro regime (5 macro features) 0.551, poutcome 0.268, contact 0.243, y (subscription) 0.042, job 0.038."
+  },
+  {
+   "type": "result",
+   "text": "Best cluster subscribes at 74.1% (765 clients): was_contacted high (mean 1 vs 0.03678); previous high (mean 2 vs 0.173); poutcome=success (89% vs 3% overall). Subscription 74.1% — high response."
+  },
+  {
+   "type": "result",
+   "text": "Using only 'which cluster are you in?' ranks held-out clients at AUC 0.793 — real but weaker than the supervised models (~0.80)."
+  },
+  {
+   "type": "failure",
+   "text": "No region of the map is predominantly subscribers. The plan predicted this; we did not re-tune n_neighbors/min_dist to make one appear."
+  },
+  {
+   "type": "limitation",
+   "text": "The five macro features take only 375 distinct value combinations across 41,188 clients — they are period labels in disguise, and after scaling they act like a strong categorical signal that dominates Euclidean distance."
+  },
+  {
+   "type": "limitation",
+   "text": "Euclidean distance on one-hot columns treats every categorical mismatch as equally far. Gower distance or CatBoost embeddings might give different structure."
+  },
+  {
+   "type": "limitation",
+   "text": "UMAP distances between islands are not meaningful; only neighbourhoods are. Do not read the gap between two clusters as a measure of difference."
+  }
+ ],
+ "comparison_note": "The only page that never sees the label while fitting. It tells us why the supervised models lean on macro features: the data's dominant structure is the economic calendar.",
+ "viva_answer": "Q: Why HDBSCAN rather than k-means? — Three reasons. k-means needs the number of clusters in advance and we had no basis for choosing one. k-means assumes roughly spherical, equally sized clusters, which is not what UMAP output looks like. And k-means forces every point into a cluster, whereas HDBSCAN can label a point as noise — which matters here, because many clients genuinely do not belong to any tight group."
+}

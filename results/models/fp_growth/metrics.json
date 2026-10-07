@@ -1,0 +1,136 @@
+{
+ "model_id": "fp_growth",
+ "task": "association_rules",
+ "baskets": 32950,
+ "items": 77,
+ "frequent_itemsets": 90183,
+ "levels": [
+  {
+   "k": 1,
+   "candidates": 77,
+   "pruned_by_subset": 0,
+   "pruned_by_support": 5,
+   "frequent": 72
+  },
+  {
+   "k": 2,
+   "candidates": 2556,
+   "pruned_by_subset": 0,
+   "pruned_by_support": 917,
+   "frequent": 1639
+  },
+  {
+   "k": 3,
+   "candidates": 26206,
+   "pruned_by_subset": 3622,
+   "pruned_by_support": 6981,
+   "frequent": 15603
+  },
+  {
+   "k": 4,
+   "candidates": 134934,
+   "pruned_by_subset": 38571,
+   "pruned_by_support": 23494,
+   "frequent": 72869
+  }
+ ],
+ "rules_total": 367138,
+ "rules_to_yes": 121,
+ "rules_actionable": 20,
+ "rules_before_improvement_filter": 121,
+ "min_improvement": 0.02,
+ "rule_score_auc_test": 0.759027,
+ "runtime": [
+  {
+   "min_support": 0.1,
+   "fpgrowth": 3.426001,
+   "fpgrowth_itemsets": 5052,
+   "apriori": 2.783015,
+   "apriori_itemsets": 5052,
+   "own_apriori": 0.087267
+  },
+  {
+   "min_support": 0.05,
+   "fpgrowth": 3.398458,
+   "fpgrowth_itemsets": 16188,
+   "apriori": 4.019273,
+   "apriori_itemsets": 16188,
+   "own_apriori": 0.326838
+  },
+  {
+   "min_support": 0.03,
+   "fpgrowth": 6.767604,
+   "fpgrowth_itemsets": 32203,
+   "apriori": 6.127203,
+   "apriori_itemsets": 32203,
+   "own_apriori": 0.744425
+  },
+  {
+   "min_support": 0.02,
+   "fpgrowth": 8.894215,
+   "fpgrowth_itemsets": 49670,
+   "apriori": 5.915388,
+   "apriori_itemsets": 49670,
+   "own_apriori": 0.799776
+  },
+  {
+   "min_support": 0.01,
+   "fpgrowth": 16.030623,
+   "fpgrowth_itemsets": 90183,
+   "apriori": 7.906614,
+   "apriori_itemsets": 90183,
+   "own_apriori": 1.390681
+  }
+ ],
+ "expected_rules_check": [
+  {
+   "rule": "poutcome=success → y=yes",
+   "support": 0.02176,
+   "coverage": 0.033536,
+   "confidence": 0.648869,
+   "lift": 5.759759
+  },
+  {
+   "rule": "job=student → y=yes",
+   "support": 0.006586,
+   "coverage": 0.021578,
+   "confidence": 0.305204,
+   "lift": 2.709178
+  },
+  {
+   "rule": "job=retired → y=yes",
+   "support": 0.010561,
+   "coverage": 0.041457,
+   "confidence": 0.254758,
+   "lift": 2.261393
+  },
+  {
+   "rule": "contact=cellular + month=mar → y=yes",
+   "support": 0.006039,
+   "coverage": 0.011715,
+   "confidence": 0.515544,
+   "lift": 4.576287
+  },
+  {
+   "rule": "contact=cellular + month=sep → y=yes",
+   "support": 0.005766,
+   "coverage": 0.011806,
+   "confidence": 0.488432,
+   "lift": 4.335622
+  },
+  {
+   "rule": "contact=cellular + month=oct → y=yes",
+   "support": 0.006161,
+   "coverage": 0.013839,
+   "confidence": 0.445175,
+   "lift": 3.951652
+  },
+  {
+   "rule": "contact=cellular + month=dec → y=yes",
+   "support": 0.001882,
+   "coverage": 0.003581,
+   "confidence": 0.525424,
+   "lift": 4.663985
+  }
+ ]
+}

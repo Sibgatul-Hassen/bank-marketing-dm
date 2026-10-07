@@ -1,0 +1,50 @@
+{
+ "model_id": "umap_hdbscan",
+ "score": "the subscription rate of the client's cluster",
+ "how": "The clustering never sees who subscribed. To turn it into a call list we place each client in their HDBSCAN cluster and score them by how often training clients in that cluster subscribed. All clients in a cluster tie, so you call whole clusters at a time, best cluster first.",
+ "steps": [
+  "Find the client's cluster on the UMAP map",
+  "Look up that cluster's subscription rate (training clients only)",
+  "Score = that rate; everyone in the cluster ties",
+  "Call the best cluster first, then the next"
+ ],
+ "test_clients": 8238,
+ "subscribers": 928,
+ "base_rate": 0.112649,
+ "roc_auc": 0.793032,
+ "distinct_scores": 27,
+ "top": [
+  {
+   "share": 0.05,
+   "calls": 412,
+   "hit_rate": 0.616505,
+   "lift": 5.472809,
+   "captured": 0.273707
+  },
+  {
+   "share": 0.1,
+   "calls": 824,
+   "hit_rate": 0.495146,
+   "lift": 4.395485,
+   "captured": 0.439655
+  },
+  {
+   "share": 0.2,
+   "calls": 1648,
+   "hit_rate": 0.347087,
+   "lift": 3.081149,
+   "captured": 0.616379
+  },
+  {
+   "share": 0.3,
+   "calls": 2471,
+   "hit_rate": 0.272359,
+   "lift": 2.417776,
+   "captured": 0.725216
+  }
+ ],
+ "within_month_auc": 0.723816,
+ "within_regime_auc": 0.564736,
+ "summary": "Calling the top 20% of clients by the subscription rate of the client's cluster (1,648 calls) reaches 62% of all subscribers, with 35% of calls ending in a subscription — 3.1× calling at random.",
+ "caveat": "Much of this ranking is about when a client was called: among clients called under the same economic conditions its AUC falls from 0.793 to 0.565 (within the same month: 0.724). A bank choosing whom to call this week works within one period, so expect less separation than the table suggests. Offline estimate on a random split of 2008–2010 data, not a live campaign."
+}

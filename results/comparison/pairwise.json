@@ -43,7 +43,7 @@
    "statistic": 41.135817,
    "p_value": 0.0,
    "delta_pr_auc": 0.01403,
-   "delta_roc_auc": 0.015329,
+   "delta_roc_auc": 0.01533,
    "note": "b = A right & B wrong; c = A wrong & B right (test set, each model at its own threshold)."
   },
   "decision_tree|log_reg": {
@@ -115,7 +115,7 @@
    "statistic": 10.690678,
    "p_value": 0.001077,
    "delta_pr_auc": 0.049517,
-   "delta_roc_auc": 0.030854,
+   "delta_roc_auc": 0.030855,
    "note": "b = A right & B wrong; c = A wrong & B right (test set, each model at its own threshold)."
   },
   "catboost|log_reg": {
@@ -178,7 +178,7 @@
    "statistic": 38.311971,
    "p_value": 0.0,
    "delta_pr_auc": 0.016693,
-   "delta_roc_auc": 0.021662,
+   "delta_roc_auc": 0.021663,
    "note": "b = A right & B wrong; c = A wrong & B right (test set, each model at its own threshold)."
   },
   "tabnet|log_reg": {
@@ -232,7 +232,7 @@
    "statistic": 38.790557,
    "p_value": 0.0,
    "delta_pr_auc": 0.032032,
-   "delta_roc_auc": 0.026625,
+   "delta_roc_auc": 0.026626,
    "note": "b = A right & B wrong; c = A wrong & B right (test set, each model at its own threshold)."
   },
   "tabpfn|log_reg": {
@@ -277,7 +277,7 @@
    "statistic": 13.988722,
    "p_value": 0.000184,
    "delta_pr_auc": 0.062844,
-   "delta_roc_auc": 0.030446,
+   "delta_roc_auc": 0.030447,
    "note": "b = A right & B wrong; c = A wrong & B right (test set, each model at its own threshold)."
   },
   "hist_gb|log_reg": {
@@ -322,7 +322,7 @@
    "statistic": 6.633229,
    "p_value": 0.010009,
    "delta_pr_auc": -0.036394,
-   "delta_roc_auc": -0.02083,
+   "delta_roc_auc": -0.020831,
    "note": "b = A right & B wrong; c = A wrong & B right (test set, each model at its own threshold)."
   },
   "random_forest|decision_tree_d5": {
@@ -331,7 +331,7 @@
    "statistic": 135.159218,
    "p_value": 0.0,
    "delta_pr_auc": -0.008071,
-   "delta_roc_auc": -0.010157,
+   "delta_roc_auc": -0.010158,
    "note": "b = A right & B wrong; c = A wrong & B right (test set, each model at its own threshold)."
   },
   "random_forest|knn_25": {
@@ -340,7 +340,7 @@
    "statistic": 12.003448,
    "p_value": 0.000531,
    "delta_pr_auc": -0.017779,
-   "delta_roc_auc": -0.002164,
+   "delta_roc_auc": -0.002165,
    "note": "b = A right & B wrong; c = A wrong & B right (test set, each model at its own threshold)."
   },
   "random_forest|gaussian_nb": {
@@ -349,7 +349,7 @@
    "statistic": 73.468223,
    "p_value": 0.0,
    "delta_pr_auc": 0.065176,
-   "delta_roc_auc": 0.004841,
+   "delta_roc_auc": 0.00484,
    "note": "b = A right & B wrong; c = A wrong & B right (test set, each model at its own threshold)."
   },
   "log_reg|decision_tree_d5": {

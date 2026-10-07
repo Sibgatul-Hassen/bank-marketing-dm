@@ -30,8 +30,8 @@
      526
     ]
    ],
-   "train_seconds": 19.546,
-   "predict_seconds": 0.061,
+   "train_seconds": 20.927,
+   "predict_seconds": 0.049,
    "cv_roc_auc_mean": 0.796802,
    "cv_roc_auc_std": 0.004839,
    "primary": true
@@ -56,8 +56,8 @@
      762
     ]
    ],
-   "train_seconds": 28.28,
-   "predict_seconds": 0.169,
+   "train_seconds": 33.61,
+   "predict_seconds": 0.074,
    "cv_roc_auc_mean": 0.947753,
    "cv_roc_auc_std": 0.003567,
    "primary": false

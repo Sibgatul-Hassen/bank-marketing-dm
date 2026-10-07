@@ -1,0 +1,47 @@
+{
+ "headline": "Rules that beat chance exist — poutcome=success lifts subscription 5.8× — but the highest-confidence rules are worthless.",
+ "findings": [
+  {
+   "type": "result",
+   "text": "90,183 frequent itemsets (≤ 4 items) and 367,138 rules at confidence ≥ 0.3; 121 predict y=yes, 121 of them with lift ≥ 1.2."
+  },
+  {
+   "type": "result",
+   "text": "Of 121 rules with lift ≥ 1.2, only 20 survive the minimum-improvement filter: most long rules are a strong short rule (usually poutcome=success) plus an item that adds nothing. Ranking by lift alone fills the top of the list with such restatements."
+  },
+  {
+   "type": "result",
+   "text": "Plan's expected rules, verified on training data: poutcome=success → y=yes lift 5.76 (coverage 3.4%); job=student → y=yes lift 2.71 (coverage 2.2%); job=retired → y=yes lift 2.26 (coverage 4.1%); contact=cellular + month=mar → y=yes lift 4.58 (coverage 1.2%); contact=cellular + month=sep → y=yes lift 4.34 (coverage 1.2%); contact=cellular + month=oct → y=yes lift 3.95 (coverage 1.4%); contact=cellular + month=dec → y=yes lift 4.66 (coverage 0.4%)."
+  },
+  {
+   "type": "result",
+   "text": "Rules generalise: the top rule's confidence is 0.65 on training clients and 0.66 on 268 held-out clients."
+  },
+  {
+   "type": "result",
+   "text": "Contrary to the textbook expectation, mlxtend's low-memory Apriori was 2.0× faster than its FP-Growth at 1% support. Apriori/FP-Growth time ratio by support — 10%: 0.81×, 5%: 1.18×, 3%: 0.91×, 2%: 0.67×, 1%: 0.49×. With only 77 items and itemsets capped at 4, candidate generation stays cheap; FP-Growth's advantage grows with longer patterns."
+  },
+  {
+   "type": "failure",
+   "text": "mlxtend's default Apriori ran out of memory at 1% support: its level-4 step tried to allocate a 32,950 × 96,363 boolean matrix (2.96 GiB). We re-ran every support level with low_memory=True — candidate explosion, observed directly."
+  },
+  {
+   "type": "result",
+   "text": "Implementation matters as much as algorithm: our bit-packed Apriori (rows packed into 64-bit words, support = popcount) took 1.4s at 1% — faster than both library implementations. FP-Growth's advantage is over naive candidate counting, not over every Apriori."
+  },
+  {
+   "type": "limitation",
+   "text": "The confidence trap: loan=no → y=no has confidence 0.887 and lift 1.000. It restates the base rate."
+  },
+  {
+   "type": "limitation",
+   "text": "As a classifier the rules are weak (AUC 0.759): most clients match no actionable rule, so they all get the same score."
+  },
+  {
+   "type": "limitation",
+   "text": "Rules are only as good as the bins: the macro terciles are uneven because those features take few distinct values."
+  }
+ ],
+ "comparison_note": "The only method whose output is a readable policy ('call these people'), but it describes groups, not individuals, and ignores everyone outside the rules' coverage.",
+ "viva_answer": "Q: You have a rule with 89% confidence. Is it a good rule? — Almost certainly not. 88.73% of all clients decline, so a rule predicting 'no' with 89% confidence is barely better than the base rate — its lift is about 1.0, meaning the antecedent tells you nothing. Confidence ignores how common the consequent already is. That is why we rank by lift and report coverage alongside it."
+}
