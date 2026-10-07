@@ -1,5 +1,5 @@
 import { MotionConfig } from 'framer-motion'
-import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom'
+import { HashRouter, Route, Routes, useParams } from 'react-router-dom'
 import { ExplainPanel } from './components/ExplainPanel'
 import { Layout } from './components/Layout'
 import { ComparisonPage } from './pages/Comparison'
@@ -19,7 +19,7 @@ function NotFound() {
 export default function App() {
   return (
     <MotionConfig reducedMotion="user">
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Layout><Home /></Layout>} />
           <Route path="/data" element={<Layout><DataPage /></Layout>} />
@@ -28,7 +28,7 @@ export default function App() {
           <Route path="/compare" element={<Layout><ComparisonPage /></Layout>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </MotionConfig>
   )
 }

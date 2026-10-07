@@ -9,7 +9,7 @@ export class NotBuiltError extends Error {
 
 /** Fetch an artifact under /results. 404 → NotBuiltError (rendered as a "not built yet" placeholder). */
 export function loadArtifact<T>(path: string): Promise<T> {
-  const url = `/results/${path}`
+  const url = `${import.meta.env.BASE_URL}results/${path}`
   if (!cache.has(url)) {
     cache.set(url, fetch(url).then(async (r) => {
       if (r.status === 404) throw new NotBuiltError(path)

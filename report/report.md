@@ -39,9 +39,9 @@ Without duration (primary). Thresholds maximise F1 on training-side predictions;
 | Model | Acc | Prec | Rec | F1 | ROC-AUC | PR-AUC | MCC | Brier | Train + predict s | Leak Δ AUC |
 |---|---|---|---|---|---|---|---|---|---|---|
 | *Majority baseline* | 0.8874 | — | 0 | 0 | 0.5000 | 0.1126 | 0 | — | — | — |
-| CatBoost | 0.8846 | 0.4893 | 0.5668 | 0.5252 | 0.8109 | 0.4786 | 0.4615 | 0.1542 | 19.6 | +0.1450 |
+| CatBoost | 0.8846 | 0.4893 | 0.5668 | 0.5252 | 0.8109 | 0.4786 | 0.4615 | 0.1542 | 21.0 | +0.1450 |
 | TabPFN | 0.8734 | 0.4523 | 0.5873 | 0.5110 | 0.8067 | 0.4611 | 0.4447 | 0.0769 | 637.6 | +0.1421 |
-| TabNet | 0.8735 | 0.4520 | 0.5787 | 0.5076 | 0.8017 | 0.4458 | 0.4406 | 0.1583 | 311.2 | +0.1478 |
+| TabNet | 0.8735 | 0.4520 | 0.5787 | 0.5076 | 0.8017 | 0.4458 | 0.4406 | 0.1583 | 251.4 | +0.1478 |
 | Decision Tree | 0.8727 | 0.4510 | 0.6002 | 0.5150 | 0.7954 | 0.4431 | 0.4494 | 0.1590 | 0.3 | +0.1510 |
 | UMAP + HDBSCAN *(cluster-rate AUC (test))* | | | | | 0.7930 | | | | | |
 | FP-Growth *(rule-score AUC (test))* | | | | | 0.7590 | | | | | |
@@ -84,7 +84,7 @@ Random Forest gains +0.166 AUC from the leak; Gaussian NB only +0.068 (2.4×). O
 
 **Decision Tree — rank 4 of 4 (PR-AUC 0.4431).** One tree of axis-parallel questions. It ranks below the ensemble because each client follows a single path, so evidence from features off that path is ignored, and because the three collinear macro features cannot be used jointly. It stays close because the strongest legitimate signals — the economic period (nr.employed / euribor3m), poutcome=success and the contact channel — are exactly the kind of sharp thresholds a tree finds first. It is the only model whose every prediction can be traced by hand, which we do on its page.
 
-**TabNet — rank 3 of 4 (PR-AUC 0.4458).** A neural network with sequential attention. It lands below CatBoost, as the plan predicted. With ~28,000 training rows, 20 features and a weak signal, a network has more parameters to fit than the data can pin down, and its smooth decision surface has no advantage over trees when the useful structure is a few sharp thresholds. It took 15.9× CatBoost's training time on CPU. Its value here is the masks: an attribution produced by the architecture itself, which we compare with SHAP on its page.
+**TabNet — rank 3 of 4 (PR-AUC 0.4458).** A neural network with sequential attention. It lands below CatBoost, as the plan predicted. With ~28,000 training rows, 20 features and a weak signal, a network has more parameters to fit than the data can pin down, and its smooth decision surface has no advantage over trees when the useful structure is a few sharp thresholds. It took 12.0× CatBoost's training time on CPU. Its value here is the masks: an attribution produced by the architecture itself, which we compare with SHAP on its page.
 
 **TabPFN — rank 2 of 4 (PR-AUC 0.4611).** No training, no tuning, and only a 3,000-row context (one eleventh of the training data, a CPU limit) — yet ROC-AUC 0.8067, in the same band as models tuned on all 32,950 rows. A prior learned from millions of synthetic tables substitutes for data: on its context curve it beats CatBoost trained on the same rows at 6 of 6 sizes (e.g. 0.775 vs 0.764 at 250 rows). It is also the only well-calibrated model (Brier 0.0769), because it was not class-weighted. The cost is inference: every prediction re-reads the whole context, which is why the full-data run was not feasible without a GPU.
 
@@ -134,12 +134,12 @@ CatBoost reaches AUC 0.811 without the leak — the strongest legitimate ranking
 
 TabNet reaches AUC 0.802 — a neural network that shows its own feature choices, at more cost and no gain over trees.
 
-- *result* — Without duration: ROC-AUC 0.8017, PR-AUC 0.4458, F1 0.5076; trained in 311s on CPU.
+- *result* — Without duration: ROC-AUC 0.8017, PR-AUC 0.4458, F1 0.5076; trained in 251s on CPU.
 - *result* — Leak inflation: +0.1478 AUC, +0.2327 PR-AUC.
 - *result* — Masks vs SHAP: Spearman ρ = 0.38; shared top-5 features: euribor3m, month, nr.employed. The two methods disagree substantially — a genuine result: masks show what the network looks at, SHAP what changes its output.
-- *failure* — TabNet loses to CatBoost: PR-AUC 0.4458 vs 0.4786, ROC-AUC 0.8017 vs 0.8109, at 3.7× the training time. We did not tune TabNet further to change this.
+- *failure* — TabNet loses to CatBoost: PR-AUC 0.4458 vs 0.4786, ROC-AUC 0.8017 vs 0.8109, at 12.0× the training time. We did not tune TabNet further to change this.
 - *limitation* — No cross-validation (CPU cost); the single-holdout AUC has no error bar, and neural nets vary more across seeds than trees.
-- *limitation* — SHAP for TabNet uses Kernel SHAP (batched; same estimator as shap.KernelExplainer) on 500 clients with 200 coalition samples (1.7 min) — approximate, unlike exact TreeSHAP.
+- *limitation* — SHAP for TabNet uses Kernel SHAP (batched; same estimator as shap.KernelExplainer) on 500 clients with 200 coalition samples (1.0 min) — approximate, unlike exact TreeSHAP.
 - *limitation* — Masks show where the network looks, not how a feature moves the prediction; a heavily attended feature can still have a small effect.
 
 ### TabPFN
@@ -174,7 +174,7 @@ Rules that beat chance exist — poutcome=success lifts subscription 5.8× — b
 - *result* — Of 121 rules with lift ≥ 1.2, only 20 survive the minimum-improvement filter: most long rules are a strong short rule (usually poutcome=success) plus an item that adds nothing. Ranking by lift alone fills the top of the list with such restatements.
 - *result* — Plan's expected rules, verified on training data: poutcome=success → y=yes lift 5.76 (coverage 3.4%); job=student → y=yes lift 2.71 (coverage 2.2%); job=retired → y=yes lift 2.26 (coverage 4.1%); contact=cellular + month=mar → y=yes lift 4.58 (coverage 1.2%); contact=cellular + month=sep → y=yes lift 4.34 (coverage 1.2%); contact=cellular + month=oct → y=yes lift 3.95 (coverage 1.4%); contact=cellular + month=dec → y=yes lift 4.66 (coverage 0.4%).
 - *result* — Rules generalise: the top rule's confidence is 0.65 on training clients and 0.66 on 268 held-out clients.
-- *result* — Contrary to the textbook expectation, mlxtend's low-memory Apriori was 2.1× faster than its FP-Growth at 1% support. Apriori/FP-Growth time ratio by support — 10%: 0.82×, 5%: 0.96×, 3%: 0.60×, 2%: 0.67×, 1%: 0.47×. With only 77 items and itemsets capped at 4, candidate generation stays cheap; FP-Growth's advantage grows with longer patterns.
+- *result* — Contrary to the textbook expectation, mlxtend's low-memory Apriori was 2.0× faster than its FP-Growth at 1% support. Apriori/FP-Growth time ratio by support — 10%: 0.81×, 5%: 1.18×, 3%: 0.91×, 2%: 0.67×, 1%: 0.49×. With only 77 items and itemsets capped at 4, candidate generation stays cheap; FP-Growth's advantage grows with longer patterns.
 - *failure* — mlxtend's default Apriori ran out of memory at 1% support: its level-4 step tried to allocate a 32,950 × 96,363 boolean matrix (2.96 GiB). We re-ran every support level with low_memory=True — candidate explosion, observed directly.
 - *result* — Implementation matters as much as algorithm: our bit-packed Apriori (rows packed into 64-bit words, support = popcount) took 1.4s at 1% — faster than both library implementations. FP-Growth's advantage is over naive candidate counting, not over every Apriori.
 - *limitation* — The confidence trap: loan=no → y=no has confidence 0.887 and lift 1.000. It restates the base rate.

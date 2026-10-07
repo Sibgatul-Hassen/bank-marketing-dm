@@ -13,7 +13,7 @@
    "f1": 0.515025,
    "roc_auc": 0.795369,
    "pr_auc": 0.443121,
-   "speed": 0.463442,
+   "speed": 0.49485,
    "interpretability": 5
   },
   "catboost": {
@@ -21,7 +21,7 @@
    "f1": 0.525212,
    "roc_auc": 0.810894,
    "pr_auc": 0.478608,
-   "speed": -1.292433,
+   "speed": -1.321743,
    "interpretability": 2
   },
   "tabnet": {
@@ -29,7 +29,7 @@
    "f1": 0.507561,
    "roc_auc": 0.801702,
    "pr_auc": 0.445784,
-   "speed": -2.493002,
+   "speed": -2.400288,
    "interpretability": 3
   },
   "tabpfn": {
@@ -55,7 +55,7 @@
    "f1": 1.0,
    "roc_auc": 1.0,
    "pr_auc": 1.0,
-   "speed": 0.543296,
+   "speed": 0.532001,
    "interpretability": 0.3625
   },
   "tabnet": {
@@ -63,7 +63,7 @@
    "f1": 0.15,
    "roc_auc": 0.496734,
    "pr_auc": 0.213785,
-   "speed": 0.231027,
+   "speed": 0.254141,
    "interpretability": 0.575
   },
   "tabpfn": {

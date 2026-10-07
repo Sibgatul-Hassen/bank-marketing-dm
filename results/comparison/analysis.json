@@ -13,7 +13,7 @@
   {
    "model_id": "tabnet",
    "title": "TabNet — rank 3 of 4 (PR-AUC 0.4458)",
-   "text": "A neural network with sequential attention. It lands below CatBoost, as the plan predicted. With ~28,000 training rows, 20 features and a weak signal, a network has more parameters to fit than the data can pin down, and its smooth decision surface has no advantage over trees when the useful structure is a few sharp thresholds. It took 15.9× CatBoost's training time on CPU. Its value here is the masks: an attribution produced by the architecture itself, which we compare with SHAP on its page."
+   "text": "A neural network with sequential attention. It lands below CatBoost, as the plan predicted. With ~28,000 training rows, 20 features and a weak signal, a network has more parameters to fit than the data can pin down, and its smooth decision surface has no advantage over trees when the useful structure is a few sharp thresholds. It took 12.0× CatBoost's training time on CPU. Its value here is the masks: an attribution produced by the architecture itself, which we compare with SHAP on its page."
   },
   {
    "model_id": "tabpfn",

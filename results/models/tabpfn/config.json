@@ -1,0 +1,45 @@
+{
+ "estimator": "tabpfn.TabPFNClassifier (weights v2)",
+ "params": [
+  {
+   "name": "model_version",
+   "value": "v2",
+   "why": "TabPFN-2.5 weights need a licence acceptance with a Prior Labs account; without TABPFN_TOKEN we use the ungated v2 weights (Nature 2025). Set the token and rerun to use 2.5."
+  },
+  {
+   "name": "context_rows",
+   "value": 3000,
+   "why": "Stratified subsample of the training split. The full 32,950 rows are infeasible on CPU (see cost figure). Fallback #1 from the plan."
+  },
+  {
+   "name": "n_estimators",
+   "value": 4,
+   "why": "Ensemble of input permutations/preprocessings averaged by TabPFN. Reduced from the default 8 to halve CPU time."
+  },
+  {
+   "name": "categorical_features_indices",
+   "value": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "why": "Integer-coded categoricals are flagged so TabPFN treats them as categories, not numbers."
+  },
+  {
+   "name": "tuning",
+   "value": "none",
+   "why": "The point of the model: zero hyperparameter tuning, compared against five tuned models."
+  },
+  {
+   "name": "random_state",
+   "value": 42,
+   "why": "Fixes the ensemble's permutations and the context subsample."
+  }
+ ]
+}
