@@ -35,5 +35,6 @@ function results(): Plugin {
 
 export default defineConfig({
   plugins: [react(), tailwindcss(), results()],
+  base: process.env.GITHUB_ACTIONS ? '/bank-marketing-dm/' : '/',
   build: { chunkSizeWarningLimit: 5000 },
 })
